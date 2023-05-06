@@ -1,0 +1,18 @@
+.mobile-navbar-container {
+  width: 100%;
+  display: none;
+}
+
+.mobile-navbar-logo {
+  width: 100px;
+}
+
+.mobile-navbar-logo img {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .mobile-navbar-container {
+    display: block;
+  }
+}

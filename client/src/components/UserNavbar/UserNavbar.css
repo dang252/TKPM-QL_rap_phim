@@ -1,0 +1,49 @@
+.user-navbar-container {
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background-color: #fdfcf0;
+  z-index: 2;
+}
+
+.user-navbar-container .content {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.user-navbar-container .content .auth {
+  width: 180px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.user-navbar-container .content .auth > :hover {
+  cursor: pointer;
+}
+
+@media (max-width: 1600px) {
+  .user-navbar-container .content {
+    width: 70%;
+  }
+}
+
+@media (max-width: 1400px) {
+  .user-navbar-container .content {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .user-navbar-container .content {
+    width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .user-navbar-container {
+    display: none;
+  }
+}

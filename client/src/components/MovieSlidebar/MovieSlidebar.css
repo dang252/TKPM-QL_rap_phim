@@ -1,0 +1,28 @@
+.movie-slidebar-container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+@media (max-width: 1600px) {
+  .movie-slidebar-container {
+    width: 70%;
+  }
+}
+
+@media (max-width: 1400px) {
+  .movie-slidebar-container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .movie-slidebar-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 800px) {
+  .movie-slidebar-container {
+    width: 90%;
+  }
+}
