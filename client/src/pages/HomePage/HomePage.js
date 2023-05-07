@@ -9,6 +9,7 @@ import HomeTitle from "../../components/HomeTitle/HomeTitle";
 import HomeTitle2 from "../../components/HomeTitle2/HomeTitle2";
 import MovieSlidebar from "../../components/MovieSlidebar/MovieSlidebar";
 import EventSlidebar from "../../components/EventSlidebar/EventSlidebar";
+import MyFooter from "../../components/MyFooter/MyFooter";
 
 const HomePage = () => {
   return (
@@ -22,6 +23,7 @@ const HomePage = () => {
       <MovieSlidebar />
       <HomeTitle2 imgUrl="../../assets/img/h3_event.gif" />
       <EventSlidebar />
+      <MyFooter />
     </div>
   );
 };

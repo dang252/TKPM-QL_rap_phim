@@ -5,7 +5,7 @@ import { Pagination, Navigation } from "swiper";
 import "./EventSlidebar.css";
 
 const EventSlidebar = () => {
-  const [event, setEvent] = useState("member");
+  const [event, setEvent] = useState("event");
   const [active, setActive] = useState("activeLeft");
 
   const handleChangeEvent = (title) => {
@@ -68,7 +68,7 @@ const EventSlidebar = () => {
             },
           }}
         >
-          {event === "event" ? (
+          {event === "member" && (
             <>
               <SwiperSlide>
                 <div className="movie-card">
@@ -91,35 +91,34 @@ const EventSlidebar = () => {
                 </div>
               </SwiperSlide>
             </>
-          ) : (
+          )}
+          {event === "event" && (
             <>
-              <>
-                <SwiperSlide>
-                  <div className="movie-card">
-                    <img alt="movie1" src="../../../assets/event/m1.png" />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="movie-card">
-                    <img alt="movie1" src="../../../assets/event/m2.png" />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="movie-card">
-                    <img alt="movie1" src="../../../assets/event/m3.png" />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="movie-card">
-                    <img alt="movie1" src="../../../assets/event/m4.png" />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="movie-card">
-                    <img alt="movie1" src="../../../assets/event/m5.png" />
-                  </div>
-                </SwiperSlide>
-              </>
+              <SwiperSlide>
+                <div className="movie-card">
+                  <img alt="movie1" src="../../../assets/event/m1.png" />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="movie-card">
+                  <img alt="movie1" src="../../../assets/event/m2.png" />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="movie-card">
+                  <img alt="movie1" src="../../../assets/event/m3.png" />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="movie-card">
+                  <img alt="movie1" src="../../../assets/event/m4.png" />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="movie-card">
+                  <img alt="movie1" src="../../../assets/event/m5.png" />
+                </div>
+              </SwiperSlide>
             </>
           )}
         </Swiper>
