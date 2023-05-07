@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import UserNavbar from "../../components/UserNavbar/UserNavbar";
 import Navbar from "../../components/Navbar/Navbar";
@@ -12,6 +12,10 @@ import EventSlidebar from "../../components/EventSlidebar/EventSlidebar";
 import MyFooter from "../../components/MyFooter/MyFooter";
 
 const HomePage = () => {
+  useEffect(() => {
+    document.title = "CGV Cinemas Fake | Trang chủ";
+  }, []);
+
   return (
     <div>
       <UserNavbar />

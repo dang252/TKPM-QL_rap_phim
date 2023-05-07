@@ -60,6 +60,16 @@
   /* background-color: red; */
 }
 
+.event-banner .event-card:hover {
+  cursor: pointer;
+}
+
+.event-slidebar-container .event-divider {
+  width: 100%;
+  height: 10px;
+  border-top: 3px solid #000;
+}
+
 @media (max-width: 1600px) {
   .event-slidebar-container {
     width: 70%;

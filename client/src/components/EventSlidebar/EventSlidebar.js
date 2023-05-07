@@ -68,54 +68,54 @@ const EventSlidebar = () => {
             },
           }}
         >
-          {event === "member" && (
+          {event === "event" && (
             <>
               <SwiperSlide>
-                <div className="movie-card">
+                <div className="event-card">
                   <img alt="movie1" src="../../../assets/event/e1.png" />
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="movie-card">
+                <div className="event-card">
                   <img alt="movie1" src="../../../assets/event/e2.png" />
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="movie-card">
+                <div className="event-card">
                   <img alt="movie1" src="../../../assets/event/e3.png" />
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="movie-card">
+                <div className="event-card">
                   <img alt="movie1" src="../../../assets/event/e4.png" />
                 </div>
               </SwiperSlide>
             </>
           )}
-          {event === "event" && (
+          {event === "member" && (
             <>
               <SwiperSlide>
-                <div className="movie-card">
+                <div className="event-card">
                   <img alt="movie1" src="../../../assets/event/m1.png" />
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="movie-card">
+                <div className="event-card">
                   <img alt="movie1" src="../../../assets/event/m2.png" />
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="movie-card">
+                <div className="event-card">
                   <img alt="movie1" src="../../../assets/event/m3.png" />
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="movie-card">
+                <div className="event-card">
                   <img alt="movie1" src="../../../assets/event/m4.png" />
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="movie-card">
+                <div className="event-card">
                   <img alt="movie1" src="../../../assets/event/m5.png" />
                 </div>
               </SwiperSlide>
@@ -123,6 +123,7 @@ const EventSlidebar = () => {
           )}
         </Swiper>
       </div>
+      <div className="event-divider"></div>
     </div>
   );
 };
