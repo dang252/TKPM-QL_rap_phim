@@ -1,0 +1,31 @@
+.form-container {
+  width: 65%;
+  max-width: 100%;
+  margin: 200px auto 30px;
+  /* height: 120px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 13px;
+  font-family: Verdana, Arial, sans-serif;
+  font-weight: 600;
+}
+
+.form-container .forms {
+  max-width: 54%; 
+  width: 54%; 
+  padding: 5px 5px;
+  font-size: 14px;
+}
+.form-container .option-container {
+    height: 40px;
+    padding: 10px;
+    margin: 20px 0;
+    background-color: #e71a0f;
+}
+
+.form-container .option-container a {
+  text-decoration: none;
+  color: white;
+  margin: 20px 20px;
+}

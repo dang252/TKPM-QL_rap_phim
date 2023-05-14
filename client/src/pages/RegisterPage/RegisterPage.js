@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import UserNavbar from "../../components/UserNavbar/UserNavbar";
 import Navbar from "../../components/Navbar/Navbar";
 import MobileNavbar from "../../components/MobileNavbar/MobileNavbar";
+import FormContainer from "../../components/FormContainer/FormContainer";
+import MyFooter from "../../components/MyFooter/MyFooter";
 
 const RegisterPage = () => {
   useEffect(() => {
@@ -14,7 +16,8 @@ const RegisterPage = () => {
       <UserNavbar />
       <Navbar />
       <MobileNavbar />
-      <h1 style={{ marginTop: "300px" }}>Register page</h1>
+      <FormContainer option="Register"/>
+      <MyFooter/>
     </div>
   );
 };
