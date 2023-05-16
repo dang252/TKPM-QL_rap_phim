@@ -33,4 +33,31 @@ module.exports = {
       }
     }
   },
+  updateProfile: async (user) => {
+    try {
+      const rs = await db.one("UPDATE users SET name = $2, phone = $3, email = $4, dob = $5, gender = $6 WHERE id = $1 RETURNING *;", [user.id, user.name, user.phone, user.email, user.dob, user.gender]);
+      return rs;
+    } catch (err) {
+      console.log("Error in updateProfile in user.m: ", err);
+      return null;
+    }
+  },
+  changePassword: async (user) => {
+    try {
+      const rs = await db.one("UPDATE users SET password = $2 WHERE id = $1 RETURNING *;", [user.id, user.password]);
+      return rs;
+    } catch (err) {
+      console.log("Error in changePassword in user.m: ", err);
+      return null;
+    }
+  },
+  bookingHistory: async (id_user) => {
+    try {
+      const rs = await db.any("SELECT c.name, c.location, b.purchase_date, m.title, s.time, m.duration, r.name, b.id_seats, b.id_food_drink, b.total_price FROM book b JOIN tickets t ON b.id_ticket = t.id JOIN rooms r ON t.id_room = r.id JOIN cinemas c ON r.id_cinema = c.id JOIN schedule s ON b.id_schedule = s.id JOIN movies m ON s.id_movie = m.id WHERE id_user = $1;", [id_user]);
+      return rs;
+    } catch (err) {
+      console.log("Error in bookingHistory in user.m: ", err);
+      return null;
+    }
+  },
 };
