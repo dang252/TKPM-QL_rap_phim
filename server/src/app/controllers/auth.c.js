@@ -15,7 +15,7 @@ const authController = {
         // is_staff: user.is_staff,
       },
       process.env.JWT_ACCESS_KEY,
-      { expiresIn: "5s" }
+      { expiresIn: "15s" }
     );
   },
 
@@ -95,7 +95,7 @@ const authController = {
   requestRefreshToken: async (req, res) => {
     // take refresh token from user
     const refreshToken = req.cookies.refreshToken;
-    console.log(refreshToken);
+
     if (!refreshToken) return res.status(401).json("401 Unauthorized");
 
     // check if we have a refresh token but it isn't our refresh token
