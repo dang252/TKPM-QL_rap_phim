@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import UserNavbar from "../../components/UserNavbar/UserNavbar";
 import Navbar from "../../components/Navbar/Navbar";
@@ -10,7 +11,13 @@ const RegisterPage = () => {
   useEffect(() => {
     document.title = "CGV Cinemas Fake | Đăng Ky";
   }, []);
-
+  let navigate = useNavigate()
+  useEffect(() => {
+    const logged = (localStorage.getItem('user'))
+    if (logged != null) {
+        navigate("/")
+    }
+  },[]);
   return (
     <div>
       <UserNavbar />

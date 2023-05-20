@@ -1,4 +1,10 @@
 .BenefitSlidebar-container {
-    width: 45%;
+    max-width: 45%;
     border-left: 1px solid black;
 }
+
+@media (max-width: 600px){
+    .BenefitSlidebar-container {
+        display: none;
+    }
+  } 
