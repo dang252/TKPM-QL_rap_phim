@@ -1,31 +1,26 @@
 import React, { useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import UserNavbar from "../../components/UserNavbar/UserNavbar";
-import Navbar from "../../components/Navbar/Navbar";
-import MobileNavbar from "../../components/MobileNavbar/MobileNavbar";
-import FormContainer from "../../components/FormContainer/FormContainer"
-import MyFooter from "../../components/MyFooter/MyFooter"
+import FormContainer from "../../components/FormContainer/FormContainer";
 
 const LoginPage = () => {
   useEffect(() => {
     document.title = "CGV Cinemas Fake | Đăng Nhập";
+    window.scrollTo(0, 0);
   }, []);
-  let navigate = useNavigate()
+
+  let navigate = useNavigate();
+
   useEffect(() => {
-    const logged = (localStorage.getItem('user'))
+    const logged = localStorage.getItem("user");
     if (logged != null) {
-        navigate("/")
+      navigate("/");
     }
-  },[]);
+  }, [navigate]);
 
   return (
     <div>
-      <UserNavbar />
-      <Navbar />
-      <MobileNavbar />
-      <FormContainer option="Login"/>
-      <MyFooter/>
+      <FormContainer option="Login" />
     </div>
   );
 };

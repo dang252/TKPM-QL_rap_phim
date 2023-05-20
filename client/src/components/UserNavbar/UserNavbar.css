@@ -15,9 +15,10 @@
 }
 
 .user-navbar-container .content .auth {
-  width: 180px;
+  min-width: 180px;
   display: flex;
   justify-content: space-around;
+  /* background-color: red; */
 }
 
 .user-navbar-container .content .auth > :hover {

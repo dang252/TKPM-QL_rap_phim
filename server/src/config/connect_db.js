@@ -4,9 +4,9 @@ const pgp = require("pg-promise")(initOptions);
 const cn = {
   host: "localhost",
   port: 5432,
-  database: "QLRP",
+  database: "TKPM_MOVIE",
   user: "postgres",
-  password: "123456",
+  password: "123",
   max: 30,
 };
 
