@@ -11,7 +11,7 @@ const authController = {
   generateAccessToken: (user) => {
     return jwt.sign(
       {
-        username: user.username,
+        userId: user.id,
         // is_staff: user.is_staff,
       },
       process.env.JWT_ACCESS_KEY,
@@ -23,11 +23,11 @@ const authController = {
   generateRefreshToken: (user) => {
     return jwt.sign(
       {
-        username: user.username,
+        userId: user.id,
         // is_staff: user.is_staff,
       },
       process.env.JWT_REFRESH_KEY,
-      { expiresIn: "1d" }
+      { expiresIn: "10m" }
     );
   },
 
@@ -80,7 +80,7 @@ const authController = {
           httpOnly: true,
           secure: false,
           path: "/",
-          sameSite: "strict",
+          sameSite: "none",
         });
 
         const { password, ...others } = user;
@@ -96,11 +96,11 @@ const authController = {
     // take refresh token from user
     const refreshToken = req.cookies.refreshToken;
 
-    if (!refreshToken) return res.status(401).json("401 Unauthorized");
+    if (!refreshToken) return res.status(401).json("401 Unauthorized!");
 
     // check if we have a refresh token but it isn't our refresh token
     if (!refreshTokens.includes(refreshToken)) {
-      return res.status(403).json("403 Forbidden");
+      return res.status(403).json("403 Forbidden!");
     }
 
     jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, (err, user) => {
@@ -120,7 +120,7 @@ const authController = {
         httpOnly: true,
         secure: false,
         path: "/",
-        sameSite: "strict",
+        sameSite: "none",
       });
 
       res.status(200).json({ accessToken: newAccessToken });
