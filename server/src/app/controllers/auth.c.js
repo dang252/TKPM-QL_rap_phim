@@ -77,7 +77,7 @@ const authController = {
 
         res.cookie("refreshToken", refreshToken, {
           httpOnly: true,
-          secure: false,
+          secure: true,
           path: "/",
           sameSite: "none",
         });
@@ -117,7 +117,7 @@ const authController = {
 
       res.cookie("refreshToken", newRefreshToken, {
         httpOnly: true,
-        secure: false,
+        secure: true,
         path: "/",
         sameSite: "none",
       });
