@@ -39,7 +39,6 @@ const authController = {
 
       // create new user
       const user = {
-        username: req.body.username,
         password: hashed,
         name: req.body.name,
         dob: req.body.dob,
