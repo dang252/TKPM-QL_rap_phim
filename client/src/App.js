@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import { Context } from "./context/UserContext";
+import { ToastContainer } from "react-toastify";
+// import { Context } from "./context/UserContext";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";

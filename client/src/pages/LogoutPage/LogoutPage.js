@@ -16,41 +16,42 @@ const LogoutPage = () => {
     }
   }, [navigate]);
 
-  const logout = async () => {
-    try {
-      await axios.post(
-        "http://localhost:5000/auth/logout",
-        {},
-        {
-          withCredentials: true,
-        }
-      );
-      localStorage.clear();
-      toast.success("Đăng xuất thành công!");
-      navigate("/");
-      window.location.reload();
-    } catch (error) {
-      if (error.response) {
-        // err 404
-        // err 500
-        toast.error(
-          "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!"
-        );
-        navigate("/");
-      } else if (error.request) {
-        toast.success(
-          "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!"
-        );
-        navigate("/");
-      } else {
-        console.log("Error", error.message);
-      }
-    }
-  };
+  // const logout = async () => {
+  //   try {
+  //     await axios.post(
+  //       "http://localhost:5000/auth/logout",
+  //       {},
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     );
+  //     localStorage.clear();
+  //     toast.success("Đăng xuất thành công!");
+  //     navigate("/");
+  //     window.location.reload();
+  //   } catch (error) {
+  //     if (error.response) {
+  //       // err 404
+  //       // err 500
+  //       toast.error(
+  //         "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!"
+  //       );
+  //       navigate("/");
+  //     } else if (error.request) {
+  //       toast.success(
+  //         "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!"
+  //       );
+  //       navigate("/");
+  //     } else {
+  //       console.log("Error", error.message);
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    logout();
-  }, []);
+  // useEffect(() => {
+  //   logout();
+  // }, []);
+
   return <div>LogoutPage</div>;
 };
 
