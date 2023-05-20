@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Context } from "../../context/UserContext";
 
 import "./MobileNavbar.css";
 
 const MobileNavbar = () => {
+  const { username, logout } = useContext(Context);
+
+  // if (username) {
+  //   console.log("Mobile:", username);
+  // }
+
   return (
     <div className="mobile-navbar-container">
       <Navbar bg="light" expand="lg">
@@ -40,8 +47,27 @@ const MobileNavbar = () => {
             </Nav>
             <Nav className="me-auto">
               <NavDropdown title="TÀI KHOẢN">
-                <NavDropdown.Item href="/login">Đăng nhập</NavDropdown.Item>
-                <NavDropdown.Item href="/register">Đăng ký</NavDropdown.Item>
+                {!username ? (
+                  <>
+                    <NavDropdown.Item href="/login">Đăng nhập</NavDropdown.Item>
+                    <NavDropdown.Item href="/register">
+                      Đăng ký
+                    </NavDropdown.Item>
+                  </>
+                ) : (
+                  <>
+                    <NavDropdown.Item href="#">
+                      Hello: {username}
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={(e) => {
+                        logout();
+                      }}
+                    >
+                      Đăng xuất
+                    </NavDropdown.Item>
+                  </>
+                )}
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

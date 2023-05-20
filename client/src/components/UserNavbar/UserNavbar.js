@@ -5,47 +5,12 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Context } from "../../context/UserContext";
 import "./UserNavbar.css";
 
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toastify";
-
 const UserNavbar = () => {
-  const { username } = useContext(Context);
-  // console.log(username);
+  const { username, logout } = useContext(Context);
 
-  const navigate = useNavigate();
-
-  const logout = async () => {
-    try {
-      await axios.post(
-        "http://localhost:5000/auth/logout",
-        {},
-        {
-          withCredentials: true,
-        }
-      );
-      localStorage.clear();
-      toast.success("Đăng xuất thành công!");
-      navigate("/");
-      window.location.reload();
-    } catch (error) {
-      if (error.response) {
-        // err 404
-        // err 500
-        toast.error(
-          "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!"
-        );
-        navigate("/");
-      } else if (error.request) {
-        toast.success(
-          "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!"
-        );
-        navigate("/");
-      } else {
-        console.log("Error", error.message);
-      }
-    }
-  };
+  // if (username) {
+  //   console.log(username);
+  // }
 
   return (
     <div className="user-navbar-container">
