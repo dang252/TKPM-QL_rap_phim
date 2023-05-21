@@ -34,6 +34,19 @@ const authController = {
   // [POST] /register
   registerUser: async (req, res) => {
     try {
+      // check if email or phone exists
+      const checkEmail = await userModel.getUserByUsername(req.body.email);
+      if (checkEmail != null) {
+        return res.status(404).json("Email already exists!");
+      }
+
+      // check if email or phone exists
+      const checkPhone = await userModel.getUserByUsername(req.body.phone);
+      if (checkPhone != null) {
+        return res.status(404).json("Phone already exists!");
+      }
+
+      // hash password
       const salt = await bcrypt.genSalt(11);
       const hashed = await bcrypt.hash(req.body.password, salt);
 
@@ -66,10 +79,7 @@ const authController = {
         return res.status(404).json("Account doesn't exist!");
       }
 
-      const validPassword = await bcrypt.compare(
-        req.body.password,
-        user.password
-      );
+      const validPassword = await bcrypt.compare(req.body.password, user.password);
       if (!validPassword) {
         res.status(404).json("Wrong password!");
       } else {
@@ -131,9 +141,7 @@ const authController = {
 
   // [POST] /logout
   logoutUser: async (req, res) => {
-    refreshTokens = refreshTokens.filter(
-      (token) => token !== req.cookies.refreshToken
-    );
+    refreshTokens = refreshTokens.filter((token) => token !== req.cookies.refreshToken);
     res.clearCookie("refreshToken");
     res.status(200).json("Logged out successfully!");
   },
