@@ -23,7 +23,7 @@ module.exports = {
   },
   getUserByID: async (id) => {
     try {
-      const rs = await db.one("SELECT * FROM users WHERE id = $1;", [id]);
+      const rs = await db.one("SELECT id, name, phone, email, password, dob AT TIME ZONE 'UTC' AT TIME ZONE 'GMT+7' AS dob, gender, is_staff FROM users WHERE id = $1;", [id]);
       return rs;
     } catch (err) {
       if (err.code === 0) {

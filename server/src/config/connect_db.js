@@ -1,12 +1,13 @@
 const initOptions = {};
 const pgp = require("pg-promise")(initOptions);
+require("dotenv").config();
 
 const cn = {
   host: "localhost",
   port: 5432,
-  database: "TKPM_MOVIE",
+  database: process.env.DATABASE_NAME,
   user: "postgres",
-  password: "123",
+  password: process.env.DATABASE_PASSWORD,
   max: 30,
 };
 
