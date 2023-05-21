@@ -15,7 +15,7 @@ const authController = {
         // is_staff: user.is_staff,
       },
       process.env.JWT_ACCESS_KEY,
-      { expiresIn: "15s" }
+      { expiresIn: "1d" }
     );
   },
 
@@ -27,7 +27,7 @@ const authController = {
         // is_staff: user.is_staff,
       },
       process.env.JWT_REFRESH_KEY,
-      { expiresIn: "10m" }
+      { expiresIn: "2d" }
     );
   },
 
@@ -66,7 +66,10 @@ const authController = {
         return res.status(404).json("Account doesn't exist!");
       }
 
-      const validPassword = await bcrypt.compare(req.body.password, user.password);
+      const validPassword = await bcrypt.compare(
+        req.body.password,
+        user.password
+      );
       if (!validPassword) {
         res.status(404).json("Wrong password!");
       } else {
@@ -128,7 +131,9 @@ const authController = {
 
   // [POST] /logout
   logoutUser: async (req, res) => {
-    refreshTokens = refreshTokens.filter((token) => token !== req.cookies.refreshToken);
+    refreshTokens = refreshTokens.filter(
+      (token) => token !== req.cookies.refreshToken
+    );
     res.clearCookie("refreshToken");
     res.status(200).json("Logged out successfully!");
   },

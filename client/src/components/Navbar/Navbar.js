@@ -4,10 +4,19 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const handleTopPage = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="navbar-container">
       <div className="content">
-        <div className="left-logo">
+        <div
+          className="left-logo"
+          onClick={(e) => {
+            handleTopPage();
+          }}
+        >
           <Link to="/" className="nav-link">
             <img alt="cgvlogo" src="../../assets/img/cgvlogo.png" />
           </Link>
