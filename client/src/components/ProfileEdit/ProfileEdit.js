@@ -1,19 +1,38 @@
 import React, { useState, useContext } from "react";
 import DatePicker from "react-datepicker";
+import { toast } from "react-toastify";
 import "./ProfileEdit.css";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { Context } from "../../context/UserContext";
 import axios from "axios";
 
+import {
+  regexName,
+  regexEmail,
+  regexTel,
+} from "../../components/Forms/FormRegex";
+
 const ProfileEdit = () => {
-  const { userProfile, handleUserDOB } = useContext(Context);
+  const { userProfile } = useContext(Context);
 
   const [userGender, setUserGender] = useState("male");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [startDate, setStartDate] = useState(new Date());
+  // const [err, setErr] = useState(0);
+  let err = 0;
+
+  const errMsg = {
+    1: "Tên không hợp lệ!",
+    2: "Email không hợp lệ!",
+    3: "Số điện thoại không hợp lệ!",
+    4: "Password không hợp lệ! Password phải bao gồm ít nhất 1 ký tự thường, 1 ký tự in hoa và 1 chữ số!",
+    5: "Capcha Không hợp lệ.",
+    6: "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!",
+    7: "Vui lòng nhập đủ thông tin!",
+  };
 
   // if (Object.keys(userProfile).length !== 0) {
   //   console.log(userProfile);
@@ -40,6 +59,25 @@ const ProfileEdit = () => {
     return `${dateStr[3]}-${tranferMonth(dateStr[1])}-${dateStr[2]}`;
   };
 
+  const checkInput = (name, phone, email) => {
+    // console.log(name, phone, email);
+    if (name === "" && phone === "" && email === "") {
+      err = 7;
+      return false;
+    } else if (!regexName.test(name)) {
+      err = 1;
+      return false;
+    } else if (!regexEmail.test(email)) {
+      err = 2;
+      return false;
+    } else if (!regexTel.test(phone)) {
+      err = 3;
+      return false;
+    }
+    err = 0;
+    return true;
+  };
+
   const handleEditProfile = async (e) => {
     try {
       e.preventDefault();
@@ -48,7 +86,9 @@ const ProfileEdit = () => {
 
       // console.log(name, phone, email, userGender, dateTranfer);
 
-      if (user) {
+      const checkError = checkInput(name, phone, email);
+
+      if (user && checkError && err === 0) {
         const rs = await axios.post(
           "http://localhost:5000/user/profile",
           {
@@ -79,7 +119,17 @@ const ProfileEdit = () => {
 
           localStorage.setItem("user", JSON.stringify(newEditUser));
           window.location.reload();
+          toast.success("Sửa hồ sơ thành công");
         }
+      }
+
+      // Form input error
+      if (!checkError) {
+        // console.log(err);
+        // console.log(checkError);
+        // console.log(errMsg[err]);
+
+        toast.error(errMsg[err]);
       }
     } catch (error) {
       console.log(error.message);
