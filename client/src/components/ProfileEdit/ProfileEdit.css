@@ -1,0 +1,92 @@
+.profile-edit-container {
+  width: 100%;
+  padding: 30px 50px;
+  /* background-color: red; */
+}
+
+.profile-edit-container .profile-edit-title {
+  font-weight: bold;
+}
+
+.profile-edit-container .profile-edit-content {
+  margin-top: 80px;
+}
+
+.profile-edit-container .profile-edit-content .profile-edit-item {
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  margin: 20px 0;
+  /* background-color: red; */
+}
+
+.profile-edit-container .profile-edit-content .profile-edit-item p {
+  height: 100%;
+  min-width: 150px;
+  line-height: 30px;
+  /* margin-right: 50px; */
+  /* background-color: blue; */
+}
+
+.profile-edit-container .profile-edit-content .profile-edit-item input {
+  width: 50%;
+  padding: 0 20px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #bdbdbd;
+}
+
+.profile-radio-container {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  /* background-color: blue; */
+}
+
+.profile-radio-container .gender-radio-btn {
+  width: 30%;
+  display: flex;
+}
+
+.radio1 {
+  min-width: 50px;
+  height: 100%;
+  text-align: center;
+}
+
+.radio1 input {
+  height: 40px;
+}
+
+.radio1-title {
+  line-height: 40px;
+}
+
+.profile-edit-container .profile-edit-content .confirm-profile-edit {
+  width: 80px;
+  height: 50px;
+  color: #fff;
+  background-color: red;
+  border: 0;
+  border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+  .profile-edit-container .profile-edit-content .profile-edit-item {
+    flex-direction: column;
+    /* background-color: red; */
+  }
+
+  .profile-edit-container .profile-edit-content .profile-edit-item .text-input {
+    width: 100%;
+    height: 50px;
+  }
+
+  .profile-radio-container {
+    width: 100%;
+  }
+
+  .radio1 input {
+    height: 50px;
+  }
+}

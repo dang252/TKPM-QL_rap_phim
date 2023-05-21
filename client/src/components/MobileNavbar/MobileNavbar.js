@@ -5,7 +5,7 @@ import { Context } from "../../context/UserContext";
 import "./MobileNavbar.css";
 
 const MobileNavbar = () => {
-  const { username, logout } = useContext(Context);
+  const { username, logout, getUserId } = useContext(Context);
 
   // if (username) {
   //   console.log("Mobile:", username);
@@ -56,7 +56,7 @@ const MobileNavbar = () => {
                   </>
                 ) : (
                   <>
-                    <NavDropdown.Item href="#">
+                    <NavDropdown.Item href={`/profile/${getUserId(username)}`}>
                       Hello: {username}
                     </NavDropdown.Item>
                     <NavDropdown.Item

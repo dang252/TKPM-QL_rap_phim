@@ -6,6 +6,7 @@ import axios from "axios";
 
 const AppContext = ({ children }) => {
   const [username, setUsername] = useState("");
+  const [userProfile, setUserProfile] = useState({});
 
   const navigate = useNavigate();
 
@@ -51,8 +52,65 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const getUserId = (username) => {
+    const data = JSON.parse(localStorage.getItem("user"));
+    if (data !== null) {
+      const names = data["name"].split(" ");
+      const name = names[names.length - 1];
+      if (name && name === username) {
+        return data.id.toString();
+      }
+    }
+    return -1;
+  };
+
+  const getUserProfile = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        const rs = await axios.get(
+          `http://localhost:5000/user/profile?id=${user.id}`,
+          {
+            headers: {
+              token: `Bearer ${user.accessToken}`,
+            },
+          },
+          { withCredentials: true }
+        );
+
+        const data = await rs.data;
+
+        if (data) {
+          console.log(data);
+          setUserProfile(data);
+        }
+
+        return rs;
+      }
+    } catch (error) {
+      console.log("Get user profile failed:", error.message);
+      return error.response;
+    }
+  };
+
+  const handleUserDOB = (dob) => {
+    const dobStr = dob.split(":")[0].split("T")[0].split("-");
+    return `${dobStr[2]}/${dobStr[1]}/${dobStr[0]}`;
+  };
+
   return (
-    <Context.Provider value={{ username, logout }}>{children}</Context.Provider>
+    <Context.Provider
+      value={{
+        username,
+        logout,
+        getUserId,
+        getUserProfile,
+        userProfile,
+        handleUserDOB,
+      }}
+    >
+      {children}
+    </Context.Provider>
   );
 };
 

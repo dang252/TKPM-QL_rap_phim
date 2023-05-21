@@ -1,0 +1,13 @@
+.profile-detail-container {
+  width: 100%;
+  padding: 30px 50px;
+  /* background-color: red; */
+}
+
+.profile-detail-container .profile-detail-title {
+  font-weight: bold;
+}
+
+.profile-detail-container .profile-detail-content {
+  margin-top: 80px;
+}

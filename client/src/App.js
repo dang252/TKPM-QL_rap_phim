@@ -10,6 +10,7 @@ import Home from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 // import LogoutPage from "./pages/LogoutPage/LogoutPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import AppContext from "./components/AppContext/AppContext";
 
 import UserNavbar from "./components/UserNavbar/UserNavbar";
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           {/* <Route path="/logout" element={<LogoutPage />} /> */}
+          <Route path="/profile/:id" element={<ProfilePage />} />
         </Routes>
         <MyFooter />
       </AppContext>

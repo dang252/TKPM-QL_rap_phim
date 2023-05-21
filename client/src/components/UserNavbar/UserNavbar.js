@@ -6,7 +6,7 @@ import { Context } from "../../context/UserContext";
 import "./UserNavbar.css";
 
 const UserNavbar = () => {
-  const { username, logout } = useContext(Context);
+  const { username, logout, getUserId } = useContext(Context);
 
   // if (username) {
   //   console.log(username);
@@ -23,7 +23,7 @@ const UserNavbar = () => {
           </p>
           <p>
             {username ? (
-              <Link to="/" className="nav-link">
+              <Link to={`/profile/${getUserId(username)}`} className="nav-link">
                 Hello, {username}
               </Link>
             ) : (

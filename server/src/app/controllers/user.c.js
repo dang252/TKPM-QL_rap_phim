@@ -26,6 +26,8 @@ const userController = {
         gender: req.body.gender,
       };
 
+      console.log(infoUser);
+
       const updatedInfoUser = await userModel.updateProfile(infoUser);
 
       res.status(200).json(updatedInfoUser);
