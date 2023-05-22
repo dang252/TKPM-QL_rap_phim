@@ -15,6 +15,12 @@
   /* background-color: red; */
 }
 
+.profile-nav-container .profile-nav-top .profile-top-title {
+  font-weight: bold;
+  font-size: 20px;
+  color: red;
+}
+
 .profile-nav-container .profile-nav-top .profile-top-avatar {
   width: 50px;
   height: 50px;
@@ -25,7 +31,7 @@
   background-color: #bdbdbd;
 }
 
-.profile-nav-container .profile-nav-top .profile-top-title {
+.profile-nav-container .profile-nav-top .profile-top-name {
   width: 100%;
   text-align: center;
   overflow-x: auto;
@@ -49,11 +55,15 @@
   /* background-color: red; */
 }
 
+.profile-nav-container .profile-nav-main .active {
+  color: red;
+}
+
 .profile-nav-container .profile-nav-main .profile-main-category p {
   margin-left: 10px;
 }
 
 .profile-nav-container .profile-nav-main .profile-main-category:hover {
-  color: red;
+  color: #c97628;
   cursor: pointer;
 }

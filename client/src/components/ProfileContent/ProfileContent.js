@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ProfileContent.css";
 import { Context } from "../../context/UserContext";
@@ -8,15 +8,16 @@ import ProfileDetail from "../ProfileDetail/ProfileDetail";
 import ProfileEdit from "../ProfileEdit/ProfileEdit";
 
 const ProfileContent = () => {
-  const { getUserProfile } = useContext(Context);
+  const { getUserProfile, navigateUrl, handleChangeProfileNav } =
+    useContext(Context);
 
   const navigate = useNavigate();
 
-  const [navigateUrl, setNavigateUrl] = useState("detail");
+  // const [navigateUrl, setNavigateUrl] = useState("detail");
 
-  const handleChangeProfileNav = (url) => {
-    setNavigateUrl(url);
-  };
+  // const handleChangeProfileNav = (url) => {
+  //   setNavigateUrl(url);
+  // };
 
   const handleGetUserProfile = async () => {
     try {

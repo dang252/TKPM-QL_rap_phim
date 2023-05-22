@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import ProfileContent from "../../components/ProfileContent/ProfileContent";
+import ProfileMobileMenu from "../../components/ProfileMobileMenu/ProfileMobileMenu";
 
 const ProfilePage = () => {
   useEffect(() => {
@@ -11,6 +12,7 @@ const ProfilePage = () => {
   return (
     <div>
       <ProfileContent />
+      <ProfileMobileMenu />
     </div>
   );
 };

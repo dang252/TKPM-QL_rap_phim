@@ -5,10 +5,18 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 const AppContext = ({ children }) => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [userProfile, setUserProfile] = useState({});
 
-  const navigate = useNavigate();
+  // Profile navbar state
+  const [navigateUrl, setNavigateUrl] = useState("detail");
+  const [activeNav, setActiveNav] = useState("detail");
+
+  const handleChangeProfileNav = (url) => {
+    setNavigateUrl(url);
+  };
 
   //doc thong  tin user trong local storage
   useEffect(() => {
@@ -114,6 +122,10 @@ const AppContext = ({ children }) => {
         getUserProfile,
         userProfile,
         handleUserDOB,
+        navigateUrl,
+        handleChangeProfileNav,
+        activeNav,
+        setActiveNav,
       }}
     >
       {children}

@@ -1,0 +1,41 @@
+.profile-mobile-menu-btn {
+  display: none;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+  color: #fff;
+  background-color: red;
+  border-radius: 100%;
+  right: 40px;
+  bottom: 40px;
+}
+
+.profile-mobile-nav {
+  display: none;
+}
+
+.offcanvas-backdrop {
+  display: none;
+}
+
+.profile-mobile-menu-btn:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .profile-mobile-menu-btn {
+    display: block;
+    z-index: 10000;
+  }
+
+  .profile-mobile-nav {
+    display: block;
+  }
+
+  .offcanvas-backdrop {
+    display: block;
+  }
+}
