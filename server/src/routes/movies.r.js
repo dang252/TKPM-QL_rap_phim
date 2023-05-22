@@ -3,9 +3,9 @@ const middlewareController = require("../middleware/middleware.js");
 
 const router = require("express").Router();
 
-router.get("/getListMovies", middlewareController.verifyToken, moviesController.getListMovies);
-router.get("/getDetail", middlewareController.verifyToken, moviesController.getDetail);
-router.get("/getCurrentMovies", middlewareController.verifyToken, moviesController.getCurrentMovies);
-router.get("/getInComingMovies", middlewareController.verifyToken, moviesController.getInComingMovies);
+router.get("/getListMovies", moviesController.getListMovies);
+router.get("/getDetail", moviesController.getDetail);
+router.get("/getCurrentMovies", moviesController.getCurrentMovies);
+router.get("/getInComingMovies", moviesController.getInComingMovies);
 
 module.exports = router;

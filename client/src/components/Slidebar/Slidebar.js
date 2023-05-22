@@ -33,6 +33,9 @@ const Slidebar = () => {
         <SwiperSlide>
           <img alt="banner3" src="../../assets/banner/3.png" />
         </SwiperSlide>
+        <SwiperSlide>
+          <img alt="banner4" src="../../assets/banner/4.png" />
+        </SwiperSlide>
       </Swiper>
     </div>
   );

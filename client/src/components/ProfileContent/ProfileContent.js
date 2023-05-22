@@ -6,6 +6,7 @@ import { Context } from "../../context/UserContext";
 import ProfileNavigation from "../ProfileNavigation/ProfileNavigation";
 import ProfileDetail from "../ProfileDetail/ProfileDetail";
 import ProfileEdit from "../ProfileEdit/ProfileEdit";
+import ProfileChangePassword from "../ProfileChangePassword/ProfileChangePassword";
 
 const ProfileContent = () => {
   const { getUserProfile, navigateUrl, handleChangeProfileNav } =
@@ -46,6 +47,7 @@ const ProfileContent = () => {
       <div className="profile-right">
         {navigateUrl === "detail" && <ProfileDetail />}
         {navigateUrl === "edit" && <ProfileEdit />}
+        {navigateUrl === "changepassword" && <ProfileChangePassword />}
       </div>
     </div>
   );

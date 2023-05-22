@@ -22,6 +22,7 @@
 }
 
 .user-navbar-container .content .auth > :hover {
+  color: red;
   cursor: pointer;
 }
 

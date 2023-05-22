@@ -43,7 +43,10 @@ const userController = {
     try {
       // check old password
       const user = await userModel.getUserByID(req.body.id);
-      const validPassword = await bcrypt.compare(req.body.oldPassword, user.password);
+      const validPassword = await bcrypt.compare(
+        req.body.oldPassword,
+        user.password
+      );
       if (!validPassword) {
         return res.status(400).json("Incorrect Old Password!");
       } else {

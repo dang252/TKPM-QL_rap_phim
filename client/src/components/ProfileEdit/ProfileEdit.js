@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import DatePicker from "react-datepicker";
+import { Modal, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import "./ProfileEdit.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -20,6 +21,7 @@ const ProfileEdit = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [show, setShow] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   // const [err, setErr] = useState(0);
   let err = 0;
@@ -37,6 +39,9 @@ const ProfileEdit = () => {
   // if (Object.keys(userProfile).length !== 0) {
   //   console.log(userProfile);
   // }
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const tranferMonth = (monthChar) => {
     if (monthChar === "Jan") return 1;
@@ -61,7 +66,7 @@ const ProfileEdit = () => {
 
   const checkInput = (name, phone, email) => {
     // console.log(name, phone, email);
-    if (name === "" && phone === "" && email === "") {
+    if (name === "" || phone === "" || email === "") {
       err = 7;
       return false;
     } else if (!regexName.test(name)) {
@@ -78,9 +83,13 @@ const ProfileEdit = () => {
     return true;
   };
 
-  const handleEditProfile = async (e) => {
+  const handleEditProfile = (e) => {
+    e.preventDefault();
+    handleShow();
+  };
+
+  const handleConfirmEditProfile = async () => {
     try {
-      e.preventDefault();
       const dateTranfer = handleDatePicker(startDate);
       const user = JSON.parse(localStorage.getItem("user"));
 
@@ -118,8 +127,12 @@ const ProfileEdit = () => {
           };
 
           localStorage.setItem("user", JSON.stringify(newEditUser));
-          window.location.reload();
+          handleClose();
           toast.success("Sửa hồ sơ thành công");
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         }
       }
 
@@ -137,95 +150,118 @@ const ProfileEdit = () => {
   };
 
   return (
-    <div className="profile-edit-container">
-      <h4 className="profile-edit-title">CHÍNH SỬA HỒ SƠ</h4>
-      <p className="profile-edit-subtitle">Thay đổi thông tin hồ sơ cá nhân</p>
-      {Object.keys(userProfile).length !== 0 && (
-        <form
-          className="profile-edit-content"
-          onSubmit={(e) => {
-            handleEditProfile(e);
-          }}
-        >
-          <div className="profile-edit-item">
-            <p>Họ tên:</p>
-            <input
-              className="text-input"
-              type="text"
-              placeholder="Nhập họ tên"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-          </div>
-          <div className="profile-edit-item">
-            <p>Số điện thoại:</p>
-            <input
-              className="text-input"
-              type="text"
-              placeholder="Nhập số điện thoại"
-              value={phone}
-              onChange={(e) => {
-                setPhone(e.target.value);
-              }}
-            />
-          </div>
-          <div className="profile-edit-item">
-            <p>Email:</p>
-            <input
-              className="text-input"
-              type="text"
-              placeholder="Nhập email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-          </div>
-          <div className="profile-edit-item">
-            <p>Giới tính: </p>
-            <div className="profile-radio-container">
-              <div className="gender-radio-btn">
-                <div className="radio1">
-                  <input
-                    type="radio"
-                    value={userGender}
-                    checked={userGender === "male"}
-                    onChange={() => {
-                      setUserGender("male");
-                    }}
-                  />
+    <>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Thông báo</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Bạn có chắc muốn đổi mật khẩu ?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Đóng
+          </Button>
+          <Button
+            variant="primary"
+            onClick={(e) => {
+              handleConfirmEditProfile();
+            }}
+          >
+            Xác nhận
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <div className="profile-edit-container">
+        <h4 className="profile-edit-title">CHỈNH SỬA HỒ SƠ</h4>
+        <p className="profile-edit-subtitle">
+          Thay đổi thông tin hồ sơ cá nhân
+        </p>
+        {Object.keys(userProfile).length !== 0 && (
+          <form
+            className="profile-edit-content"
+            onSubmit={(e) => {
+              handleEditProfile(e);
+            }}
+          >
+            <div className="profile-edit-item">
+              <p>Họ tên:</p>
+              <input
+                className="text-input"
+                type="text"
+                placeholder="Nhập họ tên"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+            </div>
+            <div className="profile-edit-item">
+              <p>Số điện thoại:</p>
+              <input
+                className="text-input"
+                type="text"
+                placeholder="Nhập số điện thoại"
+                value={phone}
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                }}
+              />
+            </div>
+            <div className="profile-edit-item">
+              <p>Email:</p>
+              <input
+                className="text-input"
+                type="text"
+                placeholder="Nhập email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+            </div>
+            <div className="profile-edit-item">
+              <p>Giới tính: </p>
+              <div className="profile-radio-container">
+                <div className="gender-radio-btn">
+                  <div className="radio1">
+                    <input
+                      type="radio"
+                      value={userGender}
+                      checked={userGender === "male"}
+                      onChange={() => {
+                        setUserGender("male");
+                      }}
+                    />
+                  </div>
+                  <div className="radio1-title">Nam</div>
                 </div>
-                <div className="radio1-title">Nam</div>
-              </div>
-              <div className="gender-radio-btn">
-                <div className="radio1">
-                  <input
-                    type="radio"
-                    value={userGender}
-                    checked={userGender === "female"}
-                    onChange={() => {
-                      setUserGender("female");
-                    }}
-                  />
+                <div className="gender-radio-btn">
+                  <div className="radio1">
+                    <input
+                      type="radio"
+                      value={userGender}
+                      checked={userGender === "female"}
+                      onChange={() => {
+                        setUserGender("female");
+                      }}
+                    />
+                  </div>
+                  <div className="radio1-title">Nữ</div>
                 </div>
-                <div className="radio1-title">Nữ</div>
               </div>
             </div>
-          </div>
-          <div className="profile-edit-item">
-            <p>Ngày sinh:</p>
-            <DatePicker
-              className="profile-edit-date"
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-            />
-          </div>
-          <button className="confirm-profile-edit">Lưu</button>
-        </form>
-      )}
-    </div>
+            <div className="profile-edit-item">
+              <p>Ngày sinh:</p>
+              <DatePicker
+                className="profile-edit-date"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+            </div>
+            <button className="confirm-profile-edit">Lưu</button>
+          </form>
+        )}
+      </div>
+    </>
   );
 };
 
