@@ -22,17 +22,24 @@ const AppContext = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post(
-        "http://localhost:5000/auth/logout",
-        {},
-        {
-          withCredentials: true,
-        }
-      );
-      localStorage.clear();
-      toast.success("Đăng xuất thành công!");
-      navigate("/");
-      window.location.reload();
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (user) {
+        await axios.post(
+          "http://localhost:5000/auth/logout",
+          {},
+          {
+            headers: {
+              token: `Bearer ${user.accessToken}`,
+            },
+            withCredentials: true,
+          }
+        );
+        localStorage.clear();
+        toast.success("Đăng xuất thành công!");
+        navigate("/");
+        window.location.reload();
+      }
     } catch (error) {
       if (error.response) {
         // err 404
