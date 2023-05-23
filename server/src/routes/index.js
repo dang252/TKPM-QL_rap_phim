@@ -30,15 +30,15 @@ function router(app) {
    *          is_staff:
    *            type: boolean
    *            description: user's role
-   * securityDefinitions:
-   *  cookieAuth:
-   *    type: apiKey
-   *    in: cookie
-   *    name: refreshToken
-   *  tokenAuth:
-   *    type: apiKey
-   *    in: header
-   *    name: token
+   *    securitySchemes:
+   *      cookieAuth:
+   *        type: apiKey
+   *        in: cookie
+   *        name: refreshToken
+   *      tokenAuth:
+   *        type: apiKey
+   *        in: header
+   *        name: token
    */
 
   app.use("/auth", authRouter);
