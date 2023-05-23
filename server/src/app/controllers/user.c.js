@@ -28,11 +28,11 @@ const userController = {
         gender: req.body.gender,
       };
 
-      console.log(infoUser);
-
       const updatedInfoUser = await userModel.updateProfile(infoUser);
 
-      res.status(200).json(updatedInfoUser);
+      const { password, ...others } = updatedInfoUser;
+
+      res.status(200).json(others);
     } catch (error) {
       res.status(500).json(error);
     }
@@ -43,10 +43,7 @@ const userController = {
     try {
       // check old password
       const user = await userModel.getUserByID(req.body.id);
-      const validPassword = await bcrypt.compare(
-        req.body.oldPassword,
-        user.password
-      );
+      const validPassword = await bcrypt.compare(req.body.oldPassword, user.password);
       if (!validPassword) {
         return res.status(400).json("Incorrect Old Password!");
       } else {
