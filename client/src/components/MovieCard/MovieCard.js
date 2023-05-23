@@ -9,7 +9,7 @@ const MovieCard = (props) => {
     const { getDate } = useContext(Context)
     return (
         <div className='movie-card'>
-            {(props.index <= 3) && <div className = {`ribbon ribbon${props.index}`}></div>}
+            {props.DisplayTop3 && (props.index <= 3) && <div className = {`ribbon ribbon${props.index}`}></div>}
             <image className='movie-img' scr={props.movie.url_poster} alt={props.movie.title}></image>
             <h5 className='movie-title'>{props.movie.title}</h5>
             <p className='movie-discription'>Khởi chiếu: {getDate(props.movie.release_date)}</p>

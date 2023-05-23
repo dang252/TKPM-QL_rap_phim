@@ -13,13 +13,15 @@ const status ={
         PathName: "Phim Đang Chiếu",
         OtherPath: "/movies/coming-soon",
         OtherPathName: "Phim Sắp Chiếu",
-        API: "CurrentMovies"
+        API: "CurrentMovies",
+        DisplayTop3: true,
     },
     "coming-soon": {
         PathName: "Phim Sắp Chiếu",
         OtherPath: "/movies/currently-showing",
         OtherPathName: "Phim Đang Chiếu",
-        API: "InComingMovies"
+        API: "InComingMovies",
+        DisplayTop3: false,
     } 
 }
 const MoviesList = (props) => {
@@ -58,7 +60,7 @@ const MoviesList = (props) => {
                 {movies && movies.map((movie, index) => {
                     console.log(index)
                     return (
-                        <MovieCard key={movie.id} movie = {movie} index={index+1}/>
+                        <MovieCard key={movie.id} movie = {movie} index={index+1} DisplayTop3={status[props.path].DisplayTop3}/>
                     )
                 })}
             </div>
