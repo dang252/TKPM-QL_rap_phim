@@ -25,8 +25,10 @@ const Navbar = () => {
           <div className="dropdown">
             <p className="drop-title">PHIM</p>
             <div className="dropdown-content">
-              <p>Phim đang chiếu</p>
-              <p>Phim sắp chiếu</p>
+              <Link to="/movies/currently-showing">Phim đang chiếu</Link>
+              <Link to="/movies/coming-soon">Phim sắp chiếu</Link>
+              {/* <p>Phim đang chiếu</p>
+              <p>Phim sắp chiếu</p> */}
             </div>
           </div>
           <div className="dropdown">

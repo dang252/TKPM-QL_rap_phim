@@ -74,6 +74,13 @@
   text-decoration: none;
 }
 
+.dropdown-content a {
+  color: #fff;
+  padding: 12px 20px;
+  text-decoration: none;
+  display: block;
+}
+
 .dropdown-content p:hover {
   cursor: pointer;
   color: red;

@@ -1,5 +1,5 @@
-import { React, useState, useEffect } from "react"
-
+import { React} from "react"
+import { Link } from "react-router-dom"
 import LoginForm from "../Forms/LoginForm/LoginForm"
 import RegisterForm from "../Forms/RegisterForm/RegisterForm"
 import BenefitSlidebar from "../BenefitSlidebar/BenefitSlidebar"
@@ -12,12 +12,12 @@ const FormContainer = (props) => {
         <div className="form-container">
             <div className="forms">
                 <div className="option-container">
-                    <a href="/login">ĐĂNG NHẬP
+                    <Link to="/login" className="nav-link">ĐĂNG NHẬP
                         {(option === "Login") && <div/>}
-                    </a>
-                    <a href="/register">ĐĂNG KÝ
+                    </Link>
+                    <Link to="/register" className="nav-link">ĐĂNG KÝ
                         {(option !== "Login") && <div/>}
-                    </a>
+                    </Link>
                 </div>
                 {(option === "Login")? <LoginForm/> : <RegisterForm/>}
             </div>

@@ -55,9 +55,9 @@ const LoginForm = () => {
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
-        toast.success("Đăng nhập thành công!");
         navigate("/");
         window.location.reload();
+        toast.success("Đăng nhập thành công!");
       } catch (error) {
         // toast.update(id, {render: "Something went wrong", type: "error", isLoading: false });
         if (error.response) {

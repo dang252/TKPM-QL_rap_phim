@@ -44,9 +44,9 @@ const AppContext = ({ children }) => {
           }
         );
         localStorage.clear();
-        toast.success("Đăng xuất thành công!");
         navigate("/");
         window.location.reload();
+        toast.success("Đăng xuất thành công!");
       }
     } catch (error) {
       if (error.response) {
@@ -57,7 +57,7 @@ const AppContext = ({ children }) => {
         );
         navigate("/");
       } else if (error.request) {
-        toast.success(
+        toast.error(
           "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!"
         );
         navigate("/");
@@ -113,6 +113,17 @@ const AppContext = ({ children }) => {
     return `${dobStr[2]}/${dobStr[1]}/${dobStr[0]}`;
   };
 
+  const getDate = (date) => {
+    let date_obj = date
+    if(typeof(date) !== "object"){
+      date_obj = new Date(date)
+    }
+    let day = ("0" + date_obj.getDate()).slice(-2);
+    let month = ("0" + (date_obj.getMonth() + 1)).slice(-2);
+    let year = date_obj.getFullYear();
+    return day + "-" + month + "-" + year;
+  }
+
   return (
     <Context.Provider
       value={{
@@ -126,6 +137,7 @@ const AppContext = ({ children }) => {
         handleChangeProfileNav,
         activeNav,
         setActiveNav,
+        getDate
       }}
     >
       {children}

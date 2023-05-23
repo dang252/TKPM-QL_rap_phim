@@ -17,6 +17,8 @@ import UserNavbar from "./components/UserNavbar/UserNavbar";
 import Navbar from "./components/Navbar/Navbar";
 import MobileNavbar from "./components/MobileNavbar/MobileNavbar";
 import MyFooter from "./components/MyFooter/MyFooter";
+import MoviesPage from "./pages/MoviesPage/MoviesPage";
+import MoviesList from "./components/MoviesList/MoviesList";
 
 const App = () => {
   return (
@@ -31,6 +33,10 @@ const App = () => {
           <Route path="/register" element={<RegisterPage />} />
           {/* <Route path="/logout" element={<LogoutPage />} /> */}
           <Route path="/profile/:id" element={<ProfilePage />} />
+          <Route path="/movies" element={<MoviesPage />}>
+            <Route path='currently-showing' element={<MoviesList path = "currently-showing"/>}/>
+            <Route path='coming-soon' element={<MoviesList path = "coming-soon"/>}/>
+          </Route>
         </Routes>
         <MyFooter />
       </AppContext>
