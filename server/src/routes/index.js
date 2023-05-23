@@ -1,5 +1,6 @@
 const authRouter = require("./auth.r");
 const userRouter = require("./user.r");
+const moviesRouter = require("./movies.r");
 
 function router(app) {
   /**
@@ -30,6 +31,39 @@ function router(app) {
    *          is_staff:
    *            type: boolean
    *            description: user's role
+   *      MovieDetail:
+   *        type: object
+   *        properties:
+   *          id:
+   *            type: integer
+   *            description: movie's id
+   *          title:
+   *            type: string
+   *            description: movie's title
+   *          release_date:
+   *            type: string
+   *            description: movie's release date
+   *          url_poster:
+   *            type: string
+   *            description: movie's url_poster
+   *          director:
+   *            type: string
+   *            description: movie's director
+   *          actors:
+   *            type: string
+   *            description: movie's actors
+   *          genres:
+   *            type: string
+   *            description: movie's genres
+   *          duration:
+   *            type: string
+   *            description: movie's duration
+   *          age:
+   *            type: integer
+   *            description: movie's limited age
+   *          overview:
+   *            type: string
+   *            description: movie's overview
    *    securitySchemes:
    *      cookieAuth:
    *        type: apiKey
@@ -43,6 +77,7 @@ function router(app) {
 
   app.use("/auth", authRouter);
   app.use("/user", userRouter);
+  app.use("/movies", moviesRouter);
 }
 
 module.exports = router;
