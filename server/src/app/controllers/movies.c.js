@@ -1,12 +1,12 @@
 const moviesModel = require("../models/movies.m");
 
 const moviesController = {
-  // [GET] /getListMovies
+  // [GET] /listMovies
   getListMovies: async (req, res) => {
     try {
       const listMovies = await moviesModel.getListMovies();
-      
-      const formattedMovies = listMovies.map(movie => {
+
+      const formattedMovies = listMovies.map((movie) => {
         const { director, actors, genres, duration, age, overview, ...others } = movie;
         return others; // { id, title, release_date, url_poster }
       });
@@ -17,8 +17,7 @@ const moviesController = {
     }
   },
 
-
-  //[GET] /getDetail?id={..}
+  //[GET] /detail?id={..}
   getDetail: async (req, res) => {
     try {
       const movie = await moviesModel.getDetail(req.query.id);
@@ -29,13 +28,12 @@ const moviesController = {
     }
   },
 
-
-  //[GET] /getCurrentMovies
+  //[GET] /currentMovies
   getCurrentMovies: async (req, res) => {
     try {
       const listMovies = await moviesModel.getCurrentMovies();
-      
-      const formattedMovies = listMovies.map(movie => {
+
+      const formattedMovies = listMovies.map((movie) => {
         const { director, actors, genres, duration, age, overview, ...others } = movie;
         return others; // { id, title, release_date, url_poster }
       });
@@ -46,12 +44,12 @@ const moviesController = {
     }
   },
 
-  //[GET] /getInComingMovies
+  //[GET] /inComingMovies
   getInComingMovies: async (req, res) => {
     try {
       const listMovies = await moviesModel.getInComingMovies();
-      
-      const formattedMovies = listMovies.map(movie => {
+
+      const formattedMovies = listMovies.map((movie) => {
         const { director, actors, genres, duration, age, overview, ...others } = movie;
         return others; // { id, title, release_date, url_poster }
       });
@@ -61,7 +59,6 @@ const moviesController = {
       res.status(500).json(error);
     }
   },
-
 };
 
 module.exports = moviesController;
