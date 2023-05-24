@@ -155,7 +155,7 @@ const ProfileEdit = () => {
         <Modal.Header closeButton>
           <Modal.Title>Thông báo</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Bạn có chắc muốn đổi mật khẩu ?</Modal.Body>
+        <Modal.Body>Bạn có chắc muốn đổi thông tin hồ sơ ?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Đóng
