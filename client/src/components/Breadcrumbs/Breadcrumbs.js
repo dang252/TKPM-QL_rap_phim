@@ -1,7 +1,8 @@
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, {useContext} from 'react'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseChimney, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { Context } from "../../context/UserContext";
 
 import "./Breadcrumbs.css"
 
@@ -11,6 +12,8 @@ const pathToName = {
     "coming-soon": "Phim sắp chiếu"
 }
 const Breadcrumbs = () => {
+    const { detailMovie } = useContext(Context);
+
     const location = useLocation();
     let link = ''
     const crumbs = location.pathname.split('/')
@@ -20,7 +23,10 @@ const Breadcrumbs = () => {
             return (
                 <span key={crumb}>
                     <FontAwesomeIcon icon={faChevronRight} />
-                    <Link to={link}>{pathToName[crumb]}</Link>
+                    {crumb === "detail" 
+                    ?<Link to={link}>{detailMovie.title}</Link> 
+                    :<Link to={link}>{pathToName[crumb]}</Link>
+                    }
                 </span>
             )
         })

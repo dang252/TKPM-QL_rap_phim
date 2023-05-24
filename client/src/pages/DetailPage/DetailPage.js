@@ -7,6 +7,7 @@ import "./DetailPage.css";
 import DetailMovieContent from "../../components/DetailMovieContent/DetailMovieContent";
 
 import { Context } from "../../context/UserContext";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 const DetailPage = () => {
   const { getDetailMovie, detailMovie } = useContext(Context);
@@ -42,6 +43,7 @@ const DetailPage = () => {
             </p>
           )}
         </div>
+        {/* <Breadcrumbs></Breadcrumbs> */}
       </div>
       <DetailMovieContent detailMovie={detailMovie} />
     </div>

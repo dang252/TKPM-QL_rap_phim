@@ -232,7 +232,7 @@ const RegisterForm = () => {
         className="input-radio"
         type="radio"
         name="gender"
-        onChange={(e) => setGender("M")}
+        onChange={(e) => setGender("male")}
         defaultChecked
       />
       Nam
@@ -240,7 +240,7 @@ const RegisterForm = () => {
         className="input-radio"
         type="radio"
         name="gender"
-        onChange={(e) => setGender("F")}
+        onChange={(e) => setGender("female")}
       />
       Nữ
       <div className="captcha-container">
