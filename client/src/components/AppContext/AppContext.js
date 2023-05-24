@@ -18,6 +18,9 @@ const AppContext = ({ children }) => {
     setNavigateUrl(url);
   };
 
+  // Homepage movie list state
+  const [hpMovieList, setHpMovieList] = useState("");
+
   //doc thong  tin user trong local storage
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("user"));
@@ -114,15 +117,32 @@ const AppContext = ({ children }) => {
   };
 
   const getDate = (date) => {
-    let date_obj = date
-    if(typeof(date) !== "object"){
-      date_obj = new Date(date)
+    let date_obj = date;
+    if (typeof date !== "object") {
+      date_obj = new Date(date);
     }
     let day = ("0" + date_obj.getDate()).slice(-2);
     let month = ("0" + (date_obj.getMonth() + 1)).slice(-2);
     let year = date_obj.getFullYear();
     return day + "-" + month + "-" + year;
-  }
+  };
+
+  const getMoviesByCategory = async (category) => {
+    try {
+      const rs = await axios.get(`http://localhost:5000/movies/${category}`);
+      const data = await rs?.data;
+      if (data) {
+        setHpMovieList(rs.data);
+      }
+    } catch (error) {
+      console.log("Get current movie failed:", error.message);
+    }
+  };
+
+  const randomArray = (length, max) =>
+    Array(length)
+      .fill()
+      .map(() => Math.round(Math.random() * max));
 
   return (
     <Context.Provider
@@ -137,7 +157,10 @@ const AppContext = ({ children }) => {
         handleChangeProfileNav,
         activeNav,
         setActiveNav,
-        getDate
+        getDate,
+        getMoviesByCategory,
+        hpMovieList,
+        randomArray,
       }}
     >
       {children}

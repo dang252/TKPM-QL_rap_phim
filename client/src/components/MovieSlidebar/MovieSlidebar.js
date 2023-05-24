@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 
+import HomePageMovieCard from "../HomePageMovieCard/HomePageMovieCard";
+
 import "./MovieSlidebar.css";
 
-const MovieSlidebar = () => {
+const MovieSlidebar = (props) => {
+  const { movieSelection } = props;
+
+  useEffect(() => {
+    if (movieSelection.length !== 0) {
+      // console.log(movieSelection);
+    }
+  }, [movieSelection]);
+
   return (
     <div className="movie-slidebar-container">
       <Swiper
@@ -30,36 +40,14 @@ const MovieSlidebar = () => {
           },
         }}
       >
-        <SwiperSlide>
-          <div className="movie-card">
-            <img alt="movie1" src="../../assets/movie/1.png" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="movie-card">
-            <img alt="movie1" src="../../assets/movie/2.png" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="movie-card">
-            <img alt="movie1" src="../../assets/movie/3.png" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="movie-card">
-            <img alt="movie1" src="../../assets/movie/4.png" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="movie-card">
-            <img alt="movie1" src="../../assets/movie/5.png" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="movie-card">
-            <img alt="movie1" src="../../assets/movie/6.png" />
-          </div>
-        </SwiperSlide>
+        {movieSelection.length !== 0 &&
+          movieSelection.map((movie) => {
+            return (
+              <SwiperSlide key={movie.id}>
+                <HomePageMovieCard movie={movie} />
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
     </div>
   );
