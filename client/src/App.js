@@ -11,6 +11,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 // import LogoutPage from "./pages/LogoutPage/LogoutPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import DetailPage from "./pages/DetailPage/DetailPage";
 import AppContext from "./components/AppContext/AppContext";
 
 import UserNavbar from "./components/UserNavbar/UserNavbar";
@@ -34,9 +35,16 @@ const App = () => {
           {/* <Route path="/logout" element={<LogoutPage />} /> */}
           <Route path="/profile/:id" element={<ProfilePage />} />
           <Route path="/movies" element={<MoviesPage />}>
-            <Route path='currently-showing' element={<MoviesList path = "currently-showing"/>}/>
-            <Route path='coming-soon' element={<MoviesList path = "coming-soon"/>}/>
+            <Route
+              path="currently-showing"
+              element={<MoviesList path="currently-showing" />}
+            />
+            <Route
+              path="coming-soon"
+              element={<MoviesList path="coming-soon" />}
+            />
           </Route>
+          <Route path="/movies/detail" element={<DetailPage />} />
         </Routes>
         <MyFooter />
       </AppContext>

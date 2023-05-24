@@ -13,11 +13,13 @@ const MovieCard = (props) => {
         <div className={`ribbon ribbon${props.index}`}></div>
       )}
       {/* <image className='movie-img' scr={props.movie.url_poster} alt={props.movie.title}></image> */}
-      <img
-        className="movie-img"
-        scr={props.movie.url_poster}
-        alt={props.movie.title}
-      />
+      <Link className="movie-img" to={`/movies/detail?id=${props.movie.id}`}>
+        <img
+          // className="movie-img"
+          scr={props.movie.url_poster}
+          alt={props.movie.title}
+        />
+      </Link>
       <h5 className="movie-title">{props.movie.title}</h5>
       <p className="movie-discription">
         Khởi chiếu: {getDate(props.movie.release_date)}

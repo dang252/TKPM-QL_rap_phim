@@ -1,80 +1,78 @@
 .movie-card {
-    align-self: center;
-    justify-self: center;
-    width: 186px;
-    height: 100%;
-    /* border: 1px solid black; */
-    display: flex; 
-    flex-direction: column;
-    position: relative;
+  align-self: center;
+  justify-self: center;
+  width: 186px;
+  height: 100%;
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
-.movie-card .ribbon{
-    position: absolute;
-    height: 65px;
-    width: 50px;
-    top:-17px;
-    right:-27px;
+.movie-card .ribbon {
+  position: absolute;
+  height: 65px;
+  width: 50px;
+  top: -17px;
+  right: -27px;
 }
 
 .movie-card .ribbon1 {
-    background-image: url("../../../public/assets/img/ribbon-film-final.png");
-    background-repeat: no-repeat;
+  background-image: url("../../../public/assets/img/ribbon-film-final.png");
+  background-repeat: no-repeat;
 }
 
 .movie-card .ribbon2 {
-    background-image: url("../../../public/assets/img/ribbon-film-final.png");
-    background-repeat: no-repeat;
-    background-position: -50px 0px;
+  background-image: url("../../../public/assets/img/ribbon-film-final.png");
+  background-repeat: no-repeat;
+  background-position: -50px 0px;
 }
 
 .movie-card .ribbon3 {
-    background-image: url("../../../public/assets/img/ribbon-film-final.png");
-    background-repeat: no-repeat;
-    background-position: -100px 0px;
+  background-image: url("../../../public/assets/img/ribbon-film-final.png");
+  background-repeat: no-repeat;
+  background-position: -100px 0px;
 }
 
 .movie-card .movie-img {
-    /* display: block; */
-    border: 6px solid black;
-    width: 186px;
-    height: 260px;
+  /* display: block; */
+  border: 6px solid black;
+  width: 186px;
+  height: 260px;
+  text-decoration: none;
 }
 
 .movie-card .booking-button {
-    margin-top: auto;
-    align-self: flex-end;
-    padding: 5px;
-    text-decoration: none;
-    color:white;
-    background-color: red;
-    border-radius: 3px;
-
+  margin-top: auto;
+  align-self: flex-end;
+  padding: 5px;
+  text-decoration: none;
+  color: white;
+  background-color: red;
+  border-radius: 3px;
 }
 
 .movie-card .booking-button div {
-    border: 1px solid white;
-    padding: 1px 2px;
-    border-radius: 5px;
+  border: 1px solid white;
+  padding: 1px 2px;
+  border-radius: 5px;
 }
 
 .movie-card .booking-button div span {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
-
 @media screen and (max-width: 700px) {
-    .movie-card {
-        width: calc(100vw/3.5);
-        /* padding */
-        
-    }
-    .movie-card .ribbon{
-        top: 10px;
-        right: 5px;
-    }
-    .movie-card .movie-img {
-        width: calc(100vw/3.5);
-        height: calc((100vw/3.5) * (260/186)) ;
-    }
+  .movie-card {
+    width: calc(100vw / 3.5);
+    /* padding */
+  }
+  .movie-card .ribbon {
+    top: 10px;
+    right: 5px;
+  }
+  .movie-card .movie-img {
+    width: calc(100vw / 3.5);
+    height: calc((100vw / 3.5) * (260 / 186));
+  }
 }

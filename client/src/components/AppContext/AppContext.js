@@ -21,6 +21,9 @@ const AppContext = ({ children }) => {
   // Homepage movie list state
   const [hpMovieList, setHpMovieList] = useState("");
 
+  // Detail page movie state
+  const [detailMovie, setDetailMovie] = useState({});
+
   //doc thong  tin user trong local storage
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("user"));
@@ -144,6 +147,26 @@ const AppContext = ({ children }) => {
       .fill()
       .map(() => Math.round(Math.random() * max));
 
+  const getDetailMovie = async (id) => {
+    try {
+      const rs = await axios.get(
+        `http://localhost:5000/movies/detail?id=${id}`
+      );
+      const data = await rs?.data;
+      setDetailMovie(data);
+    } catch (error) {
+      console.log("Get detail movie failed:", error.message);
+    }
+  };
+
+  const durationTransform = (duration) => {
+    const temp = duration.split(":");
+    const hour = Number(temp[0]);
+    const minute = Number(temp[1]);
+    const second = Number(temp[2]);
+    return hour * 60 + minute + second / 60;
+  };
+
   return (
     <Context.Provider
       value={{
@@ -161,6 +184,9 @@ const AppContext = ({ children }) => {
         getMoviesByCategory,
         hpMovieList,
         randomArray,
+        getDetailMovie,
+        detailMovie,
+        durationTransform,
       }}
     >
       {children}
