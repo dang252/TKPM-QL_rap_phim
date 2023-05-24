@@ -1,42 +1,49 @@
-import React, {useContext} from 'react'
-import { Link, useLocation, useSearchParams } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouseChimney, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import React, { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHouseChimney,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { Context } from "../../context/UserContext";
 
-import "./Breadcrumbs.css"
+import "./Breadcrumbs.css";
 
 const pathToName = {
-    "movies": 'Phim',
-    "currently-showing": 'Phim đang chiếu',
-    "coming-soon": "Phim sắp chiếu"
-}
+  movies: "Phim",
+  "currently-showing": "Phim đang chiếu",
+  "coming-soon": "Phim sắp chiếu",
+};
 const Breadcrumbs = () => {
-    const { detailMovie } = useContext(Context);
+  const { detailMovie } = useContext(Context);
 
-    const location = useLocation();
-    let link = ''
-    const crumbs = location.pathname.split('/')
-        .filter(crumb => crumb !== '')
-        .map(crumb => {
-            link += '/' + crumb
-            return (
-                <span key={crumb}>
-                    <FontAwesomeIcon icon={faChevronRight} />
-                    {crumb === "detail" 
-                    ?<Link to={link}>{detailMovie.title}</Link> 
-                    :<Link to={link}>{pathToName[crumb]}</Link>
-                    }
-                </span>
-            )
-        })
+  const location = useLocation();
+  let link = "";
+  const crumbs = location.pathname
+    .split("/")
+    .filter((crumb) => crumb !== "")
+    .map((crumb) => {
+      link += "/" + crumb;
+      return (
+        <span key={crumb}>
+          <FontAwesomeIcon icon={faChevronRight} />
+          {crumb === "detail" ? (
+            <Link to={link}>{detailMovie.title}</Link>
+          ) : (
+            <Link to={link}>{pathToName[crumb]}</Link>
+          )}
+        </span>
+      );
+    });
 
-    return (
-        <div className='breadcrumbs-container'>
-            <Link to='/'><FontAwesomeIcon icon={faHouseChimney} /></Link>
-            {crumbs}
-        </div>
-    )
-}
+  return (
+    <div className="breadcrumbs-container">
+      <Link to="/">
+        <FontAwesomeIcon icon={faHouseChimney} />
+      </Link>
+      {crumbs}
+    </div>
+  );
+};
 
-export default Breadcrumbs
+export default Breadcrumbs;

@@ -74,6 +74,14 @@
   .detail-movie-container {
     width: 90%;
   }
+
+  .detail-movie-container
+    .detail-movie-content
+    .content-left
+    .detail-image
+    img {
+    width: 200px;
+  }
 }
 
 @media (max-width: 1000px) {

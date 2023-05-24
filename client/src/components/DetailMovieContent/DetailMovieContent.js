@@ -19,7 +19,7 @@ const DetailMovieContent = (props) => {
   const imageZoomStyles = {
     width: 200,
     zoomWidth: 200,
-    img: "../../assets/movie/1.png",
+    img: detailMovie ? detailMovie.url_poster : "",
   };
 
   const getRated = (age) => {
@@ -33,7 +33,7 @@ const DetailMovieContent = (props) => {
       return "T16 - PHIM ĐƯỢC PHỔ BIẾN ĐẾN NGƯỜI XEM TỪ ĐỦ 16 TUỔI TRỞ LÊN (16+)";
     }
     if (age === 18) {
-      return "T18 - PHIM ĐƯỢC PHỔ BIẾN ĐẾN NGƯỜI XEM TỪ ĐỦ 16 TUỔI TRỞ LÊN (18+)";
+      return "T18 - PHIM ĐƯỢC PHỔ BIẾN ĐẾN NGƯỜI XEM TỪ ĐỦ 18 TUỔI TRỞ LÊN (18+)";
     }
   };
 
@@ -69,7 +69,7 @@ const DetailMovieContent = (props) => {
                 {windowSize[0] > 800 ? (
                   <ReactImageZoom {...imageZoomStyles} />
                 ) : (
-                  <img src="../../assets/movie/1.png" alt="detail title" />
+                  <img src={detailMovie.url_poster} alt="detail title" />
                 )}
               </div>
             </div>
@@ -143,6 +143,16 @@ const DetailMovieContent = (props) => {
                         height: "30px",
                         backgroundImage: `url("../../assets/img/rating-sprite.png")`,
                         backgroundPosition: "-283px 0px",
+                      }}
+                    />
+                  )}
+                  {detailMovie.age === 18 && (
+                    <div
+                      style={{
+                        width: "45px",
+                        height: "30px",
+                        backgroundImage: `url("../../assets/img/rating-sprite.png")`,
+                        backgroundPosition: "-330px 0px",
                       }}
                     />
                   )}

@@ -7,7 +7,7 @@ import "./DetailPage.css";
 import DetailMovieContent from "../../components/DetailMovieContent/DetailMovieContent";
 
 import { Context } from "../../context/UserContext";
-import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+// import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 const DetailPage = () => {
   const { getDetailMovie, detailMovie } = useContext(Context);

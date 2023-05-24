@@ -16,7 +16,7 @@ const MovieCard = (props) => {
       <Link className="movie-img" to={`/movies/detail?id=${props.movie.id}`}>
         <img
           // className="movie-img"
-          scr={props.movie.url_poster}
+          src={props.movie.url_poster}
           alt={props.movie.title}
         />
       </Link>
