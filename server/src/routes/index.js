@@ -65,6 +65,43 @@ function router(app) {
    *          overview:
    *            type: string
    *            description: movie's overview
+   *      BookDetail:
+   *        type: object
+   *        properties:
+   *          cinema_name:
+   *            type: string
+   *            description: cinema's name
+   *          location:
+   *            type: string
+   *            description: cinema's location
+   *          purchase_date:
+   *            type: string
+   *            description: ticket's purchase_date
+   *          title:
+   *            type: string
+   *            description: movie's title
+   *          start_time:
+   *            type: string
+   *            description: movie's start time
+   *          end_time:
+   *            type: string
+   *            description: movie's end time
+   *          room_name:
+   *            type: string
+   *            description: room's name
+   *          seats:
+   *            type: array
+   *            items:
+   *              type: string
+   *            description: seat code
+   *          food_drink:
+   *            type: array
+   *            items:
+   *              type: string
+   *            description: food_drink's name
+   *          total_price:
+   *            type: number
+   *            description: ticket's total_price
    *    securitySchemes:
    *      cookieAuth:
    *        type: apiKey
