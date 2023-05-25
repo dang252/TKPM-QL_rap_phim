@@ -62,6 +62,10 @@
   border-radius: 3px;
 }
 
+.movie-card .booking-button:hover {
+  cursor: pointer;
+}
+
 .movie-card .booking-button div {
   border: 1px solid white;
   padding: 1px 2px;

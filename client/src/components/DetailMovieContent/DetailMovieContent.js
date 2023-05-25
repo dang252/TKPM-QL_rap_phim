@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import ReactImageZoom from "react-image-zoom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTicket } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +8,8 @@ import "./DetailMovieContent.css";
 import { Context } from "../../context/UserContext";
 
 const DetailMovieContent = (props) => {
-  const { getDate, durationTransform } = useContext(Context);
+  const { getDate, durationTransform, handleGetTicketInfo, openModal } =
+    useContext(Context);
   const { detailMovie } = props;
 
   const [windowSize, setWindowSize] = useState([
@@ -156,7 +157,7 @@ const DetailMovieContent = (props) => {
                       }}
                     />
                   )}
-                  <Link to="/ticket" style={{ textDecoration: "none" }}>
+                  <div style={{ textDecoration: "none" }}>
                     <div
                       style={{
                         fontSize: "18px",
@@ -171,6 +172,10 @@ const DetailMovieContent = (props) => {
                         display: "flex",
                         justifyContent: "center",
                       }}
+                      onClick={(e) => {
+                        handleGetTicketInfo(detailMovie.id);
+                        openModal();
+                      }}
                     >
                       <p style={{ lineHeight: "50px" }}>
                         <FontAwesomeIcon icon={faTicket} />
@@ -179,7 +184,7 @@ const DetailMovieContent = (props) => {
                         MUA VÉ
                       </p>
                     </div>
-                  </Link>
+                  </div>
                 </div>
               </div>
             </div>

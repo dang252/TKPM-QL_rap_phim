@@ -176,6 +176,22 @@ const AppContext = ({ children }) => {
     return hour * 60 + minute + second / 60;
   };
 
+  const [ticketInfo, setTicketInfo] = useState();
+
+  const handleGetTicketInfo = (id) => {
+    setTicketInfo(id);
+  };
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <Context.Provider
       value={{
@@ -196,6 +212,12 @@ const AppContext = ({ children }) => {
         getDetailMovie,
         detailMovie,
         durationTransform,
+        handleGetTicketInfo,
+        modalIsOpen,
+        openModal,
+        setIsOpen,
+        closeModal,
+        ticketInfo,
       }}
     >
       {children}

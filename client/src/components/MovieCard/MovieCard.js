@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
 const MovieCard = (props) => {
-  const { getDate } = useContext(Context);
+  const { getDate, handleGetTicketInfo, openModal } = useContext(Context);
   return (
     <div className="movie-card">
       {props.DisplayTop3 && props.index <= 3 && (
@@ -24,7 +24,13 @@ const MovieCard = (props) => {
       <p className="movie-discription">
         Khởi chiếu: {getDate(props.movie.release_date)}
       </p>
-      <div className="booking-button">
+      <div
+        className="booking-button"
+        onClick={(e) => {
+          handleGetTicketInfo(props.movie.id);
+          openModal();
+        }}
+      >
         <div>
           <FontAwesomeIcon icon={faPhone} />
           <span>MUA VÉ</span>

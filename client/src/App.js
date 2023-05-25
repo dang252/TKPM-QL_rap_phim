@@ -20,11 +20,13 @@ import MobileNavbar from "./components/MobileNavbar/MobileNavbar";
 import MyFooter from "./components/MyFooter/MyFooter";
 import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import MoviesList from "./components/MoviesList/MoviesList";
+import TicketModal from "./components/TicketModal/TicketModal";
 
 const App = () => {
   return (
     <div className="main-app">
       <AppContext>
+        <TicketModal />
         <UserNavbar />
         <Navbar />
         <MobileNavbar />
