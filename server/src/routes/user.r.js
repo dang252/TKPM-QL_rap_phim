@@ -115,50 +115,25 @@ router.post("/changePassword", middlewareController.verifyToken, userController.
 
 /**
  * @swagger
- * /user/booking_history:
+ * /user/booking_history?id={id}:
  *  get:
  *   summary: get user's booking history
  *   tags: [/user]
  *   security:
  *     - tokenAuth: []
+ *   parameters:
+ *     - name: id
+ *       in: path
+ *       description: User's ID
+ *       required: true
+ *       type: integer
  *   responses:
  *     '200':
  *       description: Get booking history successfully
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               cinema_name:
- *                 type: string
- *                 description: cinema's name
- *               location:
- *                 type: string
- *                 description: cinema's location
- *               purchase_date:
- *                 type: string
- *                 description: ticket's purchase_date
- *               title:
- *                 type: string
- *                 description: movie's title
- *               time:
- *                 type: string
- *                 description: movie's start time
- *               duration:
- *                 type: string
- *                 description: movie's duration
- *               room_name:
- *                 type: string
- *                 description: room's name
- *               id_seats:
- *                 type: integer
- *                 description: seat's id
- *               id_food_drink:
- *                 type: integer
- *                 description: food_drink's id
- *               total_price:
- *                 type: number
- *                 description: ticket's total_price
+ *             $ref: '#/components/schemas/BookDetail'
  *     '500':
  *       description: Internal server error
  */
