@@ -40,19 +40,22 @@
 .profile-radio-container {
   width: 50%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   /* background-color: blue; */
 }
 
 .profile-radio-container .gender-radio-btn {
-  width: 30%;
+  width: 45%;
   display: flex;
+  justify-content: flex-start;
+  /* background-color: red; */
 }
 
 .radio1 {
   min-width: 50px;
   height: 100%;
-  text-align: center;
+  text-align: left;
+  /* background-color: red; */
 }
 
 .radio1 input {
@@ -61,6 +64,8 @@
 
 .radio1-title {
   line-height: 40px;
+  margin-right: 5px;
+  /* background-color: red; */
 }
 
 .profile-edit-container .profile-edit-content .confirm-profile-edit {
