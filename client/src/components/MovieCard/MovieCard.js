@@ -24,12 +24,12 @@ const MovieCard = (props) => {
       <p className="movie-discription">
         Khởi chiếu: {getDate(props.movie.release_date)}
       </p>
-      <Link to="/" className="booking-button">
+      <div className="booking-button">
         <div>
           <FontAwesomeIcon icon={faPhone} />
           <span>MUA VÉ</span>
         </div>
-      </Link>
+      </div>
     </div>
   );
 };
