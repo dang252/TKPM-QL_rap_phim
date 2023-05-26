@@ -45,9 +45,10 @@ module.exports = {
       }
     }
   },
-  getSchedule: async (id_movie, date) => {
+  getSchedule: async (id_movie, date, province) => {
     try {
-      const rs = await db.any("SELECT id, id_movie, id_cinema, id_room, date AT TIME ZONE 'UTC' AT TIME ZONE 'GMT+7' AS date, time FROM schedule WHERE id_movie = $1 AND date = $2;", [id_movie, date]);
+      const rs = await db.any("SELECT _s.id, _s.id_movie, _s.id_cinema, _s.id_room, _s.date AT TIME ZONE 'UTC' AT TIME ZONE 'GMT+7' AS date, _s.time FROM schedule _s JOIN cinemas _c ON _s.id_cinema = _c.id WHERE id_movie = $1 AND date = COALESCE($2, CURRENT_DATE) AND province = $3;", [id_movie, date, province]);
+
       return rs;
     } catch (err) {
       if (err.code === 0) {

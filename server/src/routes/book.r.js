@@ -136,21 +136,49 @@ router.get("/cinema", bookController.getCinemaDetail);
 
 /**
  * @swagger
- * /book/schedule?id_movie={id_movie}&date='{date}':
- *  get:
+ * /book/schedule:
+ *  post:
  *   summary: get schedule
  *   tags: [/book]
- *   parameters:
- *     - name: id_movie
- *       in: path
- *       description: Movie's ID
- *       required: true
- *       type: integer
- *     - name: date
- *       in: path
- *       description: Movie's Day
- *       required: true
- *       type: string
+ *   requestBody:
+ *     required: true
+ *     content:
+ *       application/json:
+ *         schema:
+ *           oneOf:
+ *             - type: object
+ *               properties:
+ *                 id_movie:
+ *                   type: integer
+ *                   description: schedule's id_movie
+ *               example:
+ *                 id_movie: 1
+ *             - type: object
+ *               properties:
+ *                 id_movie:
+ *                   type: integer
+ *                   description: schedule's id_movie
+ *                 date:
+ *                   type: string
+ *                   description: schedule's date
+ *               example:
+ *                 id_movie: 1
+ *                 date: 2023-05-24
+ *             - type: object
+ *               properties:
+ *                 id_movie:
+ *                   type: integer
+ *                   description: schedule's id_movie
+ *                 date:
+ *                   type: string
+ *                   description: schedule's date
+ *                 province:
+ *                   type: string
+ *                   description: cinema's province
+ *               example:
+ *                 id_movie: 1
+ *                 date: 2023-05-24
+ *                 province: Hà Nội
  *   responses:
  *     '200':
  *       description: Get schedule successfully
@@ -182,7 +210,7 @@ router.get("/cinema", bookController.getCinemaDetail);
  *     '500':
  *       description: Internal server error
  */
-router.get("/schedule", bookController.getSchedule);
+router.post("/schedule", bookController.getSchedule);
 
 /**
  * @swagger

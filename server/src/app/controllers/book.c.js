@@ -34,10 +34,10 @@ const bookController = {
     }
   },
 
-  // [GET] /schedule?id_movie={}&date={}
+  // [POST] /schedule
   getSchedule: async (req, res) => {
     try {
-      const schedule = await bookModel.getSchedule(req.query.id_movie, req.query.date);
+      const schedule = await bookModel.getSchedule(req.body.id_movie, req.body.date || null, req.body.province || "Hồ Chí Minh");
 
       res.status(200).json(schedule);
     } catch (error) {
