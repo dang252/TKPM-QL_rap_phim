@@ -198,9 +198,15 @@ router.get("/cinema", bookController.getCinemaDetail);
  *                 id_cinema:
  *                   type: integer
  *                   description: schedule's id cinema
+ *                 cinema_name:
+ *                   type: string
+ *                   description: cinema's name
  *                 id_room:
  *                   type: integer
  *                   description: schedule's id room
+ *                 room_name:
+ *                   type: string
+ *                   description: room's name
  *                 date:
  *                   type: string
  *                   description: schedule's date
