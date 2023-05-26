@@ -12,6 +12,130 @@ const router = require("express").Router();
 
 /**
  * @swagger
+ * /book/provinces:
+ *  get:
+ *   summary: get provinces
+ *   tags: [/book]
+ *   responses:
+ *     '200':
+ *       description: Get provinces successfully
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: array
+ *             items:
+ *               type: object
+ *               properties:
+ *                 province:
+ *                   type: string
+ *                   description: province's name
+ *     '500':
+ *       description: Internal server error
+ */
+router.get("/provinces", bookController.getProvinces);
+
+/**
+ * @swagger
+ * /book/provinces:
+ *  post:
+ *   summary: get cinemas by province
+ *   tags: [/book]
+ *   requestBody:
+ *     required: true
+ *     content:
+ *       application/json:
+ *         schema:
+ *           type: object
+ *           properties:
+ *             province:
+ *               type: string
+ *               description: province's name
+ *   responses:
+ *     '200':
+ *       description: Get cinemas successfully
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: array
+ *             items:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: cinema's id
+ *                 name:
+ *                   type: string
+ *                   description: cinema's name
+ *     '500':
+ *       description: Internal server error
+ */
+router.post("/provinces", bookController.getCinemas);
+
+/**
+ * @swagger
+ * /book/cinema?id_cinema={id_cinema}:
+ *  get:
+ *   summary: get cinema's detail
+ *   tags: [/book]
+ *   parameters:
+ *     - name: id_cinema
+ *       in: path
+ *       description: cinema's ID
+ *       required: true
+ *       type: integer
+ *   responses:
+ *     '200':
+ *       description: Get cinema's detail successfully
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: integer
+ *                 description: cinema's id
+ *               name:
+ *                 type: string
+ *                 description: cinema's name
+ *               province:
+ *                 type: string
+ *                 description: cinema's province
+ *               location:
+ *                 type: string
+ *                 description: cinema's location
+ *               schedule:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       description: schedule's id
+ *                     movie_title:
+ *                       type: string
+ *                       description: movie's title
+ *                     movie_poster:
+ *                       type: string
+ *                       description: movie's poster
+ *                     room_name:
+ *                       type: string
+ *                       description: room's name
+ *                     date:
+ *                       type: string
+ *                       description: date
+ *                     time:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                       description: schedule's time
+ *                 description: cinema's schedule
+ *     '500':
+ *       description: Internal server error
+ */
+router.get("/cinema", bookController.getCinemaDetail);
+
+/**
+ * @swagger
  * /book/schedule?id_movie={id_movie}&date='{date}':
  *  get:
  *   summary: get schedule

@@ -1,6 +1,39 @@
 const bookModel = require("../models/book.m");
 
 const bookController = {
+  // [GET] /provinces
+  getProvinces: async (req, res) => {
+    try {
+      const provinces = await bookModel.getProvinces();
+
+      res.status(200).json(provinces);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
+  // [POST] /provinces
+  getCinemas: async (req, res) => {
+    try {
+      const cinemas = await bookModel.getCinemasByProvince(req.body.province);
+
+      res.status(200).json(cinemas);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
+  // [GET] /cinema?id_cinema={}
+  getCinemaDetail: async (req, res) => {
+    try {
+      const cinema_detail = await bookModel.getCinemaDetail(req.query.id_cinema);
+
+      res.status(200).json(cinema_detail);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
   // [GET] /schedule?id_movie={}&date={}
   getSchedule: async (req, res) => {
     try {
