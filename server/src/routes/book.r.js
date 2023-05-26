@@ -185,28 +185,30 @@ router.get("/cinema", bookController.getCinemaDetail);
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               id:
- *                 type: integer
- *                 description: schedule's id
- *               id_movie:
- *                 type: integer
- *                 description: schedule's id movie
- *               id_cinema:
- *                 type: integer
- *                 description: schedule's id cinema
- *               id_room:
- *                 type: integer
- *                 description: schedule's id room
- *               date:
- *                 type: string
- *                 description: schedule's date
- *               time:
- *                 type: array
- *                 items:
+ *             type: array
+ *             items:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: schedule's id
+ *                 id_movie:
+ *                   type: integer
+ *                   description: schedule's id movie
+ *                 id_cinema:
+ *                   type: integer
+ *                   description: schedule's id cinema
+ *                 id_room:
+ *                   type: integer
+ *                   description: schedule's id room
+ *                 date:
  *                   type: string
- *                 description: schedule's time
+ *                   description: schedule's date
+ *                 time:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                   description: schedule's time
  *     '500':
  *       description: Internal server error
  */

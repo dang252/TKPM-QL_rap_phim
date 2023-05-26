@@ -18,24 +18,26 @@ const router = require("express").Router();
  *   tags: [/movies]
  *   responses:
  *     '200':
- *       description: get list all movies successfully
+ *       description: Get list all movies successfully
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               id:
- *                 type: integer
- *                 description: movie's id
- *               title:
- *                 type: string
- *                 description: movie's title
- *               release_date:
- *                 type: string
- *                 description: movie's release date
- *               url_poster:
- *                 type: string
- *                 description: movie's url poster
+ *             type: array
+ *             items:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: movie's id
+ *                 title:
+ *                   type: string
+ *                   description: movie's title
+ *                 release_date:
+ *                   type: string
+ *                   description: movie's release date
+ *                 url_poster:
+ *                   type: string
+ *                   description: movie's url poster
  *     '500':
  *       description: Internal server error
  */
@@ -55,7 +57,7 @@ router.get("/listMovies", moviesController.getListMovies);
  *       type: integer
  *   responses:
  *     '200':
- *       description: Register successfully
+ *       description: Get movie's detail successfully
  *       content:
  *         application/json:
  *           schema:
@@ -73,13 +75,26 @@ router.get("/detail", moviesController.getDetail);
  *   tags: [/movies]
  *   responses:
  *     '200':
- *       description: Register successfully
+ *       description: Get current movies successfully
  *       content:
  *         application/json:
  *           schema:
  *             type: array
  *             items:
- *               $ref: '#/components/schemas/MovieDetail'
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: movie's id
+ *                 title:
+ *                   type: string
+ *                   description: movie's title
+ *                 release_date:
+ *                   type: string
+ *                   description: movie's release date
+ *                 url_poster:
+ *                   type: string
+ *                   description: movie's url poster
  *     '500':
  *       description: Internal server error
  */
@@ -93,13 +108,26 @@ router.get("/currentMovies", moviesController.getCurrentMovies);
  *   tags: [/movies]
  *   responses:
  *     '200':
- *       description: Register successfully
+ *       description: Get in coming movies successfully
  *       content:
  *         application/json:
  *           schema:
  *             type: array
  *             items:
- *               $ref: '#/components/schemas/MovieDetail'
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: movie's id
+ *                 title:
+ *                   type: string
+ *                   description: movie's title
+ *                 release_date:
+ *                   type: string
+ *                   description: movie's release date
+ *                 url_poster:
+ *                   type: string
+ *                   description: movie's url poster
  *     '500':
  *       description: Internal server error
  */
