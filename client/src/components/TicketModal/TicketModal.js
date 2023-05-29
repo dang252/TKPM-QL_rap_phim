@@ -3,18 +3,24 @@ import "./TicketModal.css";
 import Modal from "react-modal";
 
 import { Context } from "../../context/UserContext";
+import ModalContent from "../ModalContent/ModalContent";
 
 const customStyles = {
   content: {
     top: "10%",
     margin: "0 auto",
     width: "90%",
+    backgroundColor: "#fdfcf0",
+    padding: "5px",
   },
-  overlay: { zIndex: 1000, backgroundColor: "rgba(0, 0, 0, 0.7)" },
+  overlay: { 
+    zIndex: 1000, 
+    backgroundColor: "rgba(0, 0, 0, 0.7)" 
+  },
 };
 
 const TicketModal = () => {
-  const { modalIsOpen, closeModal, ticketInfo } = useContext(Context);
+  const { modalIsOpen, closeModal } = useContext(Context);
 
   // let subtitle;
 
@@ -33,11 +39,8 @@ const TicketModal = () => {
         contentLabel="Example Modal"
         ariaHideApp={false}
       >
-        <button onClick={closeModal}>close</button>
-        {/* <div ref={(_subtitle) => (subtitle = _subtitle)}>
-          Buy ticket for movie: {ticketInfo}
-        </div> */}
-        <div>Buy ticket for movie: {ticketInfo}</div>
+        <ModalContent></ModalContent>
+        <button className = "close-btn" onClick={closeModal}>X</button>
       </Modal>
     </div>
   );

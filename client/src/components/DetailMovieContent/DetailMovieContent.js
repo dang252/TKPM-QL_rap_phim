@@ -42,7 +42,7 @@ const DetailMovieContent = (props) => {
     if (Object.keys(detailMovie).length !== 0) {
       document.title = `${detailMovie.title}`;
       window.scrollTo(0, 0);
-      console.log(detailMovie);
+      // console.log(detailMovie);
     }
   }, [detailMovie]);
 

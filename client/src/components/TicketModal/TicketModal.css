@@ -1,1 +1,11 @@
-
+.close-btn {
+    background-color: black;
+    color: white;
+    width: 40px;
+    height: 25px;
+    border-radius:10px;
+    border:none;
+    position: absolute;
+    top: 5px;
+    right:5px; 
+}
