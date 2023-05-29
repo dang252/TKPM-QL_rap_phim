@@ -192,6 +192,49 @@ const AppContext = ({ children }) => {
     setIsOpen(false);
   };
 
+  const [idSchedule, setIdSchedule] = useState("");
+  const [seatsList, setSeatsList] = useState([]);
+  const [seatsPickList, setSeatsPickList] = useState([]);
+
+  const getSeats = async (idSchedule) => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        const rs = await axios.get(
+          `http://localhost:5000/book/seats?id_schedule=${idSchedule}`,
+          {
+            headers: {
+              token: `Bearer ${user.accessToken}`,
+            },
+          }
+        );
+        setIdSchedule(idSchedule);
+        setSeatsList(rs.data);
+      }
+    } catch (error) {
+      console.log("Get seats failed:", error.message);
+    }
+  };
+
+  const handleAddSeatsPick = (targetSeat) => {
+    if (targetSeat?.status === 0) {
+      const id = targetSeat?.id_seat;
+      console.log(id);
+
+      const checkExist = seatsPickList.filter((seat) => {
+        return seat === id;
+      });
+
+      if (checkExist.length !== 0) {
+        const filterSeatsLick = seatsPickList.filter((seat) => {
+          return seat !== id;
+        });
+        setSeatsPickList(filterSeatsLick);
+      } else {
+        setSeatsPickList([...seatsPickList, id]);
+      }
+    }
+  };
 
   return (
     <Context.Provider
@@ -219,6 +262,11 @@ const AppContext = ({ children }) => {
         setIsOpen,
         closeModal,
         ticketInfo,
+        getSeats,
+        idSchedule,
+        seatsList,
+        handleAddSeatsPick,
+        seatsPickList,
       }}
     >
       {children}

@@ -12,6 +12,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 // import LogoutPage from "./pages/LogoutPage/LogoutPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import DetailPage from "./pages/DetailPage/DetailPage";
+import SeatsPage from "./pages/SeatsPage/SeatsPage";
 import AppContext from "./components/AppContext/AppContext";
 
 import UserNavbar from "./components/UserNavbar/UserNavbar";
@@ -47,6 +48,7 @@ const App = () => {
             />
           </Route>
           <Route path="/movies/detail" element={<DetailPage />} />
+          <Route path="/book/seats" element={<SeatsPage />} />
         </Routes>
         <MyFooter />
       </AppContext>

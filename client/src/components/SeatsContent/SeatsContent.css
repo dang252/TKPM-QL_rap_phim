@@ -1,0 +1,219 @@
+.seats-container {
+  width: 50%;
+  margin: 250px auto 100px;
+  min-height: 500px;
+  border: 1px solid gray;
+  overflow-y: auto;
+}
+
+.seats-container .seats-title {
+  width: 100%;
+  height: 40px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 40px;
+  color: #fff;
+  background-color: #000;
+}
+
+.seats-container .seats-subtitle {
+  width: 100%;
+  height: 80px;
+  padding: 0 20px;
+  font-weight: 500;
+  line-height: 80px;
+  border-bottom: 1px solid gray;
+  background-color: #fdf7dc;
+}
+
+.seats-container .seats-box-wrapper {
+  width: 95%;
+  margin: 50px auto;
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 80px 640px 40px 40px 40px;
+  grid-template-rows: 40px 280px 200px 40px;
+  /* border: 1px solid red; */
+}
+
+.seat {
+  font-size: 13px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border: 1px solid #000;
+}
+
+.choose {
+  background-color: #35b51d;
+}
+
+.picked {
+  color: #fff;
+  background-color: gray;
+}
+
+.ban {
+  color: #fff;
+  background-color: #000;
+}
+
+.seat:hover {
+  cursor: pointer;
+}
+
+.area-1 {
+  width: 80px;
+  height: 40px;
+  background-color: red;
+}
+
+.area-2 {
+  width: 640px;
+  height: 40px;
+  display: grid;
+  grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+  grid-template-rows: 40px;
+  /* background-color: blueviolet; */
+}
+
+.area-3,
+.area-4,
+.area-5 {
+  width: 40px;
+  height: 40px;
+  background-color: red;
+}
+
+.area-6 {
+  width: 80px;
+  height: 280px;
+  display: grid;
+  grid-template-columns: 40px 40px;
+  grid-template-rows: 40px 40px 40px 40px 40px 40px 40px;
+  /* background-color: blue; */
+}
+
+.area-7 {
+  width: 640px;
+  height: 280px;
+  display: grid;
+  grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+  grid-template-rows: 40px 40px 40px 40px 40px 40px 40px;
+  /* background-color: green; */
+}
+
+.area-8,
+.area-9,
+.area-10 {
+  width: 40px;
+  height: 280px;
+  background-color: red;
+}
+
+.area-11 {
+  width: 80px;
+  height: 200px;
+  display: grid;
+  grid-template-columns: 40px 40px;
+  grid-template-rows: 40px 40px 40px 40px 40px;
+  /* background-color: green; */
+}
+
+.area-12 {
+  width: 640px;
+  height: 200px;
+  display: grid;
+  grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+  grid-template-rows: 40px 40px 40px 40px 40px;
+  /* background-color: blue; */
+}
+
+.area-13 {
+  width: 40px;
+  height: 200px;
+  background-color: red;
+}
+
+.area-14,
+.area-15 {
+  width: 40px;
+  height: 200px;
+  display: grid;
+  grid-template-columns: 40px;
+  grid-template-rows: 40px 40px 40px 40px 40px;
+  /* background-color: green; */
+}
+
+.area-16 {
+  width: 80px;
+  height: 40px;
+  display: grid;
+  grid-template-columns: 40px 40px;
+  grid-template-rows: 40px;
+  /* background-color: blue; */
+}
+
+.area-17 {
+  width: 640px;
+  height: 40px;
+  display: grid;
+  grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+  grid-template-rows: 40px;
+  /* background-color: green; */
+}
+
+.area-18,
+.area-19 {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  grid-template-columns: 40px;
+  grid-template-rows: 40px;
+  /* background-color: blue; */
+}
+
+.area-20 {
+  width: 40px;
+  height: 40px;
+  background-color: red;
+}
+
+.none {
+  opacity: 0;
+}
+
+@media (max-width: 1600px) {
+  .seats-container {
+    width: 70%;
+  }
+
+  .seats-container .seats-box-wrapper {
+    width: 85%;
+  }
+}
+
+@media (max-width: 1400px) {
+  .seats-container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .seats-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 800px) {
+  .seats-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .seats-container {
+    margin-top: 20px;
+  }
+}
