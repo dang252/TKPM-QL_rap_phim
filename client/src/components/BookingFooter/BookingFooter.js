@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
 import "./BookingFooter.css";
 
 const BookingFooter = (props) => {
@@ -16,6 +17,8 @@ const BookingFooter = (props) => {
     nextUrl,
   } = props;
 
+  const navigate = useNavigate();
+
   if (Object.keys(detailMovie).length !== 0) {
     // console.log(paramsTime, paramsCinemaName, detailMovie);
   }
@@ -26,17 +29,34 @@ const BookingFooter = (props) => {
     });
   };
 
+  const handlePrevPage = () => {
+    navigate(prevUrl);
+  };
+
+  const handleNextPage = () => {
+    if (seatsPickList.length === 0) {
+      window.scrollTo(0, 0);
+      toast.error("Vui lòng chọn ghế");
+    } else if (seatsPickList.length !== 0) {
+      navigate(nextUrl);
+    }
+  };
+
   return (
     <div className="booking-footer-container">
       {Object.keys(detailMovie).length !== 0 && (
         <>
           <div className="booking-footer-left">
-            <Link to={prevUrl}>
+            <div
+              onClick={(e) => {
+                handlePrevPage();
+              }}
+            >
               <div className="prev-btn">
                 <FontAwesomeIcon icon={faArrowLeft} />
                 <p>Previous</p>
               </div>
-            </Link>
+            </div>
           </div>
           <div className="booking-footer-main">
             <div className="booking-poster">
@@ -68,12 +88,16 @@ const BookingFooter = (props) => {
             </div>
           </div>
           <div className="booking-footer-right">
-            <Link to={nextUrl}>
+            <div
+              onClick={(e) => {
+                handleNextPage();
+              }}
+            >
               <div className="next-btn">
                 <FontAwesomeIcon icon={faArrowRight} />
                 <p>Next</p>
               </div>
-            </Link>
+            </div>
           </div>
         </>
       )}

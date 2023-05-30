@@ -171,6 +171,7 @@ const DetailMovieContent = (props) => {
                         borderRadius: "5px",
                         display: "flex",
                         justifyContent: "center",
+                        cursor: "pointer",
                       }}
                       onClick={(e) => {
                         handleGetTicketInfo(detailMovie.id);

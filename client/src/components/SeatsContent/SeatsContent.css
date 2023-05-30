@@ -70,6 +70,7 @@
 }
 
 .seat:hover {
+  background-color: #ff2b1c;
   cursor: pointer;
 }
 

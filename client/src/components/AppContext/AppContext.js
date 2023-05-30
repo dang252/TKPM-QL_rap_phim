@@ -236,6 +236,22 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const getFoods = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        const rs = await axios.get("http://localhost:5000/book/food_drink", {
+          headers: {
+            token: `Bearer ${user.accessToken}`,
+          },
+        });
+        console.log(rs);
+      }
+    } catch (error) {
+      console.log("Get foods failed:", error.message);
+    }
+  };
+
   return (
     <Context.Provider
       value={{
@@ -267,6 +283,7 @@ const AppContext = ({ children }) => {
         seatsList,
         handleAddSeatsPick,
         seatsPickList,
+        getFoods,
       }}
     >
       {children}

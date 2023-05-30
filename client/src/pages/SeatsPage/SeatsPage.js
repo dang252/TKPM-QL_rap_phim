@@ -19,9 +19,12 @@ const SeatsPage = () => {
 
   useEffect(() => {
     document.title = "CGV Cinemas Fake | Đặt vé";
-    window.scrollTo(0, 0);
     closeModal();
   }, [closeModal]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     getSeats(paramsIdSchedule);

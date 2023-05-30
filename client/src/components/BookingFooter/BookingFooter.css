@@ -9,17 +9,15 @@
 
 .booking-footer-left,
 .booking-footer-right {
-  height: 100%;
   width: 10%;
   display: flex;
   align-items: center;
   /* background-color: blue; */
 }
 
-.booking-footer-left a,
-.booking-footer-right a {
-  width: 100%;
-  height: inherit;
+.booking-footer-left div,
+.booking-footer-right div {
+  width: 95%;
   margin: 50% auto;
   color: #fff;
   text-decoration: none;
@@ -39,7 +37,8 @@
   background-color: red;
 }
 
-.prev-btn:hover {
+.prev-btn:hover,
+.next-btn:hover {
   cursor: pointer;
 }
 
@@ -69,7 +68,13 @@
 
 @media (max-width: 1200px) {
   .booking-footer-container {
-    width: 130%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 1050px) {
+  .booking-footer-container {
+    width: 105%;
   }
 }
 
