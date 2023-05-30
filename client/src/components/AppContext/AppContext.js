@@ -219,7 +219,7 @@ const AppContext = ({ children }) => {
   const handleAddSeatsPick = (targetSeat) => {
     if (targetSeat?.status === 0) {
       const id = targetSeat?.id_seat;
-      console.log(id);
+      // console.log(id);
 
       const checkExist = seatsPickList.filter((seat) => {
         return seat === id;

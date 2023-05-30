@@ -1,0 +1,86 @@
+.booking-footer-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  background-color: #000;
+  overflow-x: auto;
+}
+
+.booking-footer-left,
+.booking-footer-right {
+  height: 100%;
+  width: 10%;
+  display: flex;
+  align-items: center;
+  /* background-color: blue; */
+}
+
+.booking-footer-left a,
+.booking-footer-right a {
+  width: 100%;
+  height: inherit;
+  margin: 50% auto;
+  color: #fff;
+  text-decoration: none;
+  /* background-color: green; */
+}
+
+.prev-btn,
+.next-btn {
+  width: 90%;
+  height: 80px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: red;
+}
+
+.prev-btn:hover {
+  cursor: pointer;
+}
+
+.booking-footer-main {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+  /* background-color: blue; */
+}
+
+.booking-footer-main .booking-poster {
+  width: 15%;
+}
+
+.booking-footer-main .booking-poster img {
+  width: 100%;
+}
+
+.booking-footer-main .booking-content {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  /* background-color: blue; */
+}
+
+@media (max-width: 1200px) {
+  .booking-footer-container {
+    width: 130%;
+  }
+}
+
+@media (max-width: 800px) {
+  .booking-footer-container {
+    width: 160%;
+  }
+}
+
+@media (max-width: 600px) {
+  .booking-footer-container {
+    width: 230%;
+  }
+}

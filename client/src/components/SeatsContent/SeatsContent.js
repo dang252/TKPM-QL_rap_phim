@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import "./SeatsContent.css";
 
+import BookingFooter from "../BookingFooter/BookingFooter";
+
 import { Context } from "../../context/UserContext";
 
 import {
@@ -18,7 +20,13 @@ import {
 } from "../../constrants/seats";
 
 const SeatsContent = (props) => {
-  const { seatsList, paramsIdSchedule, paramsCinemaName } = props;
+  const {
+    seatsList,
+    paramsIdSchedule,
+    paramsCinemaName,
+    detailMovie,
+    paramsTime,
+  } = props;
 
   const { handleAddSeatsPick, seatsPickList } = useContext(Context);
 
@@ -54,6 +62,7 @@ const SeatsContent = (props) => {
       <p className="seats-subtitle">
         {paramsCinemaName} | Cinemas {paramsIdSchedule}
       </p>
+      <p className="seats-subtitle-2">Người / Ghế</p>
       <div className="seats-box-wrapper">
         <div className="item area-1 none">1</div>
         <div className="item area-2">
@@ -318,6 +327,16 @@ const SeatsContent = (props) => {
         </div>
         <div className="item area-20 none">20</div>
       </div>
+      <BookingFooter
+        seatsList={seatsList}
+        seatsPickList={seatsPickList}
+        paramsTime={paramsTime}
+        paramsCinemaName={paramsCinemaName}
+        paramsIdSchedule={paramsIdSchedule}
+        detailMovie={detailMovie}
+        prevUrl="/"
+        nextUrl="/book/food"
+      />
     </div>
   );
 };

@@ -18,12 +18,22 @@
 
 .seats-container .seats-subtitle {
   width: 100%;
-  height: 80px;
+  height: 50px;
+  margin-top: -15px;
   padding: 0 20px;
   font-weight: 500;
-  line-height: 80px;
+  line-height: 50px;
   border-bottom: 1px solid gray;
   background-color: #fdf7dc;
+}
+
+.seats-container .seats-subtitle-2 {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-weight: 500;
+  background-color: #b3b3b3;
 }
 
 .seats-container .seats-box-wrapper {

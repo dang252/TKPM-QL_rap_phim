@@ -5,7 +5,7 @@ import FormContainer from "../../components/FormContainer/FormContainer";
 
 const RegisterPage = () => {
   useEffect(() => {
-    document.title = "CGV Cinemas Fake | Đăng Ky";
+    document.title = "CGV Cinemas Fake | Đăng Ký";
     window.scrollTo(0, 0);
   }, []);
 
