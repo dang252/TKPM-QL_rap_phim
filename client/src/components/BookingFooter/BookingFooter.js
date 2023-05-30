@@ -11,7 +11,7 @@ const BookingFooter = (props) => {
     seatsPickList,
     paramsTime,
     paramsCinemaName,
-    paramsIdSchedule,
+    paramsIdRoom,
     detailMovie,
     prevUrl,
     nextUrl,
@@ -65,7 +65,7 @@ const BookingFooter = (props) => {
             <div className="booking-content">
               <p>{detailMovie.title}</p>
               <p>Rạp: {paramsCinemaName}</p>
-              <p>Phòng: Cinemas {paramsIdSchedule}</p>
+              <p>Phòng: Cinemas {paramsIdRoom}</p>
               <p>Xuất chiếu: {paramsTime}</p>
               <div
                 style={{

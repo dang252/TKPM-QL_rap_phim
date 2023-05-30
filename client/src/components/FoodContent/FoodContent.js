@@ -15,6 +15,7 @@ const FoodContent = (props) => {
   const [searchParams] = useSearchParams();
   const paramsTime = searchParams.get("time");
   const paramsIdMovie = searchParams.get("id_movie");
+  const paramsIdRoom = searchParams.get("id_room");
 
   return (
     <div className="food-content-container">
@@ -65,8 +66,8 @@ const FoodContent = (props) => {
         paramsCinemaName={paramsCinemaName}
         paramsIdSchedule={paramsIdSchedule}
         detailMovie={detailMovie}
-        prevUrl={`/book/seats?id_movie=${paramsIdMovie}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`}
-        nextUrl={`/book/payment?id_movie=${detailMovie.id}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`}
+        prevUrl={`/book/seats?id_movie=${paramsIdMovie}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`}
+        nextUrl={`/book/payment?id_movie=${detailMovie.id}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`}
       />
     </div>
   );

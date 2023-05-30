@@ -6,7 +6,8 @@ import { Context } from "../../context/UserContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const FoodPage = () => {
-  const { seatsPickList, getFoods, foodList } = useContext(Context);
+  const { seatsPickList, getFoods, foodList, setFoodPickList } =
+    useContext(Context);
 
   const navigate = useNavigate();
 
@@ -18,6 +19,8 @@ const FoodPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setFoodPickList([]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

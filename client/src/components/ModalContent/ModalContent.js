@@ -195,7 +195,7 @@ const ModalContent = () => {
                   {cinema.time.map((tm) => {
                     return (
                       <Link
-                        to={`/book/seats?id_movie=${ticketInfo}&id_schedule=${cinema.id}&name=${cinema.cinema_name}&time=${tm}`}
+                        to={`/book/seats?id_movie=${ticketInfo}&id_room=${cinema.id_room}&id_schedule=${cinema.id}&name=${cinema.cinema_name}&time=${tm}`}
                         className="time-container"
                         key={tm}
                       >

@@ -6,13 +6,14 @@ import PaymentContent from "../../components/PaymentContent/PaymentContent";
 import { Context } from "../../context/UserContext";
 
 const PaymentPage = () => {
-  const { seatsPickList } = useContext(Context);
+  const { seatsPickList, getTicketPrice, ticketPrice } = useContext(Context);
 
   const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
   const paramsIdSchedule = searchParams.get("id_schedule");
   const paramsIdMovie = searchParams.get("id_movie");
+  const paramsIdRoom = searchParams.get("id_room");
   const paramsCinemaName = searchParams.get("name");
   const paramsTime = searchParams.get("time");
 
@@ -23,7 +24,7 @@ const PaymentPage = () => {
   useEffect(() => {
     if (seatsPickList.length === 0) {
       navigate(
-        `/book/seats?id_movie=${paramsIdMovie}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`
+        `/book/seats?id_movie=${paramsIdMovie}&id_movie=${paramsIdMovie}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`
       );
     }
   }, [
@@ -35,9 +36,20 @@ const PaymentPage = () => {
     paramsTime,
   ]);
 
+  useEffect(() => {
+    getTicketPrice("2023-05-24", paramsTime, paramsIdMovie);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paramsTime, paramsIdMovie]);
+
   return (
     <div>
-      <PaymentContent />
+      <PaymentContent
+        ticketPrice={ticketPrice}
+        paramsTime={paramsTime}
+        paramsCinemaName={paramsCinemaName}
+        paramsIdSchedule={paramsIdSchedule}
+        paramsIdRoom={paramsIdRoom}
+      />
     </div>
   );
 };

@@ -6,16 +6,21 @@ import { Context } from "../../context/UserContext";
 import SeatsContent from "../../components/SeatsContent/SeatsContent";
 
 const SeatsPage = () => {
-  const { closeModal, getSeats, seatsList, detailMovie, getDetailMovie } =
-    useContext(Context);
+  const {
+    closeModal,
+    getSeats,
+    setSeatsPickList,
+    seatsList,
+    detailMovie,
+    getDetailMovie,
+  } = useContext(Context);
 
   const [searchParams] = useSearchParams();
   const paramsIdSchedule = searchParams.get("id_schedule");
   const paramsIdMovie = searchParams.get("id_movie");
+  const paramsIdRoom = searchParams.get("id_room");
   const paramsCinemaName = searchParams.get("name");
   const paramsTime = searchParams.get("time");
-
-  // console.log(detailMovie);
 
   useEffect(() => {
     document.title = "CGV Cinemas Fake | Đặt vé";
@@ -24,6 +29,8 @@ const SeatsPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setSeatsPickList([]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -37,6 +44,7 @@ const SeatsPage = () => {
       <SeatsContent
         seatsList={seatsList}
         paramsIdSchedule={paramsIdSchedule}
+        paramsIdRoom={paramsIdRoom}
         paramsCinemaName={paramsCinemaName}
         detailMovie={detailMovie}
         paramsTime={paramsTime}

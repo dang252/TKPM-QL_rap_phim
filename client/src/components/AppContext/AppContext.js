@@ -285,6 +285,35 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const [ticketPrice, setTicketPrice] = useState(0);
+
+  const getTicketPrice = async (date, time, id_room) => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const data = {
+        date: date,
+        time: time,
+        user_dob: user.dob,
+        id_room: id_room,
+      };
+
+      if (user) {
+        const rs = await axios.post(
+          "http://localhost:5000/book/ticket_price",
+          data,
+          {
+            headers: {
+              token: `Bearer ${user.accessToken}`,
+            },
+          }
+        );
+        setTicketPrice(rs.data.price);
+      }
+    } catch (error) {
+      console.log("Get foods failed:", error.message);
+    }
+  };
+
   return (
     <Context.Provider
       value={{
@@ -316,10 +345,14 @@ const AppContext = ({ children }) => {
         seatsList,
         handleAddSeatsPick,
         seatsPickList,
+        setSeatsPickList,
         getFoods,
         foodList,
         foodPickList,
+        setFoodPickList,
         handleFoodList,
+        getTicketPrice,
+        ticketPrice,
       }}
     >
       {children}

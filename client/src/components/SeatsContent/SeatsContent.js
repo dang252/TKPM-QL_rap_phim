@@ -23,6 +23,7 @@ const SeatsContent = (props) => {
   const {
     seatsList,
     paramsIdSchedule,
+    paramsIdRoom,
     paramsCinemaName,
     detailMovie,
     paramsTime,
@@ -333,9 +334,10 @@ const SeatsContent = (props) => {
         paramsTime={paramsTime}
         paramsCinemaName={paramsCinemaName}
         paramsIdSchedule={paramsIdSchedule}
+        paramsIdRoom={paramsIdRoom}
         detailMovie={detailMovie}
         prevUrl="/"
-        nextUrl={`/book/foods?id_movie=${detailMovie.id}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`}
+        nextUrl={`/book/foods?id_movie=${detailMovie.id}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`}
       />
     </div>
   );

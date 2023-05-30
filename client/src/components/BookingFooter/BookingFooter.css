@@ -66,7 +66,42 @@
   /* background-color: blue; */
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
+  .booking-footer-container .booking-footer-main {
+    flex-direction: column;
+    width: 70%;
+    /* background-color: red; */
+  }
+
+  .booking-footer-container .booking-footer-main .booking-content {
+    margin-top: 30px;
+    padding: 0 5px;
+  }
+
+  .booking-footer-main .booking-poster {
+    width: 30%;
+  }
+
+  .prev-btn,
+  .next-btn {
+    height: 50px;
+  }
+
+  .prev-btn p,
+  .next-btn p {
+    height: 10px;
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .booking-footer-left,
+  .booking-footer-right {
+    width: 15%;
+  }
+}
+
+/* @media (max-width: 1200px) {
   .booking-footer-container {
     width: 100%;
   }
@@ -88,4 +123,4 @@
   .booking-footer-container {
     width: 230%;
   }
-}
+} */
