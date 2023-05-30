@@ -236,6 +236,9 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const [foodList, setFoodList] = useState([]);
+  const [foodPickList, setFoodPickList] = useState([]);
+
   const getFoods = async () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
@@ -245,10 +248,40 @@ const AppContext = ({ children }) => {
             token: `Bearer ${user.accessToken}`,
           },
         });
-        console.log(rs);
+        setFoodList(rs.data);
       }
     } catch (error) {
       console.log("Get foods failed:", error.message);
+    }
+  };
+
+  const handleFoodList = (id, type) => {
+    // console.log(id, type);
+
+    if (type === "add") {
+      const tempList = [...foodPickList, id];
+      tempList.sort((a, b) => {
+        return a - b;
+      });
+      setFoodPickList(tempList);
+    }
+    if (type === "sub") {
+      let targetList = foodPickList.filter((food) => {
+        return food === id;
+      });
+
+      if (targetList.length > 0) {
+        targetList.pop();
+        const filterList = foodPickList.filter((food) => {
+          return food !== id;
+        });
+
+        const mergeList = targetList.concat(filterList);
+        mergeList.sort((a, b) => {
+          return a - b;
+        });
+        setFoodPickList(mergeList);
+      }
     }
   };
 
@@ -284,6 +317,9 @@ const AppContext = ({ children }) => {
         handleAddSeatsPick,
         seatsPickList,
         getFoods,
+        foodList,
+        foodPickList,
+        handleFoodList,
       }}
     >
       {children}

@@ -1,0 +1,36 @@
+.payment-content-container {
+  width: 50%;
+  margin: 250px auto 100px;
+  min-height: 500px;
+  border: 1px solid gray;
+}
+
+@media (max-width: 1600px) {
+  .payment-content-container {
+    width: 70%;
+  }
+}
+
+@media (max-width: 1400px) {
+  .payment-content-container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .payment-content-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 800px) {
+  .payment-content-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .payment-content-container {
+    margin-top: 15px;
+  }
+}

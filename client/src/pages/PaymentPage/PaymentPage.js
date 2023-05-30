@@ -1,12 +1,12 @@
 import React, { useEffect, useContext } from "react";
-
-import FoodContent from "../../components/FoodContent/FoodContent";
-
-import { Context } from "../../context/UserContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-const FoodPage = () => {
-  const { seatsPickList, getFoods, foodList } = useContext(Context);
+import PaymentContent from "../../components/PaymentContent/PaymentContent";
+
+import { Context } from "../../context/UserContext";
+
+const PaymentPage = () => {
+  const { seatsPickList } = useContext(Context);
 
   const navigate = useNavigate();
 
@@ -35,20 +35,11 @@ const FoodPage = () => {
     paramsTime,
   ]);
 
-  useEffect(() => {
-    getFoods();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div>
-      <FoodContent
-        foodList={foodList}
-        paramsIdSchedule={paramsIdSchedule}
-        paramsCinemaName={paramsCinemaName}
-      />
+      <PaymentContent />
     </div>
   );
 };
 
-export default FoodPage;
+export default PaymentPage;

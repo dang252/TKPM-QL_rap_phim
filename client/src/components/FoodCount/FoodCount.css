@@ -1,0 +1,24 @@
+.food-count-container {
+  display: flex;
+}
+
+.food-count-container .food-count {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0 5px;
+  border: 1px solid #000;
+  background-color: #fff;
+}
+
+.food-sub,
+.food-add {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  cursor: pointer;
+  background-color: red;
+}

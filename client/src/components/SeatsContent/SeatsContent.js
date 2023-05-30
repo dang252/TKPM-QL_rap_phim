@@ -35,7 +35,7 @@ const SeatsContent = (props) => {
   }
 
   useEffect(() => {
-    console.log(seatsPickList);
+    // console.log(seatsPickList);
   }, [seatsPickList]);
 
   const getSeatId = (seatName) => {

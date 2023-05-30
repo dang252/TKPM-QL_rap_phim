@@ -14,6 +14,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import DetailPage from "./pages/DetailPage/DetailPage";
 import SeatsPage from "./pages/SeatsPage/SeatsPage";
 import FoodPage from "./pages/FoodPage/FoodPage";
+import PaymentPage from "./pages/PaymentPage/PaymentPage";
 import AppContext from "./components/AppContext/AppContext";
 
 import UserNavbar from "./components/UserNavbar/UserNavbar";
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/movies/detail" element={<DetailPage />} />
           <Route path="/book/seats" element={<SeatsPage />} />
           <Route path="/book/foods" element={<FoodPage />} />
+          <Route path="/book/payment" element={<PaymentPage />} />
         </Routes>
         <MyFooter />
       </AppContext>
