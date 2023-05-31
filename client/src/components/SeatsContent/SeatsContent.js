@@ -61,7 +61,7 @@ const SeatsContent = (props) => {
     <div className="seats-container">
       <p className="seats-title">BOOKING ONLINE</p>
       <p className="seats-subtitle">
-        {paramsCinemaName} | Cinemas {paramsIdSchedule}
+        {paramsCinemaName} | Cinemas {paramsIdRoom}
       </p>
       <p className="seats-subtitle-2">Người / Ghế</p>
       <div className="seats-box-wrapper">

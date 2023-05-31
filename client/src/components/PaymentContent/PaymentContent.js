@@ -283,6 +283,36 @@ const PaymentContent = (props) => {
               Tổng tiền bắp nước: {getTotalFood(foodList, foodPickList)}đ
             </div>
           </div>
+          <div
+            style={{
+              margin: "30px 0",
+            }}
+          >
+            <div
+              style={{
+                color: "#fff",
+                fontWeight: "bold",
+                backgroundColor: "red",
+                padding: "10px 15px",
+                border: "1px solid gray",
+                textAlign: "center",
+              }}
+            >
+              <p>Tổng tiền thanh toán</p>
+            </div>
+            <div
+              style={{
+                backgroundColor: "#c2c2c2",
+                textAlign: "center",
+                padding: "10px 0",
+                border: "1px solid gray",
+              }}
+            >
+              {(ticketPrice ? ticketPrice * seatsPickList.length : 0) +
+                getTotalFood(foodList, foodPickList)}
+              đ
+            </div>
+          </div>
         </div>
       </div>
       <BookingFooter

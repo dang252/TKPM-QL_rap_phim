@@ -21,7 +21,7 @@ const FoodContent = (props) => {
     <div className="food-content-container">
       <p className="food-content-title">BOOKING ONLINE</p>
       <p className="food-content-subtitle">
-        {paramsCinemaName} | Cinemas {paramsIdSchedule}
+        {paramsCinemaName} | Cinemas {paramsIdRoom}
       </p>
       <p className="food-content-subtitle-2">Bắp Nước</p>
       <div
