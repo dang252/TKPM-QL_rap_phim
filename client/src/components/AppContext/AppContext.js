@@ -315,6 +315,8 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const [ticketInfoResult, setTicketInfoResult] = useState({});
+
   const handleBookTicket = async (idSchedule, time) => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
@@ -337,7 +339,8 @@ const AppContext = ({ children }) => {
             },
           }
         );
-        console.log(rs.data);
+        // console.log(rs.data);
+        setTicketInfoResult(rs.data);
       }
     } catch (error) {
       console.log("Book ticket:", error.message);
@@ -384,6 +387,7 @@ const AppContext = ({ children }) => {
         getTicketPrice,
         ticketPrice,
         handleBookTicket,
+        ticketInfoResult,
       }}
     >
       {children}
