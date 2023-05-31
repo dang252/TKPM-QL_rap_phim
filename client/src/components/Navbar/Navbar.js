@@ -34,9 +34,12 @@ const Navbar = () => {
           <div className="dropdown">
             <p className="drop-title">RẠP CGV</p>
             <div className="dropdown-content">
-              <p>Tất cả các rạp</p>
+              <Link to="/cinemas/all">Tất cả các rạp</Link>
+              <Link to="/cinemas/special">Rạp đặc biệt</Link>
+              <Link to="/cinemas/3d">Rạp 3D</Link>
+              {/* <p>Tất cả các rạp</p>
               <p>Rạp đặc biệt</p>
-              <p>Rạp 3D</p>
+              <p>Rạp 3D</p> */}
             </div>
           </div>
         </div>

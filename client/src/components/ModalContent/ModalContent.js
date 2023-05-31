@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Context } from "../../context/UserContext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./ModalContent.css";
 
@@ -23,6 +23,8 @@ const ModalContent = () => {
   const [provinceOption, setProvinceOption] = useState(0);
   const [cinemas, setCinemas] = useState([]);
   const { ticketInfo } = useContext(Context);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     let days = [new Date()];
@@ -52,6 +54,15 @@ const ModalContent = () => {
     };
     GetProvince();
   }, [dateOption]);
+
+  const handleGetSchedule = (ticketInfo, id_room, id, cinema_name, tm) => {
+    const user = localStorage.getItem("user");
+    if (user)
+      navigate(
+        `/book/seats?id_movie=${ticketInfo}&id_room=${id_room}&id_schedule=${id}&name=${cinema_name}&time=${tm}`
+      );
+    else navigate("/login");
+  };
 
   useEffect(() => {
     const GetCinemasSchedule = async () => {
@@ -194,13 +205,22 @@ const ModalContent = () => {
                   <div className="room-name">{cinema.room_name}</div>
                   {cinema.time.map((tm) => {
                     return (
-                      <Link
-                        to={`/book/seats?id_movie=${ticketInfo}&id_room=${cinema.id_room}&id_schedule=${cinema.id}&name=${cinema.cinema_name}&time=${tm}`}
+                      <div
+                        // to={`/book/seats?id_movie=${ticketInfo}&id_room=${cinema.id_room}&id_schedule=${cinema.id}&name=${cinema.cinema_name}&time=${tm}`}
                         className="time-container"
                         key={tm}
+                        onClick={(e) => {
+                          handleGetSchedule(
+                            ticketInfo,
+                            cinema.id_room,
+                            cinema.id,
+                            cinema.cinema_name,
+                            tm
+                          );
+                        }}
                       >
                         {tm}
-                      </Link>
+                      </div>
                     );
                   })}
                 </div>

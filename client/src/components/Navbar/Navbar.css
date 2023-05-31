@@ -81,7 +81,7 @@
   display: block;
 }
 
-.dropdown-content p:hover {
+.dropdown-content a:hover {
   cursor: pointer;
   color: red;
 }
