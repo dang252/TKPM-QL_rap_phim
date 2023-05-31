@@ -26,7 +26,7 @@ const FoodPage = () => {
   useEffect(() => {
     if (seatsPickList.length === 0) {
       navigate(
-        `/book/seats?id_movie=${paramsIdMovie}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`
+        `/book/seats?id_movie=${paramsIdMovie}&id_movie=${paramsIdMovie}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`
       );
     }
   }, [

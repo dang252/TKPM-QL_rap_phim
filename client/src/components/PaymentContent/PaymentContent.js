@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./PaymentContent.css";
 
 import BookingFooter from "../BookingFooter/BookingFooter";
@@ -17,9 +17,13 @@ const PaymentContent = (props) => {
   const { seatsPickList, foodList, foodPickList, seatsList, detailMovie } =
     useContext(Context);
 
-  // console.log("Seats:", seatsPickList);
-  // console.log("Foods:", foodPickList);
-  // console.log("Ticket price:", ticketPrice);
+  const [isAgreeRule, setIsAgreeRule] = useState(false);
+  const [paymentType, setPaymentType] = useState("atm");
+
+  useEffect(() => {
+    setIsAgreeRule(false);
+    setPaymentType("atm");
+  }, []);
 
   const getTotalFood = (foodList, foodPickList) => {
     if (foodPickList.length === 0) {
@@ -60,7 +64,15 @@ const PaymentContent = (props) => {
                 // backgroundColor: "red",
               }}
             >
-              <input type="radio" name="payment" value="atm" />
+              <input
+                type="radio"
+                name="payment"
+                value="atm"
+                checked={paymentType === "atm"}
+                onChange={(e) => {
+                  setPaymentType(e.target.value);
+                }}
+              />
               <div
                 style={{
                   maxWidth: "50px",
@@ -97,7 +109,15 @@ const PaymentContent = (props) => {
                 // backgroundColor: "red",
               }}
             >
-              <input type="radio" name="payment" value="visa" />
+              <input
+                type="radio"
+                name="payment"
+                value="visa"
+                checked={paymentType === "visa"}
+                onChange={(e) => {
+                  setPaymentType(e.target.value);
+                }}
+              />
               <div
                 style={{
                   maxWidth: "50px",
@@ -134,7 +154,15 @@ const PaymentContent = (props) => {
                 // backgroundColor: "red",
               }}
             >
-              <input type="radio" name="payment" value="momo" />
+              <input
+                type="radio"
+                name="payment"
+                value="momo"
+                checked={paymentType === "momo"}
+                onChange={(e) => {
+                  setPaymentType(e.target.value);
+                }}
+              />
               <div
                 style={{
                   maxWidth: "50px",
@@ -171,7 +199,15 @@ const PaymentContent = (props) => {
                 // backgroundColor: "red",
               }}
             >
-              <input type="radio" name="payment" value="zalopay" />
+              <input
+                type="radio"
+                name="payment"
+                value="zalopay"
+                checked={paymentType === "zalopay"}
+                onChange={(e) => {
+                  setPaymentType(e.target.value);
+                }}
+              />
               <div
                 style={{
                   maxWidth: "50px",
@@ -208,7 +244,15 @@ const PaymentContent = (props) => {
                 // backgroundColor: "red",
               }}
             >
-              <input type="radio" name="payment" value="shopeepay" />
+              <input
+                type="radio"
+                name="payment"
+                value="shopeepay"
+                checked={paymentType === "shopeepay"}
+                onChange={(e) => {
+                  setPaymentType(e.target.value);
+                }}
+              />
               <div
                 style={{
                   maxWidth: "50px",
@@ -235,6 +279,20 @@ const PaymentContent = (props) => {
                 ShopeePay
               </p>
             </div>
+          </div>
+          <div style={{ margin: "50px 20px" }}>
+            <input
+              type="checkbox"
+              name="agree"
+              value="agree"
+              checked={isAgreeRule}
+              onChange={() => {
+                setIsAgreeRule(!isAgreeRule);
+              }}
+              style={{ marginRight: "20px" }}
+            />
+            Tôi đồng ý với điều khoản sử dụng và mua vé cho người có độ tuổi phù
+            hợp
           </div>
         </div>
         <div className="content-right">
@@ -325,6 +383,8 @@ const PaymentContent = (props) => {
         detailMovie={detailMovie}
         prevUrl={`/book/foods?id_movie=${detailMovie.id}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`}
         nextUrl={`/book/result`}
+        isAgreeRule={isAgreeRule}
+        paymentType={paymentType}
       />
     </div>
   );

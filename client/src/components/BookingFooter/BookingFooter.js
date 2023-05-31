@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
+import { Button, Modal } from "react-bootstrap";
 import "./BookingFooter.css";
+
+import { Context } from "../../context/UserContext";
 
 const BookingFooter = (props) => {
   const {
@@ -11,13 +14,22 @@ const BookingFooter = (props) => {
     seatsPickList,
     paramsTime,
     paramsCinemaName,
+    paramsIdSchedule,
     paramsIdRoom,
     detailMovie,
     prevUrl,
     nextUrl,
+    isAgreeRule,
   } = props;
 
+  const { handleBookTicket } = useContext(Context);
+
   const navigate = useNavigate();
+
+  const [showPayment, setShowPayment] = useState(false);
+
+  const handleClosePayment = () => setShowPayment(false);
+  const handleShowPayment = () => setShowPayment(true);
 
   if (Object.keys(detailMovie).length !== 0) {
     // console.log(paramsTime, paramsCinemaName, detailMovie);
@@ -33,17 +45,42 @@ const BookingFooter = (props) => {
     navigate(prevUrl);
   };
 
+  const handleConfirmPayment = () => {
+    handleBookTicket(paramsIdSchedule, paramsTime);
+    navigate(nextUrl);
+  };
+
   const handleNextPage = () => {
     if (seatsPickList.length === 0) {
       window.scrollTo(0, 0);
       toast.error("Vui lòng chọn ghế");
-    } else if (seatsPickList.length !== 0) {
+    } else if (isAgreeRule !== undefined && !isAgreeRule) {
+      window.scrollTo(0, 0);
+      toast.error("Vui lòng chấp nhận điều khoản");
+    } else if (isAgreeRule !== undefined && isAgreeRule) {
+      window.scrollTo(0, 0);
+      handleShowPayment();
+    } else if (isAgreeRule === undefined && seatsPickList.length !== 0) {
       navigate(nextUrl);
     }
   };
 
   return (
     <div className="booking-footer-container">
+      <Modal show={showPayment} onHide={handleClosePayment}>
+        <Modal.Header closeButton>
+          <Modal.Title>Thông báo</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Xác nhận thanh toán ?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClosePayment}>
+            Đóng
+          </Button>
+          <Button variant="primary" onClick={handleConfirmPayment}>
+            Đồng ý
+          </Button>
+        </Modal.Footer>
+      </Modal>
       {Object.keys(detailMovie).length !== 0 && (
         <>
           <div className="booking-footer-left">

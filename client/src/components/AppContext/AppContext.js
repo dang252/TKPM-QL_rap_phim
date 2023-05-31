@@ -290,14 +290,15 @@ const AppContext = ({ children }) => {
   const getTicketPrice = async (date, time, id_room) => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
-      const data = {
-        date: date,
-        time: time,
-        user_dob: user.dob,
-        id_room: id_room,
-      };
 
       if (user) {
+        const data = {
+          date: date,
+          time: time,
+          user_dob: user.dob,
+          id_room: id_room,
+        };
+
         const rs = await axios.post(
           "http://localhost:5000/book/ticket_price",
           data,
@@ -310,7 +311,36 @@ const AppContext = ({ children }) => {
         setTicketPrice(rs.data.price);
       }
     } catch (error) {
-      console.log("Get foods failed:", error.message);
+      console.log("Get ticket price failed:", error.message);
+    }
+  };
+
+  const handleBookTicket = async (idSchedule, time) => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (user) {
+        const data = {
+          id_user: user.id,
+          id_seats: seatsPickList,
+          id_schedule: idSchedule,
+          id_food_drink: foodPickList,
+          start_time: time,
+        };
+
+        const rs = await axios.post(
+          "http://localhost:5000/book/bookTickets",
+          data,
+          {
+            headers: {
+              token: `Bearer ${user.accessToken}`,
+            },
+          }
+        );
+        console.log(rs.data);
+      }
+    } catch (error) {
+      console.log("Book ticket:", error.message);
     }
   };
 
@@ -353,6 +383,7 @@ const AppContext = ({ children }) => {
         handleFoodList,
         getTicketPrice,
         ticketPrice,
+        handleBookTicket,
       }}
     >
       {children}

@@ -1,0 +1,36 @@
+.payment-confirm-container {
+  width: 50%;
+  margin: 250px auto 100px;
+  min-height: 500px;
+  border: 1px solid gray;
+}
+
+@media (max-width: 1600px) {
+  .payment-confirm-container {
+    width: 70%;
+  }
+}
+
+@media (max-width: 1400px) {
+  .payment-confirm-container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .payment-confirm-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 800px) {
+  .payment-confirm-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .payment-confirm-container {
+    margin-top: 15px;
+  }
+}
