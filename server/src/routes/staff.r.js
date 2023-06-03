@@ -3,6 +3,8 @@ const middlewareController = require("../middleware/middleware.js");
 
 const router = require("express").Router();
 
+router.get("/listCinema", middlewareController.verifyToken, staffController.getListCinema);
+
 router.get("/listShift", middlewareController.verifyToken, staffController.getListShift);
 
 router.get("/staffShift", middlewareController.verifyToken, staffController.getStaffShift);
@@ -16,6 +18,8 @@ router.post("/createSchedule", middlewareController.verifyToken, staffController
 router.post("/addShowtime", middlewareController.verifyToken, staffController.postAddShowtime);
 
 router.post("/blockSeat", middlewareController.verifyToken, staffController.postBlockSeat);
+
+router.post("/listUser", middlewareController.verifyToken, staffController.getListUser);
 
 router.post("/blockUser", middlewareController.verifyToken, staffController.postBlockUser);
 

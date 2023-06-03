@@ -3,7 +3,23 @@ const db = require("../../config/connect_db");
 const MAX_STAFF_PER_SHIFT = 5;
 
 module.exports = {
-    // get list shift of a cinema
+    // get list cinema
+    getListCinema: async () => {
+        try {
+            const rs = await db.any("SELECT id, name FROM cinemas");
+            return rs;
+        }
+        catch (error) {
+            if (err.code === 0) {
+                return null;
+            } else {
+                throw err;
+            }
+        }
+
+    },
+
+     // get list shift of a cinema
     getListShift: async (id_cinema) => {
         try {
             const rs = await db.any("SELECT * FROM staff_shift WHERE id_cinema = $1", [id_cinema]);
@@ -179,14 +195,31 @@ module.exports = {
     },
     
 
-    // block user
-    blockUser: async (username) => {
+    // get list user
+    listUser: async () => {
         try {
-            const check = await db.oneOrNone(`SELECT * FROM blacklist WHERE username = $1;`, [username]);
+            const rs = await db.one("SELECT name, email FROM users WHERE id_staff = 'false'");
+            return rs;
+        }
+        catch (error) {
+            if (err.code === 0) {
+                return null;
+            } else {
+                throw err;
+            }
+        }
+
+    },
+    
+
+    // block user
+    blockUser: async (email) => {
+        try {
+            const check = await db.oneOrNone(`SELECT * FROM blacklist WHERE email = $1;`, [email]);
             if (check !== null) {
                 return "FAIL";
             }
-            const rs = await db.one("INSERT INTO blacklist VALUES ($1);", [username]);
+            const rs = await db.one("INSERT INTO blacklist VALUES ($1);", [email]);
             return "OK";
         }
         catch (error) {

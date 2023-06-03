@@ -1,6 +1,20 @@
 const staffModel = require("../models/staff.m");
 
 const moviesController = {
+  // [GET] /listCinema
+  getListCinema: async (req, res) => {
+    try {
+      const listCinema = await staffModel.getListCinema();
+
+      res.status(200).json(
+        listCinema
+        // { id, name }
+        );
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
   // [GET] /listShift
   getListShift: async (req, res) => {
     try {
@@ -117,10 +131,20 @@ const moviesController = {
     }
   },
 
+  //[GET] /getUser
+  getListUser: async (req, res) => {
+    try {
+      const rs = await staffModel.listUser();
+      res.status(200).json(rs);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
   //[POST] /blockUser
   postBlockUser: async (req, res) => {
     try {
-      const rs = await staffModel.blockUser(req.body.username);    // return "FAIL" if it has been blocked
+      const rs = await staffModel.blockUser(req.body.email);    // return "FAIL" if it has been blocked
       res.status(200).json(rs);
     } catch (error) {
       res.status(500).json(error);
