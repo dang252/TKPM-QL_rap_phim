@@ -133,4 +133,36 @@ router.get("/currentMovies", moviesController.getCurrentMovies);
  */
 router.get("/inComingMovies", moviesController.getInComingMovies);
 
+/**
+ * @swagger
+ * /movies/recommendMovies?id_user={id_user}:
+ *  get:
+ *   summary: get recommend movies and genres
+ *   tags: [/movies]
+ *   parameters:
+ *     - name: id_user
+ *       in: path
+ *       description: user's ID
+ *       required: true
+ *       type: integer
+ *   security:
+ *     - tokenAuth: []
+ *   responses:
+ *     '200':
+ *       description: Get recommend movies and genres successfully
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               genres:
+ *                 type: string
+ *                 description: genres' name
+ *               movies:
+ *                 $ref: '#/components/schemas/MovieDetail'
+ *     '500':
+ *       description: Internal server error
+ */
+router.get("/recommendMovies", middlewareController.verifyToken, moviesController.getRecommendMovies);
+
 module.exports = router;

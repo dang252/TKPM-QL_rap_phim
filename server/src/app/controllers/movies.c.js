@@ -59,6 +59,17 @@ const moviesController = {
       res.status(500).json(error);
     }
   },
+
+  //[GET] /recommendMovies?id_user={id}
+  getRecommendMovies: async (req, res) => {
+    try {
+      const recommendMovies = await moviesModel.getRecommendMovies(req.query.id_user);
+
+      res.status(200).json(recommendMovies);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
 };
 
 module.exports = moviesController;
