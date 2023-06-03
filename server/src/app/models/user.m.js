@@ -33,6 +33,18 @@ module.exports = {
       }
     }
   },
+  checkNotLocked: async (id_user) => {
+    try {
+      await db.any("SELECT * FROM blacklist WHERE id_user = $1;", [id_user]);
+      return false;
+    } catch (err) {
+      if (err.code === 0) {
+        return true;
+      } else {
+        throw err;
+      }
+    }
+  },
   updateProfile: async (user) => {
     try {
       const rs = await db.one("UPDATE users SET name = $2, phone = $3, email = $4, dob = $5, gender = $6 WHERE id = $1 RETURNING *;", [user.id, user.name, user.phone, user.email, user.dob, user.gender]);

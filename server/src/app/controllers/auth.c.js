@@ -74,15 +74,17 @@ const authController = {
     try {
       // get user from database
       const user = await userModel.getUserByUsername(req.body.username);
-
       if (user == null) {
         return res.status(404).json("Account doesn't exist!");
       }
 
-      const validPassword = await bcrypt.compare(
-        req.body.password,
-        user.password
-      );
+      const check = await userModel.checkNotLocked(user.id);
+      console.log(user.id);
+      if (!check) {
+        return res.status(403).json("Account has been locked!");
+      }
+
+      const validPassword = await bcrypt.compare(req.body.password, user.password);
       if (!validPassword) {
         res.status(404).json("Wrong password!");
       } else {
@@ -144,9 +146,7 @@ const authController = {
 
   // [POST] /logout
   logoutUser: async (req, res) => {
-    refreshTokens = refreshTokens.filter(
-      (token) => token !== req.cookies.refreshToken
-    );
+    refreshTokens = refreshTokens.filter((token) => token !== req.cookies.refreshToken);
     res.clearCookie("refreshToken");
     res.status(200).json("Logged out successfully!");
   },
