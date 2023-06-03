@@ -65,7 +65,7 @@ module.exports = {
       const _movies = await db.any("SELECT * FROM movies WHERE id = ANY($1);", [rs.id_movies]);
 
       return {
-        genres: _genres.get_genres,
+        genres: _genres.get_genres || "",
         movies: _movies,
       };
     } catch (err) {
