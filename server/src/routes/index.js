@@ -102,6 +102,72 @@ function router(app) {
    *          total_price:
    *            type: number
    *            description: ticket's total_price
+   *      Cinemas:
+   *        type: object
+   *        properties:
+   *          id:
+   *            type: integer
+   *            description: cinema's id
+   *          name:
+   *            type: string
+   *            description: cinema's name
+   *          province:
+   *            type: string
+   *            description: province where cinema locates
+   *          location:
+   *            type: string
+   *            description: detail address
+   *      Shifts:
+   *        type: object
+   *        properties:
+   *          title:
+   *            type: string
+   *            description: cinema's id
+   *          release_date:
+   *            type: string
+   *            description: cinema's name
+   *          url_poster:
+   *            type: string
+   *            description: province where cinema locates
+   *          director:
+   *            type: string
+   *            description: detail address
+   *          actors:
+   *            type: integer
+   *            description: cinema's id
+   *          genres:
+   *            type: integer[]
+   *            description: cinema's name
+   *          duration:
+   *            type: string
+   *            description: province where cinema locates
+   *          age:
+   *            type: integer
+   *            description: detail address
+   *          overview:
+   *            type: string
+   *            description: detail address
+   *      Schedule:
+   *        type: object
+   *        properties:
+   *          id:
+   *            type: integer
+   *            description: schedule's id
+   *          id_movie:
+   *            type: integer
+   *            description: movie's id
+   *          id_cinema:
+   *            type: integer
+   *            description: cinema's id
+   *          id_room:
+   *            type: integer
+   *            description: room's id
+   *          date:
+   *            type: string
+   *            description: date showing (yyyy/mm/dd)
+   *          time:
+   *            type: string[]
+   *            description: showtime (hh:mm:ss)
    *    securitySchemes:
    *      cookieAuth:
    *        type: apiKey

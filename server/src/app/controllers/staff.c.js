@@ -144,7 +144,7 @@ const moviesController = {
   //[POST] /blockUser
   postBlockUser: async (req, res) => {
     try {
-      const rs = await staffModel.blockUser(req.body.email);    // return "FAIL" if it has been blocked
+      const rs = await staffModel.blockUser(req.body.id_user);    // return "FAIL" if it has been blocked
       res.status(200).json(rs);
     } catch (error) {
       res.status(500).json(error);
