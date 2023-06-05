@@ -25,6 +25,8 @@ import MyFooter from "./components/MyFooter/MyFooter";
 import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import MoviesList from "./components/MoviesList/MoviesList";
 import TicketModal from "./components/TicketModal/TicketModal";
+import CinemasPage from "./pages/CinemasPage/CinemasPage";
+import AllCinemas from "./components/AllCinemas/AllCinemas";
 
 const App = () => {
   return (
@@ -51,6 +53,9 @@ const App = () => {
             />
           </Route>
           <Route path="/movies/detail" element={<DetailPage />} />
+          <Route path="/cinemas" element={<CinemasPage />}>
+            <Route path="all" element={<AllCinemas/>}/> 
+          </Route>
           <Route path="/book/seats" element={<SeatsPage />} />
           <Route path="/book/foods" element={<FoodPage />} />
           <Route path="/book/payment" element={<PaymentPage />} />

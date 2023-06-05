@@ -1,0 +1,117 @@
+
+.cinema-main-info {
+    width: 100%;
+    margin: 0 auto 20px;
+    /* margin-top: 1000px; */
+}
+
+.cinema-main-info > *{
+    width: 1000px;
+    margin: 0 auto;
+}  
+
+.cinema-main-info .cinema-header {
+    background: url("../../../public/assets/img/h3_theater.gif") no-repeat center;
+    height: 50px;
+    width: 210px;
+    position: absolute;
+    left: calc(50% - 105px);
+    margin: 20px 0;
+}
+.cinema-main-info .cinema-header::before, .cinema-main-info .cinema-header::after {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    height: 20px;
+    content: "";
+    display: block;
+    width: 380px;
+
+}
+
+.cinema-main-info .cinema-header::after {
+    transform: translate(210px, -25%);
+}
+.cinema-main-info .cinema-header::before {
+    transform: translate(-380px, 75%);
+}
+
+/* .cinema-main-info .theatre-img-slider {
+    z-index: 0;
+} */
+
+.cinema-main-info .theatre-img-slider .slider-caption {
+    height: auto;
+    background-color: black;
+    transform: translateY(-100%);
+    position: relative;
+    z-index: 1;
+    opacity: 0.8;
+    padding: 15px;
+    display: flex;
+}
+.cinema-main-info .theatre-img-slider .slider-caption .left-infomation {
+    width: 70%;
+    color: #fdfcf0;
+    font-size: 11px;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cinema-main-info .theatre-img-slider .slider-caption .left-infomation label { 
+    font-size: 13px;
+}
+.cinema-main-info .theatre-img-slider .slider-caption .right-infomation {
+    width: 30%;
+}
+.cinema-main-info .theatre-img-slider .slider-caption .right-infomation a{
+    text-decoration: none;
+    text-align: center;
+    width: min(120px, 70%);
+    border-radius: 5px;
+    background-color: red;
+    color: #fdfcf0;
+    font-size: 13px;
+    padding: 5px 10px;
+    display: block;
+    margin: 0 5% 5%;
+}
+
+.cinema-main-info .cinema-name::before {
+    height: 80px;
+    content: "";
+    display: block;
+}
+
+.cinema-main-info .cinema-name {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.cinema-main-info .movies-list .movie-container {
+    border-bottom: 1px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-weight: 100;
+}
+.cinema-main-info .movies-list .movie-container p {
+    border-bottom: 1px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-weight: 100;
+}
+.cinema-main-info .movies-list .movie-container img {
+    width: 20%;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .cinema-main-info .cinema-header::before, .cinema-main-info .cinema-header::after {
+        width: calc(50vw - 120px);
+    }
+    .cinema-main-info .cinema-header::before {
+        transform: translate(calc(-50vw + 120px), 75%);
+    }
+    .cinema-main-info > *{
+        width: 100%;
+    }   
+  
+}

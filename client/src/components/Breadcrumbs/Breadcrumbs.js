@@ -10,9 +10,12 @@ import { Context } from "../../context/UserContext";
 import "./Breadcrumbs.css";
 
 const pathToName = {
-  movies: "Phim",
+  "movies": "Phim",
   "currently-showing": "Phim đang chiếu",
   "coming-soon": "Phim sắp chiếu",
+  "cinemas": "Rạp",
+  "all": "Tất cả",
+  "special": "Đặc biệt"
 };
 const Breadcrumbs = () => {
   const { detailMovie } = useContext(Context);

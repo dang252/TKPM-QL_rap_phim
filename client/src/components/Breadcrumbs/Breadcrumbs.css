@@ -6,6 +6,7 @@
   background-color: #f1f0e5;
   border-bottom: 1px solid #cacac0;
   padding: 0 16vw;
+  z-index: 1;
 }
 
 .breadcrumbs-container a {

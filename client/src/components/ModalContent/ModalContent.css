@@ -1,4 +1,9 @@
-.dates-container {
+.modal-content-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.modal-content-container .dates-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, 78px);
     padding: 20px;
@@ -6,7 +11,7 @@
     border-bottom: 2px solid black;
 }
 
-.dates-container .date-container {
+.modal-content-container .dates-container .date-container {
     width: 77px;
     height: 48px;
     border: 2px solid white;
@@ -16,22 +21,22 @@
     color: #717171;
     cursor: pointer;
 }
-.dates-container .selected {
+.modal-content-container .dates-container .selected {
     border-color: black;
 }
-.dates-container .date-container:hover {
+.modal-content-container .dates-container .date-container:hover {
     border-color: black;
 }
 
 
-.dates-container .date-container div {
+.modal-content-container .dates-container .date-container div {
     width: fit-content;
     font-size: 11px;
     font-weight: 100;
     margin: 3px
 }
 
-.dates-container .date-container span {
+.modal-content-container .dates-container .date-container span {
     position: absolute;
     font-size: 31px;
     font-weight: 300;
@@ -39,7 +44,7 @@
     right: 3px
 }
 
-.provinces-container {
+.modal-content-container .provinces-container {
     display: grid;
     /* width: calc(100% - 40px); */
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
@@ -50,7 +55,7 @@
     border-bottom: 2px solid black
 }
 
-.provinces-container .province-container {
+.modal-content-container .provinces-container .province-container {
     width: 78px;
     height: 40px;
     cursor: pointer;
@@ -62,33 +67,33 @@
     
 }
 
-.provinces-container .selected {
+.modal-content-container .provinces-container .selected {
     background-color: black;
     color: white;
 }
 
-.cinemas-container .cinema {
+.modal-content-container .cinemas-container .cinema {
     width: calc(100% - 80px);
     padding: 20px 0;
     margin: 0 40px;
     border-bottom: 2px solid black
 }
 
-.cinemas-container .cinema .cinema-name {
+.modal-content-container .cinemas-container .cinema .cinema-name {
     color: #636363;
     font-weight: 100;
 }
-.cinemas-container .cinema .room-container{
+.modal-content-container .cinemas-container .cinema .room-container{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
 }
 
-.cinemas-container .cinema .room-container .room-name{
+.modal-content-container .cinemas-container .cinema .room-container .room-name{
    width: 100%;
 }
 
-.cinemas-container .cinema .room-container .time-container{
+.modal-content-container .cinemas-container .cinema .room-container .time-container{
     text-decoration: none;
     color: black;
     border: 1px solid #cbcabe;
@@ -97,6 +102,6 @@
     cursor: pointer;
 }
 
-.cinemas-container .cinema .room-container .time-container:hover{
+.modal-content-container .cinemas-container .cinema .room-container .time-container:hover{
     border-color: black;
 }

@@ -33,7 +33,50 @@ const AppContext = ({ children }) => {
       setUsername(name);
     }
   }, []);
+  //lay danh sach ngay
+  const DayOfWeeks = {
+    1: "Mon",
+    2: "Tue",
+    3: "Wed",
+    4: "Thu",
+    5: "Fri",
+    6: "Sat",
+    0: "Sun",
+  };
 
+  const [dates, setDates] = useState([]);
+  useEffect(() => {
+    let days = [new Date()];
+    let date = new Date();
+    for (let i = 0; i < 24; i++) {
+      days = [...days, new Date(date.setDate(date.getDate() + 1))];
+    }
+    setDates(days);
+  }, []);
+
+  //lay danh sach cac tinh thanh
+  const [provinces, setProvinces] = useState([]);
+  const GetProvince = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/book/provinces`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      setProvinces(response.data);
+    } catch (err) {
+      toast.error(
+        "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!"
+      );
+    }
+  };
+
+  useEffect(() => {
+    console.log("1")
+    GetProvince()
+  }, [])
   const logout = async () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
@@ -388,6 +431,9 @@ const AppContext = ({ children }) => {
         ticketPrice,
         handleBookTicket,
         ticketInfoResult,
+        dates,
+        DayOfWeeks,
+        provinces,
       }}
     >
       {children}
