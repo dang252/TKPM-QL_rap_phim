@@ -1,0 +1,14 @@
+.profile-booking-history-container {
+  width: 100%;
+  padding: 30px 50px;
+  /* background-color: red; */
+}
+
+.profile-booking-history-container .profile-booking-history-title {
+  font-weight: bold;
+  color: red;
+}
+
+.profile-booking-history-container .profile-booking-history-content {
+  margin-top: 80px;
+}

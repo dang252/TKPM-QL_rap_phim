@@ -5,6 +5,7 @@ import {
   faPenToSquare,
   faAddressCard,
   faLock,
+  faTicket,
 } from "@fortawesome/free-solid-svg-icons";
 import "./ProfileNavigation.css";
 
@@ -69,6 +70,20 @@ const ProfileNavigation = (props) => {
             <FontAwesomeIcon icon={faLock} />
           </p>
           <p>Đổi mật khẩu</p>
+        </div>
+        <div
+          className={`profile-main-category ${
+            activeNav === "bookinghistory" && "active"
+          }`}
+          onClick={(e) => {
+            handleChangeProfileNav("bookinghistory");
+            setActiveNav("bookinghistory");
+          }}
+        >
+          <p>
+            <FontAwesomeIcon icon={faTicket} />
+          </p>
+          <p>Lịch sử đặt vé</p>
         </div>
       </div>
     </div>

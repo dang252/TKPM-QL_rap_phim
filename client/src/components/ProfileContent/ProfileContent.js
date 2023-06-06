@@ -7,6 +7,7 @@ import ProfileNavigation from "../ProfileNavigation/ProfileNavigation";
 import ProfileDetail from "../ProfileDetail/ProfileDetail";
 import ProfileEdit from "../ProfileEdit/ProfileEdit";
 import ProfileChangePassword from "../ProfileChangePassword/ProfileChangePassword";
+import ProfileBookingHistory from "../ProfileBookingHistory/ProfileBookingHistory";
 
 const ProfileContent = () => {
   const { getUserProfile, navigateUrl, handleChangeProfileNav } =
@@ -48,6 +49,7 @@ const ProfileContent = () => {
         {navigateUrl === "detail" && <ProfileDetail />}
         {navigateUrl === "edit" && <ProfileEdit />}
         {navigateUrl === "changepassword" && <ProfileChangePassword />}
+        {navigateUrl === "bookinghistory" && <ProfileBookingHistory />}
       </div>
     </div>
   );

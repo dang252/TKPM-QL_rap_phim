@@ -74,9 +74,8 @@ const AppContext = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log("1")
-    GetProvince()
-  }, [])
+    GetProvince();
+  }, []);
   const logout = async () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
@@ -145,7 +144,7 @@ const AppContext = ({ children }) => {
         const data = await rs.data;
 
         if (data) {
-          console.log(data);
+          // console.log(data);
           setUserProfile(data);
         }
 
@@ -390,6 +389,27 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const getBookingHistory = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (user) {
+        const rs = await axios.post(
+          `http://localhost:5000/book/booking_history?id=${user.id}`,
+          {
+            headers: {
+              token: `Bearer ${user.accessToken}`,
+            },
+          }
+        );
+
+        console.log(rs.data);
+      }
+    } catch (error) {
+      console.log("Get booking history:", error.message);
+    }
+  };
+
   return (
     <Context.Provider
       value={{
@@ -434,6 +454,7 @@ const AppContext = ({ children }) => {
         dates,
         DayOfWeeks,
         provinces,
+        getBookingHistory,
       }}
     >
       {children}
