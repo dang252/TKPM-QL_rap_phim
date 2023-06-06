@@ -79,7 +79,6 @@ const authController = {
       }
 
       const check = await userModel.checkNotLocked(user.id);
-      console.log(user.id);
       if (!check) {
         return res.status(403).json("Account has been locked!");
       }

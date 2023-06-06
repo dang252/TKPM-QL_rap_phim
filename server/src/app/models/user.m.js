@@ -35,13 +35,13 @@ module.exports = {
   },
   checkNotLocked: async (id_user) => {
     try {
-      await db.any("SELECT * FROM blacklist WHERE id_user = $1;", [id_user]);
+      await db.one("SELECT * FROM blacklist WHERE id_user = $1;", [id_user]);
       return false;
     } catch (err) {
       if (err.code === 0) {
         return true;
       } else {
-        throw err;
+        return err;
       }
     }
   },
