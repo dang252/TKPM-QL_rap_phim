@@ -73,7 +73,7 @@ router.post("/provinces", bookController.getCinemas);
 
 /**
  * @swagger
- * /book/cinema?id_cinema={id_cinema}:
+ * /book/cinema?id_cinema={id_cinema}&date={date}:
  *  get:
  *   summary: get cinema's detail
  *   tags: [/book]
@@ -83,6 +83,11 @@ router.post("/provinces", bookController.getCinemas);
  *       description: cinema's ID
  *       required: true
  *       type: integer
+ *     - name: date
+ *       in: path
+ *       description: schedule's date
+ *       required: true
+ *       type: string
  *   responses:
  *     '200':
  *       description: Get cinema's detail successfully
@@ -103,31 +108,38 @@ router.post("/provinces", bookController.getCinemas);
  *               location:
  *                 type: string
  *                 description: cinema's location
- *               schedule:
+ *               movies:
  *                 type: array
  *                 items:
  *                   type: object
  *                   properties:
- *                     id:
+ *                     id_movie:
  *                       type: integer
- *                       description: schedule's id
+ *                       description: movie's id
  *                     movie_title:
  *                       type: string
  *                       description: movie's title
  *                     movie_poster:
  *                       type: string
  *                       description: movie's poster
- *                     room_name:
- *                       type: string
- *                       description: room's name
- *                     date:
- *                       type: string
- *                       description: date
- *                     time:
+ *                     schedule:
  *                       type: array
  *                       items:
- *                         type: string
- *                       description: schedule's time
+ *                         type: object
+ *                         properties:
+ *                           id_schedule:
+ *                             type: integer
+ *                             description: schedule's id
+ *                           room_name:
+ *                             type: integer
+ *                             description: schedule's room
+ *                           date:
+ *                             type: string
+ *                             description: schedule's date
+ *                           time:
+ *                             type: array
+ *                             items:
+ *                               type: string
  *                 description: cinema's schedule
  *     '500':
  *       description: Internal server error

@@ -25,17 +25,43 @@ module.exports = {
       }
     }
   },
-  getCinemaDetail: async (id_cinema) => {
+  getCinemaDetail: async (id_cinema, date) => {
     try {
       const info_cinema = await db.one("SELECT * FROM cinemas WHERE id = $1;", [id_cinema]);
-      const cinema_schedule = await db.any("SELECT _s.id, _m.title AS movie_title, _m.url_poster AS movie_poster, _r.name AS room_name, _s.date, _s.time FROM schedule _s JOIN movies _m ON _s.id_movie = _m.id JOIN rooms _r ON _s.id_room = _r.id WHERE id_cinema = $1;", [id_cinema]);
+      let cinema_movies = [];
+
+      const current_movies = await db.one("SELECT ARRAY(SELECT id FROM movies WHERE release_date <= CURRENT_DATE and release_date >= CURRENT_DATE - 30)");
+      for (let i = 0; i < current_movies.array.length; i++) {
+        const info_movie = await db.one("SELECT id, title, url_poster FROM movies WHERE id = $1;", [current_movies.array[i]]);
+
+        await db.none("CALL generate_schedule($1, COALESCE($2, CURRENT_DATE));", [current_movies.array[i], date]);
+
+        const schedule = await db.any("SELECT _s.id, _r.name, _s.date AT TIME ZONE 'UTC' AT TIME ZONE 'GMT+7' AS date, _s.time FROM schedule _s JOIN rooms _r ON _s.id_room = _r.id WHERE _s.date = COALESCE($1, CURRENT_DATE) AND _s.id_movie = $2 AND _s.id_cinema = $3", [date, current_movies.array[i], id_cinema]);
+
+        let schedule_movie = [];
+        for (let j = 0; j < schedule.length; j++) {
+          schedule_movie.push({
+            id_schedule: schedule[j].id,
+            room_name: schedule[j].name,
+            date: schedule[j].date,
+            time: schedule[j].time,
+          });
+        }
+
+        cinema_movies.push({
+          id_movie: info_movie.id,
+          title_movie: info_movie.title,
+          movie_poster: info_movie.url_poster,
+          schedule: schedule_movie,
+        });
+      }
 
       return {
         id: info_cinema.id,
         name: info_cinema.name,
         province: info_cinema.province,
         location: info_cinema.location,
-        schedule: cinema_schedule,
+        movies: cinema_movies,
       };
     } catch (err) {
       if (err.code === 0) {
@@ -47,7 +73,7 @@ module.exports = {
   },
   getSchedule: async (id_movie, date, province) => {
     try {
-      await db.none("CALL generate_schedule($1, $2);", [id_movie, date]);
+      await db.none("CALL generate_schedule($1, COALESCE($2, CURRENT_DATE));", [id_movie, date]);
       const rs = await db.any("SELECT _s.id, _s.id_movie, _s.id_cinema, _c.name AS cinema_name, _s.id_room, _r.name AS room_name, _s.date AT TIME ZONE 'UTC' AT TIME ZONE 'GMT+7' AS date, _s.time FROM schedule _s JOIN cinemas _c ON _s.id_cinema = _c.id JOIN rooms _r ON _s.id_room = _r.id WHERE id_movie = $1 AND date = COALESCE($2, CURRENT_DATE) AND province = $3;", [id_movie, date, province]);
 
       return rs;

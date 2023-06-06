@@ -26,7 +26,7 @@ const bookController = {
   // [GET] /cinema?id_cinema={}
   getCinemaDetail: async (req, res) => {
     try {
-      const cinema_detail = await bookModel.getCinemaDetail(req.query.id_cinema);
+      const cinema_detail = await bookModel.getCinemaDetail(req.query.id_cinema, req.query.date || null);
 
       res.status(200).json(cinema_detail);
     } catch (error) {
