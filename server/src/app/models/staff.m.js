@@ -20,7 +20,7 @@ module.exports = {
   // get list shift of a cinema
   getListShift: async (id_cinema) => {
     try {
-      const rs = await db.any("SELECT * FROM shifts WHERE id_cinema = $1", [id_cinema]);
+      const rs = await db.any("SELECT * FROM shifts WHERE id_cinema = $1 ORDER BY id", [id_cinema]);
       return rs;
     } catch (error) {
       if (err.code === 0) {
@@ -66,7 +66,7 @@ module.exports = {
   // a staff successfully register to a shift
   addStaffToShift: async (id_shift, id_staff) => {
     try {
-      const rs = await db.one(`UPDATE shifts SET id_staffs = id_staffs || '{$1}' WHERE id = $2;`, [id_staff, id_shift]); // add staff to shift table
+      const rs = await db.one(`UPDATE shifts SET id_staffs = id_staffs || '{$1}' WHERE id_shift = $2;`, [id_staff, id_shift]); // add staff to shift table
       const rs1 = await db.one(`UPDATE staff SET id_shifts = id_shifts || '{$1}' WHERE id_user = $2;`, [id_shift, id_staff]); // add shift to staff table
 
       return rs;
@@ -205,6 +205,42 @@ module.exports = {
       } else {
         throw err;
       }
+    }
+  },
+
+  // --------------------- ----------- -----------
+  registerShifts: async (id_staff, id_shifts) => {
+    try {
+      // check if shift full (= 5)
+      const id_fail_shifts = await db.one("SELECT ARRAY_AGG(id) FROM shifts WHERE id = ANY($1) AND ARRAY_LENGTH(id_staffs, 1) >= 5;", [id_shifts]);
+
+      let info_success_shifts = id_shifts;
+      if (id_fail_shifts.array_agg) {
+        info_fail_shifts = await db.any("SELECT id, day, time_start, time_end FROM shifts WHERE id = ANY($1);", [id_fail_shifts.array_agg]);
+
+        id_fail_shifts.array_agg.forEach(function (shift) {
+          info_success_shifts.splice(info_success_shifts.indexOf(shift), 1);
+        });
+      }
+
+      // insert shifts for staff
+      await db.none("UPDATE shifts SET id_staffs = id_staffs || $1 WHERE id = ANY($2);", [id_staff, id_shifts]);
+
+      // return result
+      if (info_success_shifts.length != id_shifts.length) {
+        return { message: "success" };
+      } else {
+        console.log(id_shifts);
+        info_success_shifts = await db.any("SELECT id, day, time_start, time_end FROM shifts WHERE id = ANY($1);", [id_shifts]);
+
+        return {
+          message: "fail",
+          success_shifts: info_success_shifts,
+          fail_shifts: info_fail_shifts,
+        };
+      }
+    } catch (error) {
+      console.log(error);
     }
   },
 };

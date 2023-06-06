@@ -9,7 +9,7 @@ const moviesController = {
       res.status(200).json(
         listCinema
         // { id, name }
-        );
+      );
     } catch (error) {
       res.status(500).json(error);
     }
@@ -23,7 +23,7 @@ const moviesController = {
       res.status(200).json(
         listShift
         // { id_shift, id_cinema, day, time_start, time_end, id_staff[] }
-        );
+      );
     } catch (error) {
       res.status(500).json(error);
     }
@@ -37,7 +37,7 @@ const moviesController = {
       res.status(200).json(
         listShift
         // { id_shift, id_cinema, day, time_start, time_end, id_staff[] }
-        );
+      );
     } catch (error) {
       res.status(500).json(error);
     }
@@ -55,8 +55,7 @@ const moviesController = {
           "FAIL"
           // fail to register
         );
-      }
-      else {
+      } else {
         res.status(200).json("OK");
       }
     } catch (error) {
@@ -68,15 +67,15 @@ const moviesController = {
   postCreateMovie: async (req, res) => {
     try {
       const rs = await staffModel.createMovie({
-        "title": req.body.title,
-        "release_date": req.body.release_date,
-        "url_poster": req.body.url_poster,
-        "director": req.body.director,
-        "actors": req.body.actors,
-        "genres": req.body.genres,
-        "duration": req.body.duration,
-        "age": req.body.age,
-        "overview": req.body.overview
+        title: req.body.title,
+        release_date: req.body.release_date,
+        url_poster: req.body.url_poster,
+        director: req.body.director,
+        actors: req.body.actors,
+        genres: req.body.genres,
+        duration: req.body.duration,
+        age: req.body.age,
+        overview: req.body.overview,
       });
 
       res.status(200).json(rs);
@@ -89,11 +88,11 @@ const moviesController = {
   postCreateSchedule: async (req, res) => {
     try {
       const rs = await staffModel.createSchedule({
-        "id_movie": req.body.id_movie,
-        "id_cinema": req.body.id_cinema,
-        "id_room": req.body.id_room,
-        "date": req.body.date,
-        "time": req.body.time,
+        id_movie: req.body.id_movie,
+        id_cinema: req.body.id_cinema,
+        id_room: req.body.id_room,
+        date: req.body.date,
+        time: req.body.time,
       });
 
       res.status(200).json(rs);
@@ -106,11 +105,11 @@ const moviesController = {
   postAddShowtime: async (req, res) => {
     try {
       const rs = await staffModel.addShowtime({
-        "id_movie": req.body.id_movie,
-        "id_cinema": req.body.id_cinema,
-        "id_room": req.body.id_room,
-        "date": req.body.date,
-        "time": req.body.time,
+        id_movie: req.body.id_movie,
+        id_cinema: req.body.id_cinema,
+        id_room: req.body.id_room,
+        date: req.body.date,
+        time: req.body.time,
       });
 
       res.status(200).json(rs);
@@ -144,8 +143,25 @@ const moviesController = {
   //[POST] /blockUser
   postBlockUser: async (req, res) => {
     try {
-      const rs = await staffModel.blockUser(req.body.id_user);    // return "FAIL" if it has been blocked
+      const rs = await staffModel.blockUser(req.body.id_user); // return "FAIL" if it has been blocked
       res.status(200).json(rs);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
+  // --------------------- ----------- -----------
+  // [PUT] /registerShifts
+  putRegisterShifts: async (req, res) => {
+    try {
+      const rs = await staffModel.registerShifts(req.body.id_staff, req.body.id_shifts);
+
+      if (rs.message == "fail") {
+        // res.status(409).json(`The work shift on ${rs.fail_shifts[0].day} at ${rs.fail_shifts[0].time_start} - ${rs.fail_shifts[0].time_end} you registered for is full!`);
+        res.status(409).json({ success_shifts: rs.success_shifts, fail_shifts: rs.fail_shifts });
+      } else {
+        res.status(200).json("Register for work shifts successfully!");
+      }
     } catch (error) {
       res.status(500).json(error);
     }

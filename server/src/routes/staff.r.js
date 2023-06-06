@@ -165,7 +165,7 @@ router.post("/shiftsRegister", middlewareController.verifyToken, staffController
  *               description: genres of movie
  *             duration:
  *               type: string
- *               description: hh:mm:ss 
+ *               description: hh:mm:ss
  *             age:
  *               type: integer
  *               description: age limitation of movie
@@ -230,7 +230,7 @@ router.post("/createSchedule", middlewareController.verifyToken, staffController
 
 /**
  * @swagger
-  * /staff/addShowtime:
+ * /staff/addShowtime:
  *  post:
  *   summary: staff add a new showtime of a movie
  *   tags: [/staff]
@@ -272,7 +272,7 @@ router.post("/addShowtime", middlewareController.verifyToken, staffController.po
 
 /**
  * @swagger
-  * /staff/blockSeat:
+ * /staff/blockSeat:
  *  post:
  *   summary: staff block seats of a schedule
  *   tags: [/staff]
@@ -331,7 +331,7 @@ router.get("/listUser", middlewareController.verifyToken, staffController.getLis
 
 /**
  * @swagger
-  * /staff/blockUser:
+ * /staff/blockUser:
  *  post:
  *   summary: staff block a User
  *   tags: [/staff]
@@ -362,5 +362,47 @@ router.get("/listUser", middlewareController.verifyToken, staffController.getLis
  *       description: Internal server error
  */
 router.post("/blockUser", middlewareController.verifyToken, staffController.postBlockUser);
+
+//
+/**
+ * @swagger
+ * /staff/registerShifts:
+ *  put:
+ *   summary: staff registers for work shifts
+ *   tags: [/staff]
+ *   requestBody:
+ *     required: true
+ *     content:
+ *       application/json:
+ *         schema:
+ *           type: object
+ *           properties:
+ *             id_staff:
+ *               type: integer
+ *               description: staff's id
+ *             id_shifts:
+ *               type: array
+ *               items:
+ *                 type: integer
+ *                 description: shifts' id
+ *   security:
+ *     - tokenAuth: []
+ *   responses:
+ *     '200':
+ *       description: Update staff's shifts successfully
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: string
+ *     '409':
+ *       description: Update staff's shifts unsuccessfully
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: string
+ *     '500':
+ *       description: Internal server error
+ */
+router.put("/registerShifts", middlewareController.verifyToken, staffController.putRegisterShifts);
 
 module.exports = router;
