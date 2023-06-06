@@ -398,13 +398,15 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const [bookingHistoryList, setBookingHistoryList] = useState([]);
+
   const getBookingHistory = async () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
 
       if (user) {
-        const rs = await axios.post(
-          `http://localhost:5000/book/booking_history?id=${user.id}`,
+        const rs = await axios.get(
+          `http://localhost:5000/user/booking_history?id=${user.id}`,
           {
             headers: {
               token: `Bearer ${user.accessToken}`,
@@ -412,7 +414,7 @@ const AppContext = ({ children }) => {
           }
         );
 
-        console.log(rs.data);
+        setBookingHistoryList(rs.data);
       }
     } catch (error) {
       console.log("Get booking history:", error.message);
@@ -465,6 +467,7 @@ const AppContext = ({ children }) => {
         provinces,
         handleGetSchedule,
         getBookingHistory,
+        bookingHistoryList,
       }}
     >
       {children}
