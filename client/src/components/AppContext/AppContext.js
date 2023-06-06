@@ -238,6 +238,15 @@ const AppContext = ({ children }) => {
   const [seatsList, setSeatsList] = useState([]);
   const [seatsPickList, setSeatsPickList] = useState([]);
 
+  const handleGetSchedule = (ticketInfo, id_room, id, cinema_name, tm) => {
+    const user = localStorage.getItem("user");
+    if (user)
+      navigate(
+        `/book/seats?id_movie=${ticketInfo}&id_room=${id_room}&id_schedule=${id}&name=${cinema_name}&time=${tm}`
+      );
+    else navigate("/login");
+  };
+
   const getSeats = async (idSchedule) => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
@@ -454,6 +463,7 @@ const AppContext = ({ children }) => {
         dates,
         DayOfWeeks,
         provinces,
+        handleGetSchedule,
         getBookingHistory,
       }}
     >

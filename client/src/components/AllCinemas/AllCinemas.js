@@ -6,13 +6,14 @@ import { Context } from "../../context/UserContext";
 import "./AllCinemas.css"
 import CinemaInfo from '../CinemaInfo/CinemaInfo';
 
+
 const AllCinemas = () => {
-  const { provinces } = useContext(Context);
+  const { provinces, dates } = useContext(Context);
   const [cinemas, setCinemas] = useState([])
   const [cinemaOption, setCinemaOption] = useState(-1)
   const [cinemaInfo, setCinemaInfo] = useState()
   const [provinceOption, setProvinceOption] = useState(-1);
-
+  const [dateOption, setDateOption] = useState(0);
 
   useEffect(() => {
     if (provinceOption === -1) return
@@ -37,33 +38,47 @@ const AllCinemas = () => {
     }
     GetCinemas();
   }, [provinceOption, provinces])
-
+  
   useEffect(() => {
     if (cinemaOption === -1) return
-    const GetCinemaInfo = async () => {
+    // console.log(1)
+    // const GetCinemaInfo = async () => {
+    //   try {
+    //     const response = await axios.get(
+    //       `http://localhost:5000/book/cinema?id_cinema=${cinemas[cinemaOption].id}`,
+    //       {},
+    //       {
+    //         withCredentials: true,
+    //       }
+    //     );
+    //     var data = response.data;
+    //     setCinemaInfo(data)
+    //   }
+    //   catch (err) {
+    //     toast.error(
+    //       "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!"
+    //     );
+    //   }
+    // }
+    // GetCinemaInfo()
+    console.log(1)
+    setDateOption(0)
+  }, [cinemaOption, cinemas])
+
+  useEffect(() => {
+    console.log(2)
+    if (cinemaOption === -1) return
+    const GetCinemaInfoWithDate = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/book/cinema?id_cinema=${cinemas[cinemaOption].id}`,
+          `http://localhost:5000/book/cinema?id_cinema=${cinemas[cinemaOption].id}&date=${(dates[dateOption].getYear() + 1900) + "-" +  (("0" + (dates[dateOption].getMonth() + 1)).slice(-2)) +  "-" + ("0" + dates[dateOption].getDate()).slice(-2)}`,
           {},
           {
             withCredentials: true,
           }
         );
         var data = response.data;
-        console.log(response.data)
-        data.schedule.sort((a, b) => {
-          if (
-              a.movie_title < b.movie_title ||
-              (a.movie_title === b.movie_title && a.date < b.date)
-            )
-              return -1;
-            if (
-              a.movie_title > b.movie_title ||
-              (a.movie_title === b.movie_title && a.date > b.date)
-            )
-              return 1;
-            return 0;
-      })
+        console.log(data)
         setCinemaInfo(data)
       }
       catch (err) {
@@ -72,8 +87,10 @@ const AllCinemas = () => {
         );
       }
     }
-    GetCinemaInfo()
-  }, [cinemaOption, cinemas])
+    GetCinemaInfoWithDate()
+
+  }, [dates, dateOption, cinemaOption, cinemas])
+
   return (
     <div className='all-cinemas'>
       <div className='cinemas-container'>
@@ -116,7 +133,7 @@ const AllCinemas = () => {
         <div className='cinemas-container-bottom' />
       </div>
       {cinemaOption !== -1 && cinemaInfo &&
-        <CinemaInfo cinemaInfo = {cinemaInfo}/>
+        <CinemaInfo cinemaInfo={cinemaInfo} dateOption={dateOption} setDateOption={setDateOption} />
       }
     </div>
   )

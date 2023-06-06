@@ -92,17 +92,97 @@
     margin-bottom: 10px;
     font-weight: 100;
 }
-.cinema-main-info .movies-list .movie-container p {
+/* .cinema-main-info .movies-list .movie-container p {
     border-bottom: 1px solid black;
     padding: 10px;
     margin-bottom: 10px;
     font-weight: 100;
+} */
+.cinema-main-info .movies-list .movie-container .movie-title{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
 }
-.cinema-main-info .movies-list .movie-container img {
+
+.cinema-main-info .movies-list .movie-container .movie-detail{
+    display: flex;
+    align-items: center;
+}
+
+.cinema-main-info .movies-list .movie-container .movie-detail img {
     width: 20%;
 }
 
+.cinema-main-info .movies-list .movie-container .movie-detail .schedule {
+    width: 80%;
+    margin-left: 2%;
+}
+.cinema-main-info .movies-list .movie-container .movie-detail .schedule .times {
+    display: flex;
+    flex-wrap: wrap;
+}
+.cinema-main-info .movies-list .movie-container .movie-detail .schedule h6 {
+    display: block;
+    width: 100%;
+    font-weight: bold;
+}
+.cinema-main-info .movies-list .movie-container .movie-detail .schedule .times .time-container {
+    color: black;
+    border: 1px solid #cbcabe;
+    padding: 2px 25px;
+    margin: 3px;
+    cursor: pointer;
+}
 
+.cinema-main-info .movies-list .movie-container .movie-detail .schedule .times .time-container:hover {
+    border-color: black;
+}
+
+.cinema-main-info .date-slider {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    padding: 2px;
+    /* transform: translateY(-100%); */
+}
+
+.cinema-main-info .date-slider .date-container {
+    width: 77px;
+    height: 48px;
+    border: 2px solid  #eee;
+    border-radius: 5px;
+    position: relative;
+    /* display: flex */
+    background: #eee;
+    color: #717171;
+    cursor: pointer;
+}
+.cinema-main-info .date-slider .selected {
+    border-color: black;
+}
+.cinema-main-info .date-slider .date-container:hover {
+    border-color: black;
+}
+
+
+.cinema-main-info .date-slider .date-container div {
+    width: fit-content;
+    font-size: 11px;
+    font-weight: 100;
+    margin: 3px
+}
+
+.cinema-main-info .date-slider .date-container span {
+    position: absolute;
+    font-size: 31px;
+    font-weight: 300;
+    top: 4px;
+    right: 3px
+}
+
+.swiper-slide {
+    background: none;
+}
 @media screen and (max-width: 1000px) {
     .cinema-main-info .cinema-header::before, .cinema-main-info .cinema-header::after {
         width: calc(50vw - 120px);
