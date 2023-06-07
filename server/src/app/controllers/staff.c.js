@@ -121,7 +121,7 @@ const moviesController = {
   //[POST] /blockSeat
   postBlockSeat: async (req, res) => {
     try {
-      const rs = await staffModel.multiBlockSeat(req.body.id_seat, req.body.id_schedule);
+      const rs = await staffModel.blockSeat(req.body.id_seat, req.body.id_schedule);
       // id_seat[]: array of seat's id
 
       res.status(200).json(rs);

@@ -343,7 +343,7 @@ router.get("/listUser", middlewareController.verifyToken, staffController.getLis
  *           type: object
  *           properties:
  *             id_user:
- *               type: string
+ *               type: integer
  *               description: user's id
  *   security:
  *     - tokenAuth: []
