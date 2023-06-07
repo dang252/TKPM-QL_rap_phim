@@ -211,27 +211,37 @@ module.exports = {
   // --------------------- ----------- -----------
   registerShifts: async (id_staff, id_shifts) => {
     try {
-      // check if shift full (= 5)
+      // get all shifts full in shifts staff registered for
       const id_fail_shifts = await db.one("SELECT ARRAY_AGG(id) FROM shifts WHERE id = ANY($1) AND ARRAY_LENGTH(id_staffs, 1) >= 5;", [id_shifts]);
 
-      let info_success_shifts = id_shifts;
+      // get all shifts not full and get information of fail shifts
+      let id_success_shifts = id_shifts.slice();
+      let info_fail_shifts;
+
       if (id_fail_shifts.array_agg) {
         info_fail_shifts = await db.any("SELECT id, day, time_start, time_end FROM shifts WHERE id = ANY($1);", [id_fail_shifts.array_agg]);
 
         id_fail_shifts.array_agg.forEach(function (shift) {
-          info_success_shifts.splice(info_success_shifts.indexOf(shift), 1);
+          id_success_shifts.splice(id_success_shifts.indexOf(shift), 1);
         });
       }
 
-      // insert shifts for staff
-      await db.none("UPDATE shifts SET id_staffs = id_staffs || $1 WHERE id = ANY($2);", [id_staff, id_shifts]);
+      // insert shifts not full yet for staff
+      await db.none(
+        ` UPDATE shifts
+          SET id_staffs = CASE
+            WHEN ARRAY_POSITION(id_staffs, 1) IS NULL THEN id_staffs || '{$1}'
+            ELSE id_staffs
+          END
+          WHERE id = ANY($2);`,
+        [id_staff, id_success_shifts]
+      );
 
       // return result
-      if (info_success_shifts.length != id_shifts.length) {
+      if (id_success_shifts.length == id_shifts.length) {
         return { message: "success" };
       } else {
-        console.log(id_shifts);
-        info_success_shifts = await db.any("SELECT id, day, time_start, time_end FROM shifts WHERE id = ANY($1);", [id_shifts]);
+        const info_success_shifts = await db.any("SELECT id, day, time_start, time_end FROM shifts WHERE id = ANY($1);", [id_success_shifts]);
 
         return {
           message: "fail",
