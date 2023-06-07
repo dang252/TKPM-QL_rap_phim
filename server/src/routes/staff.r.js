@@ -109,7 +109,9 @@ router.get("/staffShift", middlewareController.verifyToken, staffController.getS
  *           type: object
  *           properties:
  *             id_shift:
- *               type: [integer]
+ *               type: array
+ *               items:
+ *                 type: integer
  *               description: shifts's id that staff want to register
  *             id_staff:
  *               type: integer
@@ -161,7 +163,9 @@ router.post("/shiftsRegister", middlewareController.verifyToken, staffController
  *               type: string
  *               description: actors of movie
  *             genres:
- *               type: [integer]
+ *               type: array
+ *               items:
+ *                 type: integer
  *               description: genres of movie
  *             duration:
  *               type: string
@@ -212,7 +216,9 @@ router.post("/createMovie", middlewareController.verifyToken, staffController.po
  *               type: string
  *               description: yyyy/mm/dd
  *             time:
- *               type: [string]
+ *               type: array
+ *               items:
+ *                 type: string
  *               description: hh:mm:ss
  *   security:
  *     - tokenAuth: []
@@ -284,7 +290,9 @@ router.post("/addShowtime", middlewareController.verifyToken, staffController.po
  *           type: object
  *           properties:
  *             id_seat:
- *               type: [integer]
+ *               type: array
+ *               items:
+ *                 type: integer
  *               description: seats's id
  *             id_schedule:
  *               type: integer
