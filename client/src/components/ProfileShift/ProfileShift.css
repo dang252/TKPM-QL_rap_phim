@@ -1,0 +1,14 @@
+.profile-shift-container {
+  width: 100%;
+  padding: 30px 50px;
+  /* background-color: red; */
+}
+
+.profile-shift-container .profile-shift-title {
+  font-weight: bold;
+  color: red;
+}
+
+.profile-shift-container .profile-shift-content {
+  margin-top: 80px;
+}

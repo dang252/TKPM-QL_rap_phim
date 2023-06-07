@@ -8,6 +8,7 @@ import ProfileDetail from "../ProfileDetail/ProfileDetail";
 import ProfileEdit from "../ProfileEdit/ProfileEdit";
 import ProfileChangePassword from "../ProfileChangePassword/ProfileChangePassword";
 import ProfileBookingHistory from "../ProfileBookingHistory/ProfileBookingHistory";
+import ProfileShift from "../ProfileShift/ProfileShift";
 
 const ProfileContent = () => {
   const { getUserProfile, navigateUrl, handleChangeProfileNav } =
@@ -50,6 +51,7 @@ const ProfileContent = () => {
         {navigateUrl === "edit" && <ProfileEdit />}
         {navigateUrl === "changepassword" && <ProfileChangePassword />}
         {navigateUrl === "bookinghistory" && <ProfileBookingHistory />}
+        {navigateUrl === "shift" && <ProfileShift />}
       </div>
     </div>
   );

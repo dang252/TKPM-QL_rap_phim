@@ -421,6 +421,47 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const checkIsStaff = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user) {
+      if (user.is_staff === true) return true;
+      else return false;
+    }
+  };
+
+  const [shiftList, setShiftList] = useState([]);
+
+  const getCinemaShift = async (cinemaId) => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (user && user?.is_staff === true) {
+        const rs = await axios.get(
+          `http://localhost:5000/staff/listShift?id_cinema=${cinemaId}`,
+          {
+            headers: {
+              token: `Bearer ${user.accessToken}`,
+            },
+          }
+        );
+        setShiftList(rs.data);
+      }
+    } catch (error) {
+      console.log("Get cinema shift failed:", error.message);
+    }
+  };
+
+  const translateDate = (day) => {
+    if (day === "Monday") return "Thứ 2";
+    if (day === "Tuesday") return "Thứ 3";
+    if (day === "Wednesday") return "Thứ 4";
+    if (day === "Thursday") return "Thứ 5";
+    if (day === "Friday") return "Thứ 6";
+    if (day === "Saturday") return "Thứ 7";
+    if (day === "Sunday") return "Chủ nhật";
+  };
+
   return (
     <Context.Provider
       value={{
@@ -468,6 +509,10 @@ const AppContext = ({ children }) => {
         handleGetSchedule,
         getBookingHistory,
         bookingHistoryList,
+        checkIsStaff,
+        getCinemaShift,
+        shiftList,
+        translateDate,
       }}
     >
       {children}

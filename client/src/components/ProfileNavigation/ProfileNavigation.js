@@ -6,6 +6,7 @@ import {
   faAddressCard,
   faLock,
   faTicket,
+  faBriefcase,
 } from "@fortawesome/free-solid-svg-icons";
 import "./ProfileNavigation.css";
 
@@ -15,7 +16,8 @@ const ProfileNavigation = (props) => {
   const { handleChangeProfileNav } = props;
 
   // const [activeNav, setActiveNav] = useState("detail");
-  const { userProfile, activeNav, setActiveNav } = useContext(Context);
+  const { userProfile, activeNav, setActiveNav, checkIsStaff } =
+    useContext(Context);
 
   return (
     <div className="profile-nav-container">
@@ -85,6 +87,22 @@ const ProfileNavigation = (props) => {
           </p>
           <p>Lịch sử đặt vé</p>
         </div>
+        {checkIsStaff() && (
+          <div
+            className={`profile-main-category ${
+              activeNav === "shift" && "active"
+            }`}
+            onClick={(e) => {
+              handleChangeProfileNav("shift");
+              setActiveNav("shift");
+            }}
+          >
+            <p>
+              <FontAwesomeIcon icon={faBriefcase} />
+            </p>
+            <p>Quản lý lịch làm việc</p>
+          </div>
+        )}
       </div>
     </div>
   );
