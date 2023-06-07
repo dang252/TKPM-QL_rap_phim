@@ -431,6 +431,8 @@ const AppContext = ({ children }) => {
   };
 
   const [shiftList, setShiftList] = useState([]);
+  const [cinemaIdTitle, setCinemaIdTitle] = useState("");
+  const [registerShiftList, setRegisterShiftList] = useState([]);
 
   const getCinemaShift = async (cinemaId) => {
     try {
@@ -446,6 +448,7 @@ const AppContext = ({ children }) => {
           }
         );
         setShiftList(rs.data);
+        setRegisterShiftList([]);
       }
     } catch (error) {
       console.log("Get cinema shift failed:", error.message);
@@ -460,6 +463,66 @@ const AppContext = ({ children }) => {
     if (day === "Friday") return "Thứ 6";
     if (day === "Saturday") return "Thứ 7";
     if (day === "Sunday") return "Chủ nhật";
+  };
+
+  const checkInitRegisterShift = (shiftId) => {
+    const checkInit = registerShiftList.filter((shift) => {
+      return shift === shiftId;
+    });
+
+    if (checkInit.length !== 0) return true;
+    else return false;
+  };
+
+  const handleRegisterShift = (shiftId) => {
+    const checkInit = registerShiftList.filter((shift) => {
+      return shift === shiftId;
+    });
+
+    if (checkInit.length === 0) {
+      setRegisterShiftList([...registerShiftList, shiftId]);
+    } else {
+      const filterShift = registerShiftList.filter((shift) => {
+        return shift !== shiftId;
+      });
+
+      filterShift.sort((a, b) => {
+        return a - b;
+      });
+
+      setRegisterShiftList(filterShift);
+    }
+  };
+
+  const handleSubmitRegisterShift = async (shiftId) => {
+    try {
+      console.log(shiftId, registerShiftList);
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (user) {
+        const data = {
+          id_staff: user.id,
+          id_shifts: registerShiftList,
+        };
+
+        const rs = await axios.put(
+          "http://localhost:5000/staff/registerShifts",
+          data,
+          {
+            headers: {
+              token: `Bearer ${user.accessToken}`,
+            },
+          }
+        );
+
+        console.log(rs.data);
+
+        sessionStorage.setItem("reloading_register_shift", "true");
+        window.location.reload(false);
+      }
+    } catch (error) {
+      console.log("Book ticket:", error.message);
+    }
   };
 
   return (
@@ -513,6 +576,12 @@ const AppContext = ({ children }) => {
         getCinemaShift,
         shiftList,
         translateDate,
+        handleRegisterShift,
+        registerShiftList,
+        checkInitRegisterShift,
+        handleSubmitRegisterShift,
+        cinemaIdTitle,
+        setCinemaIdTitle,
       }}
     >
       {children}

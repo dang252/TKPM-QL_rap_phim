@@ -16,8 +16,31 @@ const ProfileNavigation = (props) => {
   const { handleChangeProfileNav } = props;
 
   // const [activeNav, setActiveNav] = useState("detail");
-  const { userProfile, activeNav, setActiveNav, checkIsStaff } =
-    useContext(Context);
+  const {
+    userProfile,
+    activeNav,
+    setActiveNav,
+    checkIsStaff,
+    getCinemaShift,
+    setCinemaIdTitle,
+  } = useContext(Context);
+
+  window.onload = () => {
+    let reloading = sessionStorage.getItem("reloading_register_shift");
+
+    if (reloading) {
+      const registerCinemaId = JSON.parse(
+        localStorage.getItem("register_cinema_id")
+      );
+      getCinemaShift(registerCinemaId);
+      setCinemaIdTitle(registerCinemaId);
+
+      sessionStorage.removeItem("reloading_register_shift");
+      window.scrollTo(0, 0);
+      handleChangeProfileNav("shift");
+      setActiveNav("shift");
+    }
+  };
 
   return (
     <div className="profile-nav-container">

@@ -12,3 +12,34 @@
 .profile-shift-container .profile-shift-content {
   margin-top: 80px;
 }
+
+.shift-card-content {
+  border: 1px solid gray;
+  margin: 20px 0;
+  padding: 20px 20px;
+  display: flex;
+}
+
+.shift-card-content .sub-shift-card-content-left,
+.sub-shift-card-content-mid {
+  width: 35%;
+}
+
+.shift-card-content .sub-shift-card-content-right {
+  width: 30%;
+}
+
+@media (max-width: 1000px) {
+  .shift-card-content {
+    flex-direction: column;
+  }
+
+  .shift-card-content .sub-shift-card-content-left,
+  .sub-shift-card-content-mid {
+    width: 100%;
+  }
+
+  .shift-card-content .sub-shift-card-content-right {
+    width: 100%;
+  }
+}

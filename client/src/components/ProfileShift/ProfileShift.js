@@ -1,19 +1,35 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Tab, Tabs, Form, Button } from "react-bootstrap";
+import { Tab, Tabs, Form, Button, Modal } from "react-bootstrap";
+import { toast } from "react-toastify";
 import Select from "react-select";
 import "./ProfileShift.css";
 
 import { Context } from "../../context/UserContext";
 
 const ProfileShift = () => {
-  const { getCinemaShift, shiftList, translateDate } = useContext(Context);
+  const {
+    getCinemaShift,
+    shiftList,
+    translateDate,
+    handleRegisterShift,
+    registerShiftList,
+    checkInitRegisterShift,
+    handleSubmitRegisterShift,
+    cinemaIdTitle,
+    setCinemaIdTitle,
+  } = useContext(Context);
 
   const [cinemaId, setCinemaId] = useState("");
-  const [cinemaIdTitle, setCinemaIdTitle] = useState("");
+
   const [shiftByDayList, setShiftByDayList] = useState([]);
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const options = [
-    { value: "default", label: "Xem lịch làm việc theo ngày" },
+    { value: "default", label: "Tất cả" },
     { value: "1", label: "Thứ 2" },
     { value: "2", label: "Thứ 3" },
     { value: "3", label: "Thứ 4" },
@@ -33,6 +49,7 @@ const ProfileShift = () => {
     e.preventDefault();
 
     if (cinemaId !== "") {
+      localStorage.setItem("register_cinema_id", JSON.stringify(cinemaId));
       getCinemaShift(cinemaId);
       setCinemaIdTitle(cinemaId);
     }
@@ -61,6 +78,26 @@ const ProfileShift = () => {
       <h4 className="profile-shift-title">QUẢN LÝ LỊCH LÀM VIỆC</h4>
       <p className="profile-shift-subtitle">Quản lý & đăng ký lịch làm việc</p>
       <div className="profile-shift-content">
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Thông báo</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Bạn có chắc muốn đăng ký lịch làm việc ?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Đóng
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                handleSubmitRegisterShift(cinemaIdTitle);
+                handleClose();
+              }}
+            >
+              Đồng ý
+            </Button>
+          </Modal.Footer>
+        </Modal>
         <Tabs defaultActiveKey="cinema" className="mb-5">
           <Tab eventKey="cinema" title="Lịch làm việc theo rạp">
             <Form
@@ -96,37 +133,73 @@ const ProfileShift = () => {
                   >
                     Danh sách ca làm việc cho mã rạp phim: {cinemaIdTitle}
                   </p>
-                  <Select
-                    onChange={(e) => {
-                      handleSortShiftDay(e);
-                    }}
-                    options={options}
-                  />
+                  <div style={{ width: "30%" }}>
+                    <Select
+                      onChange={(e) => {
+                        handleSortShiftDay(e);
+                      }}
+                      options={options}
+                    />
+                  </div>
                 </div>
               )}
               {shiftByDayList.length !== 0 &&
                 shiftByDayList.map((shift) => {
                   return (
-                    <div
-                      key={shift.id}
-                      style={{
-                        border: "1px solid gray",
-                        margin: "20px 0",
-                        padding: "20px 20px",
-                      }}
-                    >
-                      <div>
-                        <p>Ngày làm việc: {translateDate(shift.day)}</p>
-                        <p>Giờ bắt đầu: {shift.time_start}</p>
-                        <p>Giờ kết thúc: {shift.time_end}</p>
-                        <p>
+                    <div key={shift.id} className="shift-card-content">
+                      <div className="sub-shift-card-content-left">
+                        <p style={{ textAlign: "center" }}>
+                          Ngày làm việc: {translateDate(shift.day)}
+                        </p>
+                        <p style={{ textAlign: "center" }}>
+                          Giờ bắt đầu: {shift.time_start}
+                        </p>
+                        <p style={{ textAlign: "center" }}>
+                          Giờ kết thúc: {shift.time_end}
+                        </p>
+                      </div>
+                      <div className="sub-shift-card-content-mid">
+                        <p style={{ textAlign: "center" }}>
                           Số lượng nhân viên: {getShiftAmount(shift.id_staffs)}
                           /5
                         </p>
                       </div>
+                      <div className="sub-shift-card-content-right">
+                        <p style={{ textAlign: "center" }}>Đăng ký làm việc</p>
+                        <div
+                          style={{
+                            width: "25px",
+                            height: "25px",
+                            border: "1px solid gray",
+                            margin: "5px auto",
+                          }}
+                          className={`${
+                            checkInitRegisterShift(shift.id) ? "choose" : "null"
+                          }`}
+                          onClick={(e) => {
+                            handleRegisterShift(shift.id);
+                          }}
+                        ></div>
+                      </div>
                     </div>
                   );
                 })}
+              {shiftByDayList.length !== 0 && (
+                <div className="text-end">
+                  <Button
+                    className="justify-content-end"
+                    variant="danger"
+                    type="button"
+                    onClick={() => {
+                      registerShiftList.length !== 0
+                        ? handleShow()
+                        : toast.error("Chọn ca làm việc trước khi đăng ký!");
+                    }}
+                  >
+                    Đăng ký
+                  </Button>
+                </div>
+              )}
             </div>
           </Tab>
           <Tab eventKey="staff" title="Lịch làm việc cá nhân">
