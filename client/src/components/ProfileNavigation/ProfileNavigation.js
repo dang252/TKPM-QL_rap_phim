@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-toastify";
 import {
   faUser,
   faPenToSquare,
@@ -23,20 +24,45 @@ const ProfileNavigation = (props) => {
     checkIsStaff,
     getCinemaShift,
     setCinemaIdTitle,
+    handleShowRegisterResult,
+    setRegisterResultMessage,
   } = useContext(Context);
 
   window.onload = () => {
     let reloading = sessionStorage.getItem("reloading_register_shift");
 
     if (reloading) {
+      window.scrollTo(0, 0);
+
       const registerCinemaId = JSON.parse(
         localStorage.getItem("register_cinema_id")
       );
+
+      const registerCinemaName = JSON.parse(
+        localStorage.getItem("register_cinema_name")
+      );
+
+      const proviceName = JSON.parse(localStorage.getItem("province"));
+      const title = `${registerCinemaName}, thành phố ${proviceName}`;
+
       getCinemaShift(registerCinemaId);
-      setCinemaIdTitle(registerCinemaId);
+      setCinemaIdTitle(title);
+
+      const result = JSON.parse(localStorage.getItem("register_shift_result"));
+
+      if (result === "Register for work shifts successfully!") {
+        toast.success("Đăng ký thành công!");
+      } else {
+        // toast.error("Đăng ký thất bại");
+        handleShowRegisterResult();
+        const result = JSON.parse(
+          localStorage.getItem("register_shift_result")
+        );
+        setRegisterResultMessage(result);
+      }
 
       sessionStorage.removeItem("reloading_register_shift");
-      window.scrollTo(0, 0);
+
       handleChangeProfileNav("shift");
       setActiveNav("shift");
     }

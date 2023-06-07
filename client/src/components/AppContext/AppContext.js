@@ -447,11 +447,26 @@ const AppContext = ({ children }) => {
             },
           }
         );
+
+        console.log(rs.data);
         setShiftList(rs.data);
         setRegisterShiftList([]);
       }
     } catch (error) {
       console.log("Get cinema shift failed:", error.message);
+    }
+  };
+
+  const checkIsRegisterShift = (staffList) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user && user?.is_staff === true) {
+      const check = staffList.filter((staff) => {
+        return staff === user.id;
+      });
+
+      if (check.length !== 0) return true;
+      else return false;
     }
   };
 
@@ -494,9 +509,14 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const [showRegisterResult, setShowRegisterResult] = useState(false);
+  const [registerResultMessage, setRegisterResultMessage] = useState();
+
+  const handleCloseRegisterResult = () => setShowRegisterResult(false);
+  const handleShowRegisterResult = () => setShowRegisterResult(true);
+
   const handleSubmitRegisterShift = async (shiftId) => {
     try {
-      console.log(shiftId, registerShiftList);
       const user = JSON.parse(localStorage.getItem("user"));
 
       if (user) {
@@ -515,13 +535,66 @@ const AppContext = ({ children }) => {
           }
         );
 
-        console.log(rs.data);
+        localStorage.setItem("register_shift_result", JSON.stringify(rs.data));
 
         sessionStorage.setItem("reloading_register_shift", "true");
         window.location.reload(false);
       }
     } catch (error) {
-      console.log("Book ticket:", error.message);
+      console.log("Register shift failed:", error.message);
+      if (error.response.status === 409) {
+        localStorage.setItem(
+          "register_shift_result",
+          JSON.stringify(error.response.data)
+        );
+
+        sessionStorage.setItem("reloading_register_shift", "true");
+        window.location.reload(false);
+      }
+    }
+  };
+
+  const [cinemaProvincesList, setCinemaProvincesList] = useState([]);
+
+  const getCinemaProvinces = async () => {
+    try {
+      const rs = await axios.get("http://localhost:5000/book/provinces");
+
+      const cloneList = rs.data?.map((cinema) => {
+        const data = {
+          value: cinema.province,
+          label: cinema.province,
+        };
+        return data;
+      });
+
+      setCinemaProvincesList(cloneList);
+    } catch (error) {
+      console.log("Get cinema provinces failed:", error.message);
+    }
+  };
+
+  const [cinemaProvincesShiftList, setCinemaProvincesShiftList] = useState([]);
+
+  const handleChooseCinemaProvinces = async (value) => {
+    try {
+      const rs = await axios.post("http://localhost:5000/book/provinces", {
+        province: value.value,
+      });
+
+      localStorage.setItem("province", JSON.stringify(value.value));
+
+      const cloneList = rs.data?.map((shift) => {
+        const data = {
+          value: shift.id,
+          label: shift.name,
+        };
+        return data;
+      });
+
+      setCinemaProvincesShiftList(cloneList);
+    } catch (error) {
+      console.log("Get cinema provinces list failed:", error.message);
     }
   };
 
@@ -582,6 +655,16 @@ const AppContext = ({ children }) => {
         handleSubmitRegisterShift,
         cinemaIdTitle,
         setCinemaIdTitle,
+        getCinemaProvinces,
+        cinemaProvincesList,
+        handleChooseCinemaProvinces,
+        cinemaProvincesShiftList,
+        handleShowRegisterResult,
+        handleCloseRegisterResult,
+        showRegisterResult,
+        registerResultMessage,
+        setRegisterResultMessage,
+        checkIsRegisterShift,
       }}
     >
       {children}

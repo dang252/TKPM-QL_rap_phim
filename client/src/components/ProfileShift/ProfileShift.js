@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Tab, Tabs, Form, Button, Modal } from "react-bootstrap";
+import { Tab, Tabs, Button, Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Select from "react-select";
 import "./ProfileShift.css";
@@ -17,9 +17,15 @@ const ProfileShift = () => {
     handleSubmitRegisterShift,
     cinemaIdTitle,
     setCinemaIdTitle,
+    getCinemaProvinces,
+    cinemaProvincesList,
+    handleChooseCinemaProvinces,
+    cinemaProvincesShiftList,
+    showRegisterResult,
+    handleCloseRegisterResult,
+    registerResultMessage,
+    checkIsRegisterShift,
   } = useContext(Context);
-
-  const [cinemaId, setCinemaId] = useState("");
 
   const [shiftByDayList, setShiftByDayList] = useState([]);
 
@@ -45,15 +51,23 @@ const ProfileShift = () => {
     }
   }, [shiftList]);
 
-  const handleGetListShift = (e, cinemaId) => {
-    e.preventDefault();
+  useEffect(() => {
+    getCinemaProvinces();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  const handleGetListShift = (cinemaId, cinemaName) => {
+    // e.preventDefault();
     if (cinemaId !== "") {
       localStorage.setItem("register_cinema_id", JSON.stringify(cinemaId));
+      localStorage.setItem("register_cinema_name", JSON.stringify(cinemaName));
+
+      const proviceName = JSON.parse(localStorage.getItem("province"));
+      const title = `${cinemaName}, thành phố ${proviceName}`;
+
       getCinemaShift(cinemaId);
-      setCinemaIdTitle(cinemaId);
+      setCinemaIdTitle(title);
     }
-    setCinemaId("");
   };
 
   const getShiftAmount = (list) => {
@@ -98,29 +112,77 @@ const ProfileShift = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <Tabs defaultActiveKey="cinema" className="mb-5">
-          <Tab eventKey="cinema" title="Lịch làm việc theo rạp">
-            <Form
-              onSubmit={(e) => {
-                handleGetListShift(e, cinemaId);
+        <Modal show={showRegisterResult} onHide={handleCloseRegisterResult}>
+          <Modal.Header closeButton>
+            <Modal.Title>Kết quả đăng ký</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div>
+              <div>
+                <p>Danh sách đăng ký thành công:</p>
+                {registerResultMessage?.success_shifts.map((shift, index) => {
+                  return (
+                    <p key={index + 12345}>
+                      {translateDate(shift.day)}, giờ bắt đầu:{" "}
+                      {shift.time_start}, giờ kết thúc: {shift.time_end}
+                    </p>
+                  );
+                })}
+              </div>
+              <div>
+                <p>Danh sách đăng ký thất bại:</p>
+                {registerResultMessage?.fail_shifts.map((shift, index) => {
+                  return (
+                    <p key={index + 12345}>
+                      {translateDate(shift.day)}, giờ bắt đầu:{" "}
+                      {shift.time_start}, giờ kết thúc: {shift.time_end}
+                    </p>
+                  );
+                })}
+              </div>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="primary"
+              onClick={() => {
+                handleCloseRegisterResult();
               }}
-              className="mb-5"
             >
-              <Form.Group className="mb-3">
-                <Form.Label>Nhập mã rạp phim để tra cứu:</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Mã rạp phim"
-                  value={cinemaId}
-                  onChange={(e) => {
-                    setCinemaId(e.target.value);
-                  }}
-                />
-              </Form.Group>
-              <Button variant="danger" type="submit">
-                Tra cứu
-              </Button>
-            </Form>
+              Đồng ý
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <Tabs defaultActiveKey="cinema" className="mb-5">
+          <Tab eventKey="cinema" title="Đăng ký lịch làm việc">
+            <div className="profile-shift-provinces">
+              <div style={{ width: "200px" }}>
+                {cinemaProvincesList.length !== 0 && (
+                  <>
+                    <p>Chọn thành phố:</p>
+                    <Select
+                      onChange={(e) => {
+                        handleChooseCinemaProvinces(e);
+                      }}
+                      options={cinemaProvincesList}
+                    />
+                  </>
+                )}
+              </div>
+              <div className="profile-shift-provinces-right">
+                {cinemaProvincesShiftList.length !== 0 && (
+                  <>
+                    <p>Chọn ca làm việc:</p>
+                    <Select
+                      onChange={(e) => {
+                        handleGetListShift(e.value, e.label);
+                      }}
+                      options={cinemaProvincesShiftList}
+                    />
+                  </>
+                )}
+              </div>
+            </div>
             <div>
               {shiftByDayList.length !== 0 && (
                 <div>
@@ -131,9 +193,9 @@ const ProfileShift = () => {
                       fontSize: "20px",
                     }}
                   >
-                    Danh sách ca làm việc cho mã rạp phim: {cinemaIdTitle}
+                    {cinemaIdTitle}
                   </p>
-                  <div style={{ width: "30%" }}>
+                  <div style={{ width: "200px" }}>
                     <Select
                       onChange={(e) => {
                         handleSortShiftDay(e);
@@ -166,20 +228,28 @@ const ProfileShift = () => {
                       </div>
                       <div className="sub-shift-card-content-right">
                         <p style={{ textAlign: "center" }}>Đăng ký làm việc</p>
-                        <div
-                          style={{
-                            width: "25px",
-                            height: "25px",
-                            border: "1px solid gray",
-                            margin: "5px auto",
-                          }}
-                          className={`${
-                            checkInitRegisterShift(shift.id) ? "choose" : "null"
-                          }`}
-                          onClick={(e) => {
-                            handleRegisterShift(shift.id);
-                          }}
-                        ></div>
+                        {!checkIsRegisterShift(shift.id_staffs) ? (
+                          <div
+                            style={{
+                              width: "25px",
+                              height: "25px",
+                              border: "1px solid gray",
+                              margin: "5px auto",
+                            }}
+                            className={`${
+                              checkInitRegisterShift(shift.id)
+                                ? "choose"
+                                : "null"
+                            }`}
+                            onClick={(e) => {
+                              handleRegisterShift(shift.id);
+                            }}
+                          ></div>
+                        ) : (
+                          <p style={{ textAlign: "center", color: "red" }}>
+                            Đã đăng ký
+                          </p>
+                        )}
                       </div>
                     </div>
                   );
@@ -202,7 +272,7 @@ const ProfileShift = () => {
               )}
             </div>
           </Tab>
-          <Tab eventKey="staff" title="Lịch làm việc cá nhân">
+          <Tab eventKey="staff" title="Tra cứu lịch làm việc">
             Tab content for Profile
           </Tab>
         </Tabs>

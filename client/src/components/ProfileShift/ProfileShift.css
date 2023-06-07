@@ -29,6 +29,16 @@
   width: 30%;
 }
 
+.profile-shift-provinces {
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.profile-shift-provinces .profile-shift-provinces-right {
+  width: 300px;
+  margin: 0 50px;
+}
+
 @media (max-width: 1000px) {
   .shift-card-content {
     flex-direction: column;
@@ -41,5 +51,15 @@
 
   .shift-card-content .sub-shift-card-content-right {
     width: 100%;
+  }
+}
+
+@media (max-width: 800px) {
+  .profile-shift-provinces {
+    flex-direction: column;
+  }
+
+  .profile-shift-provinces .profile-shift-provinces-right {
+    margin: 30px 0;
   }
 }
