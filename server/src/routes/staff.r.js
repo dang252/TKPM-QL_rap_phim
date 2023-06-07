@@ -363,7 +363,7 @@ router.get("/listUser", middlewareController.verifyToken, staffController.getLis
  */
 router.post("/blockUser", middlewareController.verifyToken, staffController.postBlockUser);
 
-//
+// --------------------- ----------- -----------
 /**
  * @swagger
  * /staff/registerShifts:
@@ -404,5 +404,55 @@ router.post("/blockUser", middlewareController.verifyToken, staffController.post
  *       description: Internal server error
  */
 router.put("/registerShifts", middlewareController.verifyToken, staffController.putRegisterShifts);
+
+/**
+ * @swagger
+ * /staff/updateSchedule:
+ *  put:
+ *   summary: staff updates schedule
+ *   tags: [/staff]
+ *   requestBody:
+ *     required: true
+ *     content:
+ *       application/json:
+ *         schema:
+ *           type: object
+ *           properties:
+ *             id_movie:
+ *               type: integer
+ *               description: movie's id
+ *             id_cinema:
+ *               type: integer
+ *               description: cinema's id
+ *             id_room:
+ *               type: integer
+ *               description: room's id
+ *             date:
+ *               type: string
+ *               description: schedule's date
+ *             time:
+ *               type: array
+ *               items:
+ *                 type: string
+ *                 description: schedule's time
+ *   security:
+ *     - tokenAuth: []
+ *   responses:
+ *     '200':
+ *       description: Update successfully!
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: string
+ *     '409':
+ *       description: The schedule you entered has been overlapped with the existing one!
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: string
+ *     '500':
+ *       description: Internal server error
+ */
+router.put("/updateSchedule", middlewareController.verifyToken, staffController.updateSchedule);
 
 module.exports = router;

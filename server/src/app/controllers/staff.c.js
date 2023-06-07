@@ -166,6 +166,29 @@ const moviesController = {
       res.status(500).json(error);
     }
   },
+
+  // [PUT] /updateSchedule
+  updateSchedule: async (req, res) => {
+    try {
+      const newSchedule = {
+        id_movie: req.body.id_movie,
+        id_cinema: req.body.id_cinema,
+        id_room: req.body.id_room,
+        date: req.body.date,
+        time: req.body.time,
+      };
+
+      const rs = await staffModel.updateSchedule(newSchedule);
+
+      if (rs == "Fail!") {
+        res.status(409).json("One of the schedule you entered has been overlapped with the existing one!");
+      } else {
+        res.status(200).json("Update successfully!");
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
 };
 
 module.exports = moviesController;

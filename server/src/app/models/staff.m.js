@@ -243,4 +243,14 @@ module.exports = {
       console.log(error);
     }
   },
+
+  updateSchedule: async (schedule_info) => {
+    try {
+      const rs = await db.one("SELECT update_schedule($1, $2, $3, $4, $5::TIME WITHOUT TIME ZONE[]) AS status;", [schedule_info.id_movie, schedule_info.id_cinema, schedule_info.id_room, schedule_info.date, schedule_info.time]);
+
+      return rs.status;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
