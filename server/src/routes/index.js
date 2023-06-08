@@ -121,33 +121,26 @@ function router(app) {
    *      Shifts:
    *        type: object
    *        properties:
-   *          title:
-   *            type: string
-   *            description: cinema's id
-   *          release_date:
-   *            type: string
-   *            description: cinema's name
-   *          url_poster:
-   *            type: string
-   *            description: province where cinema locates
-   *          director:
-   *            type: string
-   *            description: detail address
-   *          actors:
+   *          id:
+   *            type: integer
+   *            description: shift's id
+   *          id_cinema:
    *            type: integer
    *            description: cinema's id
-   *          genres:
-   *            type: integer[]
-   *            description: cinema's name
-   *          duration:
+   *          day:
    *            type: string
-   *            description: province where cinema locates
-   *          age:
-   *            type: integer
-   *            description: detail address
-   *          overview:
+   *            description: date showtime
+   *          time_start:
    *            type: string
-   *            description: detail address
+   *            description: hh:mm:ss
+   *          time_end:
+   *            type: string
+   *            description: hh:mm:ss
+   *          id_staffs:
+   *            type: array
+   *            items:
+   *              type: integer
+   *            description: ids of staff attend this shift
    *      Schedule:
    *        type: object
    *        properties:
@@ -167,7 +160,9 @@ function router(app) {
    *            type: string
    *            description: date showing (yyyy/mm/dd)
    *          time:
-   *            type: string[]
+   *            type: array
+   *            items:
+   *              type: integer
    *            description: showtime (hh:mm:ss)
    *    securitySchemes:
    *      cookieAuth:

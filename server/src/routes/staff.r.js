@@ -97,45 +97,6 @@ router.get("/staffShift", middlewareController.verifyToken, staffController.getS
 
 /**
  * @swagger
- * /staff/shiftsRegister:
- *  post:
- *   summary: staff send shifts registered
- *   tags: [/staff]
- *   requestBody:
- *     required: true
- *     content:
- *       application/json:
- *         schema:
- *           type: object
- *           properties:
- *             id_shift:
- *               type: array
- *               items:
- *                 type: integer
- *               description: shifts's id that staff want to register
- *             id_staff:
- *               type: integer
- *               description: staff's id
- *   security:
- *     - tokenAuth: []
- *   responses:
- *     '200':
- *       description: message "OK" if success, "FAIL" if fail to Register due to some fully shift
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *                message:
- *                  type: string
- *                  description: OK if success, FAIL if fail to Register due to some fully shift
- *     '500':
- *       description: Internal server error
- */
-router.post("/shiftsRegister", middlewareController.verifyToken, staffController.postShiftsRegister);
-
-/**
- * @swagger
  * /staff/createMovie:
  *  post:
  *   summary: staff create a new movie

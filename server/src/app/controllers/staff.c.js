@@ -43,26 +43,6 @@ const moviesController = {
     }
   },
 
-  //[POST] /shiftRegister
-  postShiftsRegister: async (req, res) => {
-    try {
-      const shiftRegister = await staffModel.shiftsRegister(req.body.id_shift, req.body.id_staff);
-      // id_shift[] :array of the chosen shift
-      // id_staff: id of the staff
-
-      if (shiftRegister === "FAIL") {
-        res.status(200).json(
-          "FAIL"
-          // fail to register
-        );
-      } else {
-        res.status(200).json("OK");
-      }
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
-
   //[POST] /createMovie
   postCreateMovie: async (req, res) => {
     try {
