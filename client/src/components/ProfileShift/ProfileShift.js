@@ -246,9 +246,27 @@ const ProfileShift = () => {
                             }}
                           ></div>
                         ) : (
-                          <p style={{ textAlign: "center", color: "red" }}>
-                            Đã đăng ký
-                          </p>
+                          <>
+                            <p style={{ textAlign: "center", color: "red" }}>
+                              Đã đăng ký
+                            </p>
+                            <div
+                              style={{
+                                width: "25px",
+                                height: "25px",
+                                border: "1px solid gray",
+                                margin: "5px auto",
+                              }}
+                              className={`${
+                                checkInitRegisterShift(shift.id)
+                                  ? "choose"
+                                  : "null"
+                              }`}
+                              onClick={(e) => {
+                                handleRegisterShift(shift.id);
+                              }}
+                            ></div>
+                          </>
                         )}
                       </div>
                     </div>

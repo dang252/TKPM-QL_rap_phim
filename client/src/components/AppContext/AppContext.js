@@ -448,7 +448,7 @@ const AppContext = ({ children }) => {
           }
         );
 
-        console.log(rs.data);
+        // console.log(rs.data);
         setShiftList(rs.data);
         setRegisterShiftList([]);
       }
