@@ -328,6 +328,59 @@ const SeatsContent = (props) => {
         </div>
         <div className="item area-20 none">20</div>
       </div>
+      <div
+        className="seats-note"
+        style={{
+          padding: "30px 80px",
+          margin: "30px 0",
+          // backgroundColor: "red",
+        }}
+      >
+        <p
+          style={{ fontSize: "20px", fontWeight: "bold", textAlign: "center" }}
+        >
+          Chú thích đặt ghế
+        </p>
+        <div style={{ display: "flex" }}>
+          <div
+            style={{ width: "30px", height: "30px", border: "1px solid gray" }}
+          ></div>
+          <p style={{ marginLeft: "30px" }}>Ghế có thể đặt</p>
+        </div>
+        <div style={{ display: "flex" }}>
+          <div
+            style={{
+              width: "30px",
+              height: "30px",
+              border: "1px solid gray",
+              backgroundColor: "#35b51d",
+            }}
+          ></div>
+          <p style={{ marginLeft: "30px" }}>Ghế đã chọn</p>
+        </div>
+        <div style={{ display: "flex" }}>
+          <div
+            style={{
+              width: "30px",
+              height: "30px",
+              border: "1px solid gray",
+              backgroundColor: "gray",
+            }}
+          ></div>
+          <p style={{ marginLeft: "30px" }}>Ghế đã được đặt</p>
+        </div>
+        <div style={{ display: "flex" }}>
+          <div
+            style={{
+              width: "30px",
+              height: "30px",
+              border: "1px solid gray",
+              backgroundColor: "#000",
+            }}
+          ></div>
+          <p style={{ marginLeft: "30px" }}>Ghế không được đặt</p>
+        </div>
+      </div>
       <BookingFooter
         seatsList={seatsList}
         seatsPickList={seatsPickList}
