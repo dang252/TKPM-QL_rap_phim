@@ -632,6 +632,28 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const [staffShiftHistory, setStaffShiftHistory] = useState([]);
+
+  const getStaffShift = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (user && user?.is_staff === true) {
+        const rs = await axios.get(
+          `http://localhost:5000/staff/staffShift?id_staff=${user.id}`,
+          {
+            headers: {
+              token: `Bearer ${user.accessToken}`,
+            },
+          }
+        );
+        setStaffShiftHistory(rs.data);
+      }
+    } catch (error) {
+      console.log("Get staff shift failed:", error.message);
+    }
+  };
+
   return (
     <Context.Provider
       value={{
@@ -700,6 +722,8 @@ const AppContext = ({ children }) => {
         setRegisterResultMessage,
         checkIsRegisterShift,
         handleConfirmBlockSeats,
+        getStaffShift,
+        staffShiftHistory,
       }}
     >
       {children}

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Tab, Tabs, Button, Modal } from "react-bootstrap";
+import { Tab, Tabs, Button, Modal, Pagination } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Select from "react-select";
 import "./ProfileShift.css";
@@ -25,6 +25,8 @@ const ProfileShift = () => {
     handleCloseRegisterResult,
     registerResultMessage,
     checkIsRegisterShift,
+    getStaffShift,
+    staffShiftHistory,
   } = useContext(Context);
 
   const [shiftByDayList, setShiftByDayList] = useState([]);
@@ -53,6 +55,7 @@ const ProfileShift = () => {
 
   useEffect(() => {
     getCinemaProvinces();
+    getStaffShift();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -85,6 +88,47 @@ const ProfileShift = () => {
 
     if (value.value !== "default") setShiftByDayList(sortShiftList);
     else setShiftByDayList(shiftList);
+  };
+
+  const [active, setActive] = useState(1);
+  const [shiftHistoryPerPageList, setShiftHistoryListPerPageList] = useState(
+    []
+  );
+  let items = [];
+
+  useEffect(() => {
+    handleShiftHistory(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [staffShiftHistory]);
+
+  if (staffShiftHistory.length !== 0) {
+    for (
+      let number = 1;
+      number <= Math.ceil(staffShiftHistory.length / 2);
+      number++
+    ) {
+      items.push(
+        <Pagination.Item
+          key={number}
+          active={number === active}
+          onClick={(e) => {
+            handleShiftHistory(number);
+          }}
+        >
+          {number}
+        </Pagination.Item>
+      );
+    }
+  }
+
+  const handleShiftHistory = (number) => {
+    if (staffShiftHistory.length !== 0) {
+      const begin = (number - 1) * 2;
+      const end = (number - 1) * 2 + 2;
+      const listPerPage = staffShiftHistory.slice(begin, end);
+      setShiftHistoryListPerPageList(listPerPage);
+      setActive(number);
+    }
   };
 
   return (
@@ -291,7 +335,45 @@ const ProfileShift = () => {
             </div>
           </Tab>
           <Tab eventKey="staff" title="Tra cứu lịch làm việc">
-            Tab content for Profile
+            <p
+              style={{
+                textAlign: "center",
+                fontWeight: "bold",
+                fontSize: "20px",
+              }}
+            >
+              Danh sách lịch làm việc
+            </p>
+            {shiftHistoryPerPageList.length !== 0 &&
+              shiftHistoryPerPageList.map((shift, index) => {
+                return (
+                  <div
+                    key={index + 12314323}
+                    style={{
+                      border: "1px solid gray",
+                      margin: "30px 0",
+                      padding: "20px 20px",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <p>Ngày làm việc: {translateDate(shift.day)}</p>
+                    <p>Tên rạp: {shift.name}</p>
+                    <p>Địa chỉ: {shift.location}</p>
+                    <p>Giờ bắt đầu: {shift.time_start}</p>
+                    <p>Giờ bắt đầu: {shift.time_end}</p>
+                  </div>
+                );
+              })}
+            {shiftHistoryPerPageList.length !== 0 && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Pagination>{items}</Pagination>
+              </div>
+            )}
           </Tab>
         </Tabs>
       </div>
