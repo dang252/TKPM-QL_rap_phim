@@ -89,7 +89,26 @@ router.get("/listShift", middlewareController.verifyToken, staffController.getLi
  *           schema:
  *             type: array
  *             items:
- *             $ref: '#/components/schemas/Shifts'
+ *               type: object
+ *               properties:
+ *                 province:
+ *                   type: integer
+ *                   description: province where cinema state at
+ *                 name:
+ *                   type: string
+ *                   description: cinema's name
+ *                 location:
+ *                   type: integer
+ *                   description: cinema's location
+ *                 day:
+ *                   type: string
+ *                   description: shift's day
+ *                 time_start:
+ *                   type: integer
+ *                   description: start time of shift (hh:mm:ss)
+ *                 time_end:
+ *                   type: string
+ *                   description: end time of shift (hh:mm:ss)
  *     '500':
  *       description: Internal server error
  */
