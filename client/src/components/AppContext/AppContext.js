@@ -287,6 +287,40 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const handleConfirmBlockSeats = async (paramsIdSchedule) => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (user) {
+        const data = {
+          id_seat: seatsPickList,
+          id_schedule: paramsIdSchedule,
+        };
+
+        const rs = await axios.post(
+          "http://localhost:5000/staff/blockSeat",
+          data,
+          {
+            headers: {
+              token: `Bearer ${user.accessToken}`,
+            },
+          }
+        );
+
+        if (rs.data === "OK") {
+          localStorage.setItem(
+            "register_seats_block_result",
+            JSON.stringify(rs.data)
+          );
+          sessionStorage.setItem("register_seats_block_result", "true");
+          window.location.reload(false);
+        }
+      }
+    } catch (error) {
+      console.log("Block seats failed:", error.message);
+    }
+  };
+
   const [foodList, setFoodList] = useState([]);
   const [foodPickList, setFoodPickList] = useState([]);
 
@@ -665,6 +699,7 @@ const AppContext = ({ children }) => {
         registerResultMessage,
         setRegisterResultMessage,
         checkIsRegisterShift,
+        handleConfirmBlockSeats,
       }}
     >
       {children}

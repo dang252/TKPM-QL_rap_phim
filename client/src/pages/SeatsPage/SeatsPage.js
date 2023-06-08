@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { Context } from "../../context/UserContext";
 
@@ -38,6 +39,28 @@ const SeatsPage = () => {
     getDetailMovie(paramsIdMovie);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  window.onload = () => {
+    let reloadingBlockSeats = sessionStorage.getItem(
+      "register_seats_block_result"
+    );
+
+    if (reloadingBlockSeats) {
+      window.scrollTo(0, 0);
+
+      const result = JSON.parse(
+        localStorage.getItem("register_seats_block_result")
+      );
+
+      if (result === "OK") {
+        toast.success("Khóa ghế thành công!");
+      } else {
+        toast.error("Khóa ghế thất bại");
+      }
+
+      sessionStorage.removeItem("reloading_register_shift");
+    }
+  };
 
   return (
     <div>

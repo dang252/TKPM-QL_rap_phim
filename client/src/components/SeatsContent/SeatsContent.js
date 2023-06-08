@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { Button, Modal } from "react-bootstrap";
 import "./SeatsContent.css";
 
 import BookingFooter from "../BookingFooter/BookingFooter";
@@ -18,6 +19,7 @@ import {
   area18,
   area19,
 } from "../../constrants/seats";
+import { toast } from "react-toastify";
 
 const SeatsContent = (props) => {
   const {
@@ -29,7 +31,17 @@ const SeatsContent = (props) => {
     paramsTime,
   } = props;
 
-  const { handleAddSeatsPick, seatsPickList } = useContext(Context);
+  const {
+    handleAddSeatsPick,
+    seatsPickList,
+    checkIsStaff,
+    handleConfirmBlockSeats,
+  } = useContext(Context);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   if (seatsList.length !== 0) {
     // console.log(seatsList);
@@ -57,6 +69,11 @@ const SeatsContent = (props) => {
     }
   };
 
+  const handleBlockSeats = () => {
+    if (seatsPickList.length === 0) toast.error("Chọn ghế để khóa");
+    else handleShow();
+  };
+
   return (
     <div className="seats-container">
       <p className="seats-title">BOOKING ONLINE</p>
@@ -64,6 +81,40 @@ const SeatsContent = (props) => {
         {paramsCinemaName} | Cinemas {paramsIdRoom}
       </p>
       <p className="seats-subtitle-2">Người / Ghế</p>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Thông báo</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Bạn có chắc muốn khóa ghế ?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Đóng
+          </Button>
+          <Button
+            variant="primary"
+            onClick={(e) => {
+              handleConfirmBlockSeats(paramsIdSchedule);
+            }}
+          >
+            Đồng ý
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {checkIsStaff() && (
+        <div
+          className="text-end"
+          style={{ padding: "0 50px", margin: "30px 0" }}
+        >
+          <Button
+            variant="danger"
+            onClick={(e) => {
+              handleBlockSeats();
+            }}
+          >
+            Khóa ghế
+          </Button>
+        </div>
+      )}
       <div className="seats-box-wrapper">
         <div className="item area-1 none">1</div>
         <div className="item area-2">
