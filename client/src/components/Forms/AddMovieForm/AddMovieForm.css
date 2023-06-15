@@ -1,0 +1,76 @@
+.add-movie-form {
+    padding: 10px;
+}
+
+.add-movie-form label{
+    display: block;
+}
+
+.add-movie-form .input-text-field {
+    padding: 5px;
+}
+
+.add-movie-form .upper-form-wrapper {
+    display: flex;
+    width: calc(100% - 20px);
+}
+
+.add-movie-form .upper-form-wrapper .form-left {
+    width: 50%;
+}
+
+.add-movie-form .upper-form-wrapper .form-left .input-text-field {
+    width: 100%;
+}
+
+.add-movie-form .upper-form-wrapper .form-right {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+}
+
+.add-movie-form .upper-form-wrapper .form-right .null-img {
+    max-width: 186px;
+    aspect-ratio: 9 /14;
+    border: 2px solid rgba(107, 106, 105, 0.744);
+    outline: 2px solid rgba(107, 106, 105, 0.744);
+    outline-offset:-5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-movie-form .upper-form-wrapper .form-right img {
+    /* width: 100%; */
+    /* height: 100%; */
+    max-width: 186px;;
+    object-fit: cover;
+}
+
+.add-movie-form .times-wrapper {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.add-movie-form .react-time-picker__wrapper {
+    padding: 4px
+}
+
+.add-movie-form .overview {
+    width: 100%;
+    height: 100px;
+    text-align: start;
+}
+
+.add-movie-form .input-submit {
+    padding: 10px;
+    background-color: red;
+    color: white;
+    font-size: 18px;
+    border-radius: 7px;
+    border: none;
+    display: block;
+    margin: 10px auto;
+}

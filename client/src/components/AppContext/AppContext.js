@@ -3,6 +3,7 @@ import { Context } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+// import { getSearchParamsForLocation } from "react-router-dom/dist/dom";
 
 const AppContext = ({ children }) => {
   const navigate = useNavigate();
@@ -24,15 +25,6 @@ const AppContext = ({ children }) => {
   // Detail page movie state
   const [detailMovie, setDetailMovie] = useState({});
 
-  //doc thong  tin user trong local storage
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("user"));
-    if (data !== null) {
-      const names = data["name"].split(" ");
-      const name = names[names.length - 1];
-      setUsername(name);
-    }
-  }, []);
   //lay danh sach ngay
   const DayOfWeeks = {
     1: "Mon",
@@ -92,9 +84,13 @@ const AppContext = ({ children }) => {
           }
         );
         localStorage.clear();
+        const MSG = {
+          type: "success",
+          msg: "Đăng xuất thành công!"
+        }
+        localStorage.setItem("UnfulfilledMsg", JSON.stringify(MSG))
         navigate("/");
         window.location.reload();
-        toast.success("Đăng xuất thành công!");
       }
     } catch (error) {
       if (error.response) {
@@ -155,6 +151,36 @@ const AppContext = ({ children }) => {
       return error.response;
     }
   };
+
+   //doc thong  tin user trong local storage
+   useEffect(() => {
+    const getUser = async() => {
+      try {
+        const rs = await getUserProfile()
+        console.log(rs)
+        if (rs?.status === 200){
+          const data = JSON.parse(localStorage.getItem("user"));
+          if (data !== null) {
+            const names = data["name"].split(" ");
+            const name = names[names.length - 1];
+            setUsername(name);
+          }
+        }
+        else {
+          localStorage.removeItem("user")
+        }
+      } catch(err) {
+        console.log(err.message)
+      }
+     }
+    getUser()
+    // const data = JSON.parse(localStorage.getItem("user"));
+    // if (data !== null) {
+    //   const names = data["name"].split(" ");
+    //   const name = names[names.length - 1];
+    //   setUsername(name);
+    // }
+  }, []);
 
   const handleUserDOB = (dob) => {
     const dobStr = dob.split(":")[0].split("T")[0].split("-");
@@ -653,6 +679,42 @@ const AppContext = ({ children }) => {
       console.log("Get staff shift failed:", error.message);
     }
   };
+  //danh sách các thể loại phim,
+  const genresOption = [{value: 1, label: "Hành động" }, 
+    {value: 2,  label: "Tội phạm"},
+    {value: 3, label: "Hài" },
+    {value: 4, label: "Hồi hộp"},
+    {value: 5, label: "Tâm lý"  },
+    {value: 6, label: "Phiêu lưu" },
+    {value: 7, label: "Thần thoại" },
+    {value: 8, label: "Bí ẩn" },
+    {value: 9, label: "Kinh dị" },
+    {value: 10, label: "Hoạt hình" },
+    {value: 11, label: "Gia đình" },
+    {value: 12, label: "Tình cảm" },
+    {value: 13, label: "Huyền thoại" },
+    {value: 14, label: "Khoa học viễn tưởng"}]
+
+  //Một số độ tuổi bị giới hạn, dùng trong việc render trong các form tạo phim mới
+  const ageRestrictionOption = [
+    {value: 0, label: "Không giới hạn"},
+    {value: 16, label: "Trên 16 tuổi"},
+    {value: 18, label: "Trên 18 tuổi"},
+  ]
+
+  window.onload = () => {
+    let MSG = JSON.parse(localStorage.getItem("UnfulfilledMsg"))
+    console.log(MSG)
+    if (MSG) {
+      if(MSG.type === "success") {
+        toast.success(MSG.msg);
+      }
+      else if(MSG.type === "err") {
+        toast.error(MSG.msg)
+      }
+      localStorage.removeItem("UnfulfilledMsg")
+    }
+  }
 
   return (
     <Context.Provider
@@ -724,6 +786,8 @@ const AppContext = ({ children }) => {
         handleConfirmBlockSeats,
         getStaffShift,
         staffShiftHistory,
+        ageRestrictionOption,
+        genresOption,
       }}
     >
       {children}

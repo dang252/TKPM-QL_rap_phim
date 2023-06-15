@@ -54,10 +54,14 @@ const LoginForm = () => {
         // toast.update(id, {render: "All is good", type: "success", isLoading: false});
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
+          const MSG = {
+            type: "success",
+            msg: "Đăng nhập thành công!"
+          }
+          localStorage.setItem("UnfulfilledMsg", JSON.stringify(MSG))
         }
         navigate("/");
         window.location.reload();
-        toast.success("Đăng nhập thành công!");
       } catch (error) {
         // toast.update(id, {render: "Something went wrong", type: "error", isLoading: false });
         if (error.response) {

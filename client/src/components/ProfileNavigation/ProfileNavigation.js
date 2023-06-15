@@ -8,6 +8,7 @@ import {
   faLock,
   faTicket,
   faBriefcase,
+  faFilm,
 } from "@fortawesome/free-solid-svg-icons";
 import "./ProfileNavigation.css";
 
@@ -66,6 +67,19 @@ const ProfileNavigation = (props) => {
       handleChangeProfileNav("shift");
       setActiveNav("shift");
     }
+    let MSG = JSON.parse(localStorage.getItem("UnfulfilledMsg"))
+    if (MSG) {
+      if(MSG.type === "success") {
+        toast.success(MSG.msg);
+      }
+      else if(MSG.type === "err") {
+        toast.error(MSG.msg)
+      }
+      localStorage.removeItem("UnfulfilledMsg")
+      handleChangeProfileNav("addmovies");
+      setActiveNav("addmovies");
+    }
+
   };
 
   return (
@@ -137,6 +151,7 @@ const ProfileNavigation = (props) => {
           <p>Lịch sử đặt vé</p>
         </div>
         {checkIsStaff() && (
+          <>
           <div
             className={`profile-main-category ${
               activeNav === "shift" && "active"
@@ -151,6 +166,21 @@ const ProfileNavigation = (props) => {
             </p>
             <p>Quản lý lịch làm việc</p>
           </div>
+          <div
+            className={`profile-main-category ${
+              activeNav === "addmovies" && "active"
+            }`}
+            onClick={(e) => {
+              handleChangeProfileNav("addmovies");
+              setActiveNav("addmovies");
+            }}
+          >
+            <p>
+              <FontAwesomeIcon icon={faFilm} />
+            </p>
+            <p>Thêm lịch chiếu</p>
+          </div>
+          </>
         )}
       </div>
     </div>

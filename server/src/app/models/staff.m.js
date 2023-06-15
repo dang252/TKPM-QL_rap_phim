@@ -47,7 +47,7 @@ module.exports = {
   // create movies
   createMovie: async (movie_info) => {
     try {
-      return await db.one("INSERT INTO movie (title, release_date, url_poster, director, actors, genres, duration, age, overview) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);", [movie_info.title, movie_info.release_date, movie_info.url_poster, movie_info.director, movie_info.actors, movie_info.genres, movie_info.duration, movie_info.age, movie_info.overview]);
+      return await db.one("INSERT INTO movies (title, release_date, url_poster, director, actors, genres, duration, age, overview) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);", [movie_info.title, movie_info.release_date, movie_info.url_poster, movie_info.director, movie_info.actors, movie_info.genres, movie_info.duration, movie_info.age, movie_info.overview]);
     } catch (err) {
       if (err.code === 0) {
         return null;

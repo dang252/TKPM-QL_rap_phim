@@ -32,7 +32,7 @@ const RegisterForm = () => {
   const [bmonth, setBmonth] = useState();
   const [byear, setByear] = useState();
   const [bday, setBday] = useState();
-  const [gender, setGender] = useState("M");
+  const [gender, setGender] = useState("male");
   const [err, setErr] = useState(0);
   const [captcha, setCaptcha] = useState(false);
   let navigate = useNavigate();
