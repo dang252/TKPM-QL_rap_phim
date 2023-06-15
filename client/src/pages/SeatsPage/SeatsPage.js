@@ -35,7 +35,7 @@ const SeatsPage = () => {
   }, []);
 
   useEffect(() => {
-    getSeats(paramsIdSchedule);
+    getSeats(paramsIdSchedule, paramsTime);
     getDetailMovie(paramsIdMovie);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

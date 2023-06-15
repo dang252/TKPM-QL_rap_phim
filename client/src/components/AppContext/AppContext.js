@@ -152,13 +152,13 @@ const AppContext = ({ children }) => {
     }
   };
 
-   //doc thong  tin user trong local storage
-   useEffect(() => {
-    const getUser = async() => {
+  //doc thong  tin user trong local storage
+  useEffect(() => {
+    const getUser = async () => {
       try {
         const rs = await getUserProfile()
         console.log(rs)
-        if (rs?.status === 200){
+        if (rs?.status === 200) {
           const data = JSON.parse(localStorage.getItem("user"));
           if (data !== null) {
             const names = data["name"].split(" ");
@@ -169,10 +169,10 @@ const AppContext = ({ children }) => {
         else {
           localStorage.removeItem("user")
         }
-      } catch(err) {
+      } catch (err) {
         console.log(err.message)
       }
-     }
+    }
     getUser()
     // const data = JSON.parse(localStorage.getItem("user"));
     // if (data !== null) {
@@ -273,12 +273,12 @@ const AppContext = ({ children }) => {
     else navigate("/login");
   };
 
-  const getSeats = async (idSchedule) => {
+  const getSeats = async (idSchedule, time) => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       if (user) {
         const rs = await axios.get(
-          `http://localhost:5000/book/seats?id_schedule=${idSchedule}`,
+          `http://localhost:5000/book/seats?id_schedule=${idSchedule}&time=${time}`,
           {
             headers: {
               token: `Bearer ${user.accessToken}`,
@@ -680,36 +680,36 @@ const AppContext = ({ children }) => {
     }
   };
   //danh sách các thể loại phim,
-  const genresOption = [{value: 1, label: "Hành động" }, 
-    {value: 2,  label: "Tội phạm"},
-    {value: 3, label: "Hài" },
-    {value: 4, label: "Hồi hộp"},
-    {value: 5, label: "Tâm lý"  },
-    {value: 6, label: "Phiêu lưu" },
-    {value: 7, label: "Thần thoại" },
-    {value: 8, label: "Bí ẩn" },
-    {value: 9, label: "Kinh dị" },
-    {value: 10, label: "Hoạt hình" },
-    {value: 11, label: "Gia đình" },
-    {value: 12, label: "Tình cảm" },
-    {value: 13, label: "Huyền thoại" },
-    {value: 14, label: "Khoa học viễn tưởng"}]
+  const genresOption = [{ value: 1, label: "Hành động" },
+  { value: 2, label: "Tội phạm" },
+  { value: 3, label: "Hài" },
+  { value: 4, label: "Hồi hộp" },
+  { value: 5, label: "Tâm lý" },
+  { value: 6, label: "Phiêu lưu" },
+  { value: 7, label: "Thần thoại" },
+  { value: 8, label: "Bí ẩn" },
+  { value: 9, label: "Kinh dị" },
+  { value: 10, label: "Hoạt hình" },
+  { value: 11, label: "Gia đình" },
+  { value: 12, label: "Tình cảm" },
+  { value: 13, label: "Huyền thoại" },
+  { value: 14, label: "Khoa học viễn tưởng" }]
 
   //Một số độ tuổi bị giới hạn, dùng trong việc render trong các form tạo phim mới
   const ageRestrictionOption = [
-    {value: 0, label: "Không giới hạn"},
-    {value: 16, label: "Trên 16 tuổi"},
-    {value: 18, label: "Trên 18 tuổi"},
+    { value: 0, label: "Không giới hạn" },
+    { value: 16, label: "Trên 16 tuổi" },
+    { value: 18, label: "Trên 18 tuổi" },
   ]
 
   window.onload = () => {
     let MSG = JSON.parse(localStorage.getItem("UnfulfilledMsg"))
     console.log(MSG)
     if (MSG) {
-      if(MSG.type === "success") {
+      if (MSG.type === "success") {
         toast.success(MSG.msg);
       }
-      else if(MSG.type === "err") {
+      else if (MSG.type === "err") {
         toast.error(MSG.msg)
       }
       localStorage.removeItem("UnfulfilledMsg")
