@@ -45,10 +45,10 @@ const bookController = {
     }
   },
 
-  // [GET] /seat?id_schedule={}
+  // [GET] /seat?id_schedule={}&time={}
   getSeats: async (req, res) => {
     try {
-      const seats = await bookModel.getSeats(req.query.id_schedule);
+      const seats = await bookModel.getSeats(req.query.id_schedule, req.query.time);
 
       res.status(200).json(seats);
     } catch (error) {

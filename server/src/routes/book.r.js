@@ -234,7 +234,7 @@ router.post("/schedule", bookController.getSchedule);
 
 /**
  * @swagger
- * /book/seats?id_schedule={id_schedule}:
+ * /book/seats?id_schedule={id_schedule}&time={time}:
  *  get:
  *   summary: get seats
  *   tags: [/book]
@@ -244,6 +244,11 @@ router.post("/schedule", bookController.getSchedule);
  *       description: Schedule's ID
  *       required: true
  *       type: integer
+ *     - name: time
+ *       in: path
+ *       description: Schedule's time
+ *       required: true
+ *       type: string
  *   security:
  *     - tokenAuth: []
  *   responses:

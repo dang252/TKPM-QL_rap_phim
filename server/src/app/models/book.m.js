@@ -85,9 +85,9 @@ module.exports = {
       }
     }
   },
-  getSeats: async (id_schedule) => {
+  getSeats: async (id_schedule, time) => {
     try {
-      await db.none("CALL get_seat($1);", [id_schedule]);
+      await db.none("CALL get_seat($1, $2);", [id_schedule, time]);
       const rs = await db.any(
         `
         SELECT	id_seat,
@@ -98,10 +98,10 @@ module.exports = {
                 END) AS name,
                 status
         FROM	seats
-        WHERE	id_schedule = $1
+        WHERE	id_schedule = $1 AND time = $2
         ORDER BY id_seat ASC;
       `,
-        [id_schedule]
+        [id_schedule, time]
       );
       return rs;
     } catch (err) {
@@ -139,7 +139,7 @@ module.exports = {
   bookTickets: async (bookInfo) => {
     try {
       const rs = await db.none("INSERT INTO book (id_user, id_seats, id_schedule, id_food_drink, start_time, purchase_date) VALUES ($1, $2, $3, $4, $5, CURRENT_DATE);", [bookInfo.id_user, bookInfo.id_seats, bookInfo.id_schedule, bookInfo.id_food_drink, bookInfo.start_time]);
-      await db.none("UPDATE seats SET status = 1 WHERE id_seat = ANY($1) AND id_schedule = $2", [bookInfo.id_seats, bookInfo.id_schedule]);
+      await db.none("UPDATE seats SET status = 1 WHERE id_seat = ANY($1) AND id_schedule = $2 AND time = $3", [bookInfo.id_seats, bookInfo.id_schedule, bookInfo.start_time]);
       return rs;
     } catch (err) {
       if (err.code === 0) {
