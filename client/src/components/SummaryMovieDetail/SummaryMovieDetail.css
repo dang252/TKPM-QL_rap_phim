@@ -1,0 +1,22 @@
+.summary-movie {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.summary-movie .summary-movie-poster {
+    /* width: 100%; */
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.summary-movie .summary-movie-poster img {
+    max-width: 186px;
+    object-fit: cover;
+    margin: auto;
+}

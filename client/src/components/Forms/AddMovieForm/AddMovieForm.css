@@ -2,7 +2,7 @@
     padding: 10px;
 }
 
-.add-movie-form label{
+.add-movie-form label {
     display: block;
 }
 
@@ -34,7 +34,7 @@
     aspect-ratio: 9 /14;
     border: 2px solid rgba(107, 106, 105, 0.744);
     outline: 2px solid rgba(107, 106, 105, 0.744);
-    outline-offset:-5px;
+    outline-offset: -5px;
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -44,7 +44,7 @@
 .add-movie-form .upper-form-wrapper .form-right img {
     /* width: 100%; */
     /* height: 100%; */
-    max-width: 186px;;
+    max-width: 186px;
     object-fit: cover;
 }
 
@@ -73,4 +73,14 @@
     border: none;
     display: block;
     margin: 10px auto;
+}
+
+@media screen and (max-width:600px) {
+    .add-movie-form .upper-form-wrapper .form-right img {
+        width: 100%;
+    }
+
+    .add-movie-form .upper-form-wrapper .form-right .null-img {
+        width: 100%;
+    }
 }

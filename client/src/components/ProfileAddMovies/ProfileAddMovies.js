@@ -5,6 +5,7 @@ import { Tabs, Tab } from 'react-bootstrap'
 import "./ProfileAddMovies.css"
 
 import AddMovieForm from '../Forms/AddMovieForm/AddMovieForm';
+import AddScheduleForm from '../Forms/AddScheduleForm/AddScheduleForm';
 
 const ProfileAddMovies = () => {
 
@@ -12,10 +13,10 @@ const ProfileAddMovies = () => {
         <div className='profile-add-movies-container'>
             <Tabs defaultActiveKey="addMovies" >
                 <Tab eventKey="addMovies" title="Thêm phim mới">
-                    <AddMovieForm/>
+                    <AddMovieForm />
                 </Tab>
                 <Tab eventKey="addSchedule" title="Thêm lịch chiếu cho phim">
-                    lmao
+                    <AddScheduleForm />
                 </Tab>
             </Tabs>
         </div>

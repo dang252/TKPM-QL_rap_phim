@@ -43,7 +43,7 @@ const AddMovieForm = () => {
                 type: "success",
                 msg: "Đã thêm phim thành công!"
             }
-            if(rs?.status === 200) {
+            if (rs?.status === 200) {
                 localStorage.setItem("UnfulfilledMsg", JSON.stringify(MSG))
                 window.location.reload(false);
             }
@@ -118,6 +118,7 @@ const AddMovieForm = () => {
                 onChange={(values) => {
                     setAddedMovieInfo({ ...addedMovieInfo, genres: values.map(genre => { return genre.value }) });
                 }}
+                placeholder="Thể loại"
                 required
             />
             <label>Giới hạn độ tuổi: </label>

@@ -450,7 +450,7 @@ const AppContext = ({ children }) => {
             },
           }
         );
-        // console.log(rs.data);
+        console.log(rs.data);
         setTicketInfoResult(rs.data);
       }
     } catch (error) {
@@ -679,6 +679,107 @@ const AppContext = ({ children }) => {
       console.log("Get staff shift failed:", error.message);
     }
   };
+  const getMoviesForSelect = async () => {
+    try {
+      const rs = await axios.get(
+        `http://localhost:5000/movies/listMovies`,
+        {
+          withCredentials: true
+        }
+      )
+
+      const cloneList = rs.data?.map((movie) => {
+        const data = {
+          value: movie.id,
+          label: movie.title,
+        };
+        return data;
+      });
+      return cloneList
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
+  const getProvincesForSelect = async () => {
+    try {
+      const rs = await axios.get("http://localhost:5000/book/provinces",
+        {
+          withCredentials: true
+        });
+
+      const cloneList = rs.data?.map((cinema) => {
+        const data = {
+          value: cinema.province,
+          label: cinema.province,
+        };
+        return data;
+      });
+
+      return cloneList;
+    } catch (error) {
+      console.log("Get cinema provinces failed:", error.message);
+    }
+  };
+
+  const getCinemaProvincesForSelect = async (value) => {
+    try {
+      const rs = await axios.post("http://localhost:5000/book/provinces",
+        {
+          province: value.value,
+        },
+        {
+          withCredentials: true
+        });
+      const cloneList = rs.data?.map((cinema) => {
+        const data = {
+          value: cinema.id,
+          label: cinema.name,
+        };
+        return data;
+      });
+
+      return cloneList
+    } catch (error) {
+      console.log("Get cinema provinces list failed:", error.message);
+    }
+  };
+
+  const getRoomForSelect = async (value) => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const rs = await axios.get(`http://localhost:5000/staff/listRoom?id_cinema=${value.value}`,
+        {
+          headers: {
+            token: `Bearer ${user.accessToken}`,
+          },
+          withCredentials: true
+        });
+
+      const cloneList = rs.data?.map((room, index) => {
+        const data = {
+          value: room.id,
+          label: room.name + " Phòng số " + Number(index + 1),
+        };
+        return data;
+      });
+
+      return cloneList
+    } catch (error) {
+      console.log("Get room list failed:", error.message);
+    }
+  };
+  const getMovieByID = async (id) => {
+    try {
+      const rs = await axios.get(
+        `http://localhost:5000/movies/detail?id=${id}`
+      );
+      const data = await rs?.data;
+      return data
+    } catch (error) {
+      console.log("Get detail movie failed:", error.message);
+    }
+  };
+
   //danh sách các thể loại phim,
   const genresOption = [{ value: 1, label: "Hành động" },
   { value: 2, label: "Tội phạm" },
@@ -700,6 +801,24 @@ const AppContext = ({ children }) => {
     { value: 0, label: "Không giới hạn" },
     { value: 16, label: "Trên 16 tuổi" },
     { value: 18, label: "Trên 18 tuổi" },
+  ]
+
+  const timeOption = [
+    { value: "08:00:00", label: "08:00:00" },
+    { value: "09:00:00", label: "09:00:00" },
+    { value: "10:00:00", label: "10:00:00" },
+    { value: "11:00:00", label: "11:00:00" },
+    { value: "12:00:00", label: "12:00:00" },
+    { value: "13:00:00", label: "13:00:00" },
+    { value: "14:00:00", label: "14:00:00" },
+    { value: "15:00:00", label: "15:00:00" },
+    { value: "16:00:00", label: "16:00:00" },
+    { value: "17:00:00", label: "17:00:00" },
+    { value: "18:00:00", label: "18:00:00" },
+    { value: "19:00:00", label: "19:00:00" },
+    { value: "20:00:00", label: "20:00:00" },
+    { value: "21:00:00", label: "21:00:00" },
+    { value: "22:00:00", label: "22:00:00" },
   ]
 
   window.onload = () => {
@@ -788,6 +907,12 @@ const AppContext = ({ children }) => {
         staffShiftHistory,
         ageRestrictionOption,
         genresOption,
+        getMoviesForSelect,
+        getProvincesForSelect,
+        getCinemaProvincesForSelect,
+        getRoomForSelect,
+        getMovieByID,
+        timeOption
       }}
     >
       {children}

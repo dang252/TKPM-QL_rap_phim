@@ -1,0 +1,46 @@
+.form-wrapper {
+    width: 100%;
+}
+
+.form-wrapper .detail-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.form-wrapper .detail-wrapper .movie-content {
+    width: 186px;
+}
+
+.form-wrapper .detail-wrapper .options-wrapper {
+    width: calc(100% - 186px);
+}
+
+.form-wrapper .detail-wrapper .options-wrapper>* {
+    margin: 10px auto;
+}
+
+.form-wrapper .rdp-caption>* {
+    z-index: 0;
+}
+
+.form-wrapper .input-submit {
+    padding: 10px;
+    background-color: red;
+    color: white;
+    font-size: 18px;
+    border-radius: 7px;
+    border: none;
+    display: block;
+    margin: 10px auto;
+}
+
+@media screen and (max-width: 600px) {
+    .form-wrapper .detail-wrapper {
+        display: block;
+    }
+
+    .form-wrapper .detail-wrapper .options-wrapper {
+        width: 100%;
+    }
+}
