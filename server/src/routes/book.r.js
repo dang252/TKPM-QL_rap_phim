@@ -397,6 +397,8 @@ router.post("/ticket_price", bookController.getTicketPrice);
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/BookDetail'
+ *     '409':
+ *       description: Can't book these seats
  *     '500':
  *       description: Internal server error
  */

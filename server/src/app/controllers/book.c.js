@@ -94,11 +94,15 @@ const bookController = {
         id_food_drink: req.body.id_food_drink,
         start_time: req.body.start_time,
       };
-      await bookModel.bookTickets(book_info);
 
-      const newest_book_info = await bookModel.getNewestBook(req.body.id_user);
+      const rs = await bookModel.bookTickets(book_info);
+      if (!rs) {
+        res.status(409).json("Can't book these seats!");
+      } else {
+        const newest_book_info = await bookModel.getNewestBook(req.body.id_user);
 
-      res.status(200).json(newest_book_info);
+        res.status(200).json(newest_book_info);
+      }
     } catch (error) {
       res.status(500).json(error);
     }

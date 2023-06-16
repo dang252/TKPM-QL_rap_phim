@@ -138,9 +138,15 @@ module.exports = {
   },
   bookTickets: async (bookInfo) => {
     try {
-      const rs = await db.none("INSERT INTO book (id_user, id_seats, id_schedule, id_food_drink, start_time, purchase_date) VALUES ($1, $2, $3, $4, $5, CURRENT_DATE);", [bookInfo.id_user, bookInfo.id_seats, bookInfo.id_schedule, bookInfo.id_food_drink, bookInfo.start_time]);
-      await db.none("UPDATE seats SET status = 1 WHERE id_seat = ANY($1) AND id_schedule = $2 AND time = $3", [bookInfo.id_seats, bookInfo.id_schedule, bookInfo.start_time]);
-      return rs;
+      const check = await db.any("SELECT * FROM book WHERE id_schedule = $1 AND start_time = $2 AND id_seats && $3", [bookInfo.id_schedule, bookInfo.start_time, bookInfo.id_seats]);
+
+      if (check.length == 0) {
+        await db.none("INSERT INTO book (id_user, id_seats, id_schedule, id_food_drink, start_time, purchase_date) VALUES ($1, $2, $3, $4, $5, CURRENT_DATE);", [bookInfo.id_user, bookInfo.id_seats, bookInfo.id_schedule, bookInfo.id_food_drink, bookInfo.start_time]);
+        await db.none("UPDATE seats SET status = 1 WHERE id_seat = ANY($1) AND id_schedule = $2 AND time = $3", [bookInfo.id_seats, bookInfo.id_schedule, bookInfo.start_time]);
+        return true;
+      }
+
+      return false;
     } catch (err) {
       if (err.code === 0) {
         return null;
