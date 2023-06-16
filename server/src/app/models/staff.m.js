@@ -5,9 +5,9 @@ const MAX_STAFF_PER_SHIFT = 5;
 module.exports = {
 
   // get list room
-  getListRoom: async () => {
+  getListRoom: async (id_cinema) => {
     try {
-      return await db.any("SELECT id, name FROM rooms");
+      return await db.any(`SELECT id,name FROM rooms WHERE id_cinemas @> ARRAY[ $1 ];`, [parseInt(id_cinema)]);
     } catch (err) {
       if (err.code === 0) {
         return null;

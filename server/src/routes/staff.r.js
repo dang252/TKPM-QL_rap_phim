@@ -12,10 +12,16 @@ const router = require("express").Router();
 
 /**
  * @swagger
- * /staff/listRoom:
+ * /staff/listRoom?id_cinema={id_cinema}:
  *  get:
  *   summary: get all types of room
  *   tags: [/staff]
+ *   parameters:
+ *     - name: id_cinema
+ *       in: path
+ *       description: cinema's ID
+ *       required: true
+ *       type: integer
  *   security:
  *     - tokenAuth: []
  *   responses:

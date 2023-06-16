@@ -4,7 +4,7 @@ const moviesController = {
   // [GET] /listRoom
   getListRoom: async (req, res) => {
     try {
-      const listRoom = await staffModel.getListRoom();
+      const listRoom = await staffModel.getListRoom(req.query.id_cinema);
 
       res.status(200).json(
         listRoom
