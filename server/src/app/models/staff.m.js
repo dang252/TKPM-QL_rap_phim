@@ -3,6 +3,20 @@ const db = require("../../config/connect_db");
 const MAX_STAFF_PER_SHIFT = 5;
 
 module.exports = {
+
+  // get list room
+  getListRoom: async () => {
+    try {
+      return await db.any("SELECT id, name FROM rooms");
+    } catch (err) {
+      if (err.code === 0) {
+        return null;
+      } else {
+        throw err;
+      }
+    }
+  },
+
   // get list cinema
   getListCinema: async () => {
     try {

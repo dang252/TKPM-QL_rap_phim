@@ -1,6 +1,20 @@
 const staffModel = require("../models/staff.m");
 
 const moviesController = {
+  // [GET] /listRoom
+  getListRoom: async (req, res) => {
+    try {
+      const listRoom = await staffModel.getListRoom();
+
+      res.status(200).json(
+        listRoom
+        // { id, name }
+      );
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
   // [GET] /listCinema
   getListCinema: async (req, res) => {
     try {

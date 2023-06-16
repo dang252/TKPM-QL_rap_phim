@@ -12,6 +12,35 @@ const router = require("express").Router();
 
 /**
  * @swagger
+ * /staff/listRoom:
+ *  get:
+ *   summary: get all types of room
+ *   tags: [/staff]
+ *   security:
+ *     - tokenAuth: []
+ *   responses:
+ *     '200':
+ *       description: get list of cinema successfully
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: array
+ *             items:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: type's id
+ *                 name:
+ *                   type: string
+ *                   description: type's name
+ *     '500':
+ *       description: Internal server error
+ */
+router.get("/listRoom", middlewareController.verifyToken, staffController.getListRoom);
+
+/**
+ * @swagger
  * /staff/listCinema:
  *  get:
  *   summary: get all the cinema
