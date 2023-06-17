@@ -165,10 +165,11 @@ $do$;
 
 -- get booking history
 CREATE OR REPLACE FUNCTION get_booking_history(user_id integer)
-RETURNS TABLE(cinema_name character varying, location character varying, purchase_date timestamp with time zone, title character varying, start_time time without time zone, end_time time without time zone, room_name character varying, seats text[], food_drink text[], total_price double precision) AS $$
+RETURNS TABLE(id_book integer, cinema_name character varying, location character varying, purchase_date timestamp with time zone, title character varying, start_time time without time zone, end_time time without time zone, room_name character varying, seats text[], food_drink text[], total_price double precision) AS $$
 BEGIN
 	RETURN QUERY
-	SELECT	_c.name AS cinema_name,
+	SELECT	_b.id AS id_book,
+			_c.name AS cinema_name,
 			_c.location,
 			_b.purchase_date AT TIME ZONE 'UTC' AT TIME ZONE 'GMT+7' AS purchase_date,
 			_m.title,
@@ -198,6 +199,29 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 -- SELECT * FROM get_booking_history(1);
+
+CREATE OR REPLACE FUNCTION delete_history(f_id_book INTEGER)
+RETURNS BOOLEAN AS $$
+DECLARE
+	f_date 			DATE;
+	f_start_time	TIME WITHOUT TIME ZONE;
+BEGIN
+	SELECT	_s.date, _b.start_time INTO f_date, f_start_time
+	FROM	book _b JOIN schedule _s ON _b.id_schedule = _s.id
+	WHERE	_b.id = f_id_book;
+	
+	IF (f_date > CURRENT_DATE) THEN
+		RETURN FALSE;
+	ELSIF (f_date = CURRENT_DATE AND f_start_time > CURRENT_TIME) THEN
+		RETURN FALSE;
+	END IF;
+	
+	DELETE FROM book WHERE id = f_id_book;
+	
+	RETURN TRUE;
+END;
+$$ LANGUAGE plpgsql;
+-- SELECT delete_history(35) as status
 
 -- add an account to blacklist to test
 -- INSERT INTO blacklist VALUES (1);
