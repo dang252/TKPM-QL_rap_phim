@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
 import Select from "react-select";
-import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import axios from 'axios';
 import { Context } from "../../../context/UserContext";
@@ -32,6 +31,7 @@ const AddScheduleForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const loading = toast.loading("Đang cập nhật...")
         try {
             setSchedule({
                 ...schedule, time: schedule.time.sort((a, b) => {
@@ -52,17 +52,21 @@ const AddScheduleForm = () => {
                     },
                     withCredentials: true,
                 })
-            const MSG = {
-                type: "success",
-                msg: "Đã thêm lịch thành công!"
-            }
             if (rs?.status === 200) {
+                const MSG = {
+                    type: "success",
+                    msg: "Đã thêm lịch thành công!"
+                }
                 localStorage.setItem("UnfulfilledMsg", JSON.stringify(MSG))
                 window.location.reload(false);
             }
         } catch (err) {
-            console.log(err)
-            toast.error("Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!")
+            if (err.message === "Request failed with status code 409") {
+                toast.update(loading, { render: "Lịch thêm đã bị trùng, vui lòng đổi lịch khác ", type: "error", isLoading: false, autoClose: 3000, closeOnClick: true })
+            }
+            else {
+                toast.update(loading, { render: "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!", type: "error", isLoading: false, autoClose: 3000, closeOnClick: true })
+            }
         }
     }
     useEffect(() => {

@@ -9,6 +9,7 @@ import 'react-clock/dist/Clock.css';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import "./AddMovieForm.css"
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const AddMovieForm = () => {
 
@@ -28,6 +29,7 @@ const AddMovieForm = () => {
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
+        const loading = toast.loading("Đang cập nhật...")
         try {
             const user = JSON.parse(localStorage.getItem("user"));
             const rs = await axios.post(
@@ -39,16 +41,16 @@ const AddMovieForm = () => {
                     },
                     withCredentials: true,
                 })
-            const MSG = {
-                type: "success",
-                msg: "Đã thêm phim thành công!"
-            }
             if (rs?.status === 200) {
+                const MSG = {
+                    type: "success",
+                    msg: "Đã thêm phim thành công!"
+                }
                 localStorage.setItem("UnfulfilledMsg", JSON.stringify(MSG))
                 window.location.reload(false);
             }
         } catch (err) {
-            console.log(err)
+            toast.update(loading, { render: "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!", type: "error", isLoading: false, autoClose: 3000, closeOnClick: true })
         }
     }
     return (
