@@ -75,4 +75,12 @@ module.exports = {
       }
     }
   },
+  deleteHistory: async (id_book) => {
+    try {
+      const rs = await db.one("SELECT delete_history($1) as status;", [id_book]);
+      return rs.status;
+    } catch (err) {
+      throw err;
+    }
+  },
 };

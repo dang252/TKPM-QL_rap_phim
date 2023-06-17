@@ -75,6 +75,19 @@ const userController = {
       res.status(500).json(error);
     }
   },
+
+  // [DELETE] /delete_history?id_book={id_book}
+  deleteHistory: async (req, res) => {
+    try {
+      const rs = await userModel.deleteHistory(req.query.id_book);
+      if (!rs) {
+        return res.status(409).json("Can't delete this before the movie screening!");
+      }
+      res.status(200).json("Delete Successfully!");
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
 };
 
 module.exports = userController;

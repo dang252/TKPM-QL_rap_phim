@@ -139,4 +139,28 @@ router.post("/changePassword", middlewareController.verifyToken, userController.
  */
 router.get("/booking_history", middlewareController.verifyToken, userController.getBookingHistory);
 
+/**
+ * @swagger
+ * /user/delete_history?id_book={id_book}:
+ *  delete:
+ *   summary: delete user's booking history
+ *   tags: [/user]
+ *   security:
+ *     - tokenAuth: []
+ *   parameters:
+ *     - name: id_book
+ *       in: path
+ *       description: Book's ID
+ *       required: true
+ *       type: integer
+ *   responses:
+ *     '200':
+ *       description: Delete Successfully!
+ *     '409':
+ *       description: Can't delete this before the movie screening!
+ *     '500':
+ *       description: Internal server error
+ */
+router.delete("/delete_history", middlewareController.verifyToken, userController.deleteHistory);
+
 module.exports = router;
