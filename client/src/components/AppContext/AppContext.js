@@ -484,6 +484,27 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const handleDeleteBookingHistory = async (id_book) => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (user) {
+        const rs = await axios.delete(
+          `http://localhost:5000/user/delete_history?id=${id_book}`,
+          {
+            headers: {
+              token: `Bearer ${user.accessToken}`,
+            },
+          }
+        );
+        if (rs.status === 200) return true;
+      }
+    } catch (error) {
+      console.log("Delete booking history failed:", error.message);
+      return false;
+    }
+  };
+
   const checkIsStaff = () => {
     const user = JSON.parse(localStorage.getItem("user"));
 
@@ -885,6 +906,7 @@ const AppContext = ({ children }) => {
         provinces,
         handleGetSchedule,
         getBookingHistory,
+        handleDeleteBookingHistory,
         bookingHistoryList,
         checkIsStaff,
         getCinemaShift,

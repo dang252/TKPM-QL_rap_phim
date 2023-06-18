@@ -1,18 +1,29 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Pagination } from "react-bootstrap";
+import { Pagination, Modal, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./ProfileBookingHistory.css";
 
 import { Context } from "../../context/UserContext";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ProfileBookingHistory = () => {
-  const { getBookingHistory, bookingHistoryList, getDate } =
-    useContext(Context);
+  const {
+    getBookingHistory,
+    bookingHistoryList,
+    getDate,
+    handleDeleteBookingHistory,
+  } = useContext(Context);
 
   const [active, setActive] = useState(1);
+  const [show, setShow] = useState(false);
   const [bookingHistoryPerPageList, setBookingHistoryListPerPageList] =
     useState([]);
   let items = [];
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   if (bookingHistoryList.length !== 0) {
     for (
@@ -55,6 +66,14 @@ const ProfileBookingHistory = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookingHistoryList]);
 
+  const handleConfirmDeleteBookingHistory = (ticket) => {
+    const checkDelete = handleDeleteBookingHistory(ticket?.id_book);
+    if (checkDelete) {
+      toast.success("Xóa lịch sử thành công");
+      handleClose();
+    } else toast.error("Xóa lịch sử thất bại");
+  };
+
   return (
     <div className="profile-booking-history-container">
       <h4 className="profile-booking-history-title">LỊCH SỬ ĐẶT VÉ</h4>
@@ -74,6 +93,25 @@ const ProfileBookingHistory = () => {
                   padding: "20px 20px",
                 }}
               >
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Thông báo</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>Bạn có muốn xóa lịch sử đặt vé ?</Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Đóng
+                    </Button>
+                    <Button
+                      variant="primary"
+                      onClick={(e) => {
+                        handleConfirmDeleteBookingHistory(ticket);
+                      }}
+                    >
+                      Đồng ý
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
                 <div style={{ display: "flex" }}>
                   <p style={{ fontWeight: "bold" }}>Ngày đặt:</p>
                   <p style={{ marginLeft: "10px" }}>
@@ -136,6 +174,22 @@ const ProfileBookingHistory = () => {
                   <p style={{ marginLeft: "10px", color: "red" }}>
                     {ticket.total_price}đ
                   </p>
+                </div>
+                <div style={{ display: "flex" }}>
+                  <div
+                    style={{
+                      fontSize: "25px",
+                      cursor: "pointer",
+                      marginLeft: "auto",
+                      marginRight: "20px",
+                    }}
+                    onClick={(e) => {
+                      // handleConfirmDeleteBookingHistory(ticket);
+                      handleShow();
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </div>
                 </div>
               </div>
             );
