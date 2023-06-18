@@ -62,6 +62,18 @@ const SeatsPage = () => {
     }
   };
 
+  window.onload = () => {
+    let reloadingBookingTicket = sessionStorage.getItem(
+      "booking_ticket_result"
+    );
+
+    if (reloadingBookingTicket) {
+      window.scrollTo(0, 0);
+      toast.error("Đặt vé thất bại");
+      sessionStorage.removeItem("booking_ticket_result");
+    }
+  };
+
   return (
     <div>
       <SeatsContent

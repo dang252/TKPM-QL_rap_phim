@@ -86,9 +86,9 @@ const AppContext = ({ children }) => {
         localStorage.clear();
         const MSG = {
           type: "success",
-          msg: "Đăng xuất thành công!"
-        }
-        localStorage.setItem("UnfulfilledMsg", JSON.stringify(MSG))
+          msg: "Đăng xuất thành công!",
+        };
+        localStorage.setItem("UnfulfilledMsg", JSON.stringify(MSG));
         navigate("/");
         window.location.reload();
       }
@@ -156,8 +156,8 @@ const AppContext = ({ children }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const rs = await getUserProfile()
-        console.log(rs)
+        const rs = await getUserProfile();
+        console.log(rs);
         if (rs?.status === 200) {
           const data = JSON.parse(localStorage.getItem("user"));
           if (data !== null) {
@@ -165,15 +165,14 @@ const AppContext = ({ children }) => {
             const name = names[names.length - 1];
             setUsername(name);
           }
-        }
-        else {
-          localStorage.removeItem("user")
+        } else {
+          localStorage.removeItem("user");
         }
       } catch (err) {
-        console.log(err.message)
+        console.log(err.message);
       }
-    }
-    getUser()
+    };
+    getUser();
     // const data = JSON.parse(localStorage.getItem("user"));
     // if (data !== null) {
     //   const names = data["name"].split(" ");
@@ -452,9 +451,13 @@ const AppContext = ({ children }) => {
         );
         console.log(rs.data);
         setTicketInfoResult(rs.data);
+        return true;
       }
     } catch (error) {
       console.log("Book ticket:", error.message);
+      sessionStorage.setItem("booking_ticket_result", "false");
+      window.location.reload();
+      return false;
     }
   };
 
@@ -681,12 +684,9 @@ const AppContext = ({ children }) => {
   };
   const getMoviesForSelect = async () => {
     try {
-      const rs = await axios.get(
-        `http://localhost:5000/movies/listMovies`,
-        {
-          withCredentials: true
-        }
-      )
+      const rs = await axios.get(`http://localhost:5000/movies/listMovies`, {
+        withCredentials: true,
+      });
 
       const cloneList = rs.data?.map((movie) => {
         const data = {
@@ -695,17 +695,16 @@ const AppContext = ({ children }) => {
         };
         return data;
       });
-      return cloneList
+      return cloneList;
     } catch (err) {
-      console.log(err.message)
+      console.log(err.message);
     }
-  }
+  };
   const getProvincesForSelect = async () => {
     try {
-      const rs = await axios.get("http://localhost:5000/book/provinces",
-        {
-          withCredentials: true
-        });
+      const rs = await axios.get("http://localhost:5000/book/provinces", {
+        withCredentials: true,
+      });
 
       const cloneList = rs.data?.map((cinema) => {
         const data = {
@@ -723,13 +722,15 @@ const AppContext = ({ children }) => {
 
   const getCinemaProvincesForSelect = async (value) => {
     try {
-      const rs = await axios.post("http://localhost:5000/book/provinces",
+      const rs = await axios.post(
+        "http://localhost:5000/book/provinces",
         {
           province: value.value,
         },
         {
-          withCredentials: true
-        });
+          withCredentials: true,
+        }
+      );
       const cloneList = rs.data?.map((cinema) => {
         const data = {
           value: cinema.id,
@@ -738,7 +739,7 @@ const AppContext = ({ children }) => {
         return data;
       });
 
-      return cloneList
+      return cloneList;
     } catch (error) {
       console.log("Get cinema provinces list failed:", error.message);
     }
@@ -747,13 +748,15 @@ const AppContext = ({ children }) => {
   const getRoomForSelect = async (value) => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
-      const rs = await axios.get(`http://localhost:5000/staff/listRoom?id_cinema=${value.value}`,
+      const rs = await axios.get(
+        `http://localhost:5000/staff/listRoom?id_cinema=${value.value}`,
         {
           headers: {
             token: `Bearer ${user.accessToken}`,
           },
-          withCredentials: true
-        });
+          withCredentials: true,
+        }
+      );
 
       const cloneList = rs.data?.map((room, index) => {
         const data = {
@@ -763,7 +766,7 @@ const AppContext = ({ children }) => {
         return data;
       });
 
-      return cloneList
+      return cloneList;
     } catch (error) {
       console.log("Get room list failed:", error.message);
     }
@@ -774,34 +777,36 @@ const AppContext = ({ children }) => {
         `http://localhost:5000/movies/detail?id=${id}`
       );
       const data = await rs?.data;
-      return data
+      return data;
     } catch (error) {
       console.log("Get detail movie failed:", error.message);
     }
   };
 
   //danh sách các thể loại phim,
-  const genresOption = [{ value: 1, label: "Hành động" },
-  { value: 2, label: "Tội phạm" },
-  { value: 3, label: "Hài" },
-  { value: 4, label: "Hồi hộp" },
-  { value: 5, label: "Tâm lý" },
-  { value: 6, label: "Phiêu lưu" },
-  { value: 7, label: "Thần thoại" },
-  { value: 8, label: "Bí ẩn" },
-  { value: 9, label: "Kinh dị" },
-  { value: 10, label: "Hoạt hình" },
-  { value: 11, label: "Gia đình" },
-  { value: 12, label: "Tình cảm" },
-  { value: 13, label: "Huyền thoại" },
-  { value: 14, label: "Khoa học viễn tưởng" }]
+  const genresOption = [
+    { value: 1, label: "Hành động" },
+    { value: 2, label: "Tội phạm" },
+    { value: 3, label: "Hài" },
+    { value: 4, label: "Hồi hộp" },
+    { value: 5, label: "Tâm lý" },
+    { value: 6, label: "Phiêu lưu" },
+    { value: 7, label: "Thần thoại" },
+    { value: 8, label: "Bí ẩn" },
+    { value: 9, label: "Kinh dị" },
+    { value: 10, label: "Hoạt hình" },
+    { value: 11, label: "Gia đình" },
+    { value: 12, label: "Tình cảm" },
+    { value: 13, label: "Huyền thoại" },
+    { value: 14, label: "Khoa học viễn tưởng" },
+  ];
 
   //Một số độ tuổi bị giới hạn, dùng trong việc render trong các form tạo phim mới
   const ageRestrictionOption = [
     { value: 0, label: "Không giới hạn" },
     { value: 16, label: "Trên 16 tuổi" },
     { value: 18, label: "Trên 18 tuổi" },
-  ]
+  ];
 
   const timeOption = [
     { value: "08:00:00", label: "08:00:00" },
@@ -819,21 +824,20 @@ const AppContext = ({ children }) => {
     { value: "20:00:00", label: "20:00:00" },
     { value: "21:00:00", label: "21:00:00" },
     { value: "22:00:00", label: "22:00:00" },
-  ]
+  ];
 
   window.onload = () => {
-    let MSG = JSON.parse(localStorage.getItem("UnfulfilledMsg"))
-    console.log(MSG)
+    let MSG = JSON.parse(localStorage.getItem("UnfulfilledMsg"));
+    console.log(MSG);
     if (MSG) {
       if (MSG.type === "success") {
         toast.success(MSG.msg);
+      } else if (MSG.type === "err") {
+        toast.error(MSG.msg);
       }
-      else if (MSG.type === "err") {
-        toast.error(MSG.msg)
-      }
-      localStorage.removeItem("UnfulfilledMsg")
+      localStorage.removeItem("UnfulfilledMsg");
     }
-  }
+  };
 
   return (
     <Context.Provider
@@ -912,7 +916,7 @@ const AppContext = ({ children }) => {
         getCinemaProvincesForSelect,
         getRoomForSelect,
         getMovieByID,
-        timeOption
+        timeOption,
       }}
     >
       {children}

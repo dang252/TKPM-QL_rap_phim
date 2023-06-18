@@ -45,9 +45,12 @@ const BookingFooter = (props) => {
     navigate(prevUrl);
   };
 
-  const handleConfirmPayment = () => {
-    handleBookTicket(paramsIdSchedule, paramsTime);
-    navigate(nextUrl);
+  const handleConfirmPayment = async () => {
+    const checkBookingSuccess = await handleBookTicket(
+      paramsIdSchedule,
+      paramsTime
+    );
+    if (checkBookingSuccess) navigate(nextUrl);
   };
 
   const handleNextPage = () => {
