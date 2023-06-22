@@ -3,6 +3,7 @@ import TimePicker from 'react-time-picker';
 import Select from "react-select";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Context } from "../../../context/UserContext";
+import { Modal, Button } from "react-bootstrap";
 
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
@@ -27,8 +28,8 @@ const AddMovieForm = () => {
 
     const { genresOption, ageRestrictionOption } = useContext(Context)
 
-    const handleOnSubmit = async (e) => {
-        e.preventDefault();
+    const handleOnSubmit = async () => {
+        // e.preventDefault();
         const loading = toast.loading("Đang cập nhật...")
         try {
             const user = JSON.parse(localStorage.getItem("user"));
@@ -53,8 +54,33 @@ const AddMovieForm = () => {
             toast.update(loading, { render: "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!", type: "error", isLoading: false, autoClose: 3000, closeOnClick: true })
         }
     }
+
+    const [show, setShow] = useState(false)
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
-        <form className='add-movie-form' onSubmit={(e) => { handleOnSubmit(e) }}>
+        <form className='add-movie-form' onSubmit={(e) => {
+            e.preventDefault()
+            handleShow()
+        }}>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Xác nhận</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Bạn chắc chắn muốn thêm phim vào danh sách?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Không
+                    </Button>
+                    <Button variant="primary" onClick={() => {
+                        handleClose()
+                        handleOnSubmit()
+                    }}>
+                        Thêm phim
+                    </Button>
+                </Modal.Footer>
+            </Modal>
             <div className='upper-form-wrapper'>
                 <div className='form-left'>
                     <label>Tên phim: </label>

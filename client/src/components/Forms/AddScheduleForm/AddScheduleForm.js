@@ -3,6 +3,8 @@ import Select from "react-select";
 import { DayPicker } from 'react-day-picker';
 import axios from 'axios';
 import { Context } from "../../../context/UserContext";
+import { Modal, Button } from 'react-bootstrap';
+
 import SummaryMovieDetail from '../../SummaryMovieDetail/SummaryMovieDetail';
 
 import 'react-day-picker/dist/style.css';
@@ -30,7 +32,7 @@ const AddScheduleForm = () => {
     })
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         const loading = toast.loading("Đang cập nhật...")
         try {
             setSchedule({
@@ -74,10 +76,34 @@ const AddScheduleForm = () => {
         getProvincesForSelect().then((rs) => { setProvinces(rs) })
     }, [getMoviesForSelect, getProvincesForSelect])
 
+    const [show, setShow] = useState(false)
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     // useEffect()
     return (
         <div className='form-wrapper'>
-            <form onSubmit={(e) => { handleSubmit(e) }}>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Xác nhận</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Bạn chắc chắn muốn thêm lịch chiếu phim?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Không
+                    </Button>
+                    <Button variant="primary" onClick={() => {
+                        handleClose()
+                        handleSubmit()
+                    }}>
+                        Thêm lịch
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                handleShow()
+            }}>
                 <Select
                     options={movies}
                     onChange={(movie) => {
