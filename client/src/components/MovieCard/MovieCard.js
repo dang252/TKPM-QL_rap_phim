@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
 const MovieCard = (props) => {
+  const todate = new Date().toISOString()
+  console.log(props.movie.title, " ", props.movie.release_date, " ", todate, " ", props.movie.release_date <= todate)
   const { getDate, handleGetTicketInfo, openModal } = useContext(Context);
   return (
     <div className="movie-card">
@@ -24,18 +26,22 @@ const MovieCard = (props) => {
       <p className="movie-discription">
         Khởi chiếu: {getDate(props.movie.release_date)}
       </p>
-      <div
-        className="booking-button"
-        onClick={(e) => {
-          handleGetTicketInfo(props.movie.id);
-          openModal();
-        }}
-      >
-        <div>
-          <FontAwesomeIcon icon={faPhone} />
-          <span>MUA VÉ</span>
+      {
+        props.movie.release_date <= todate &&
+        <div
+          className="booking-button"
+          onClick={(e) => {
+            handleGetTicketInfo(props.movie.id);
+            openModal();
+          }}
+        >
+          <div>
+            <FontAwesomeIcon icon={faPhone} />
+            <span>MUA VÉ</span>
+          </div>
         </div>
-      </div>
+      }
+
     </div>
   );
 };

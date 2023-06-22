@@ -57,7 +57,7 @@ const DetailMovieContent = (props) => {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
-
+  const todate = new Date().toISOString()
   return (
     <div className="detail-movie-container">
       <p className="detail-movie-title">Nội Dung Phim</p>
@@ -157,35 +157,38 @@ const DetailMovieContent = (props) => {
                       }}
                     />
                   )}
-                  <div style={{ textDecoration: "none" }}>
-                    <div
-                      style={{
-                        fontSize: "18px",
-                        width: "150px",
-                        height: "50px",
-                        color: "#fff",
-                        backgroundColor: "#e71a0f",
-                        marginTop: "50px",
-                        marginLeft: "50px",
-                        border: 0,
-                        borderRadius: "5px",
-                        display: "flex",
-                        justifyContent: "center",
-                        cursor: "pointer",
-                      }}
-                      onClick={(e) => {
-                        handleGetTicketInfo(detailMovie.id);
-                        openModal();
-                      }}
-                    >
-                      <p style={{ lineHeight: "50px" }}>
-                        <FontAwesomeIcon icon={faTicket} />
-                      </p>
-                      <p style={{ lineHeight: "50px", marginLeft: "15px" }}>
-                        MUA VÉ
-                      </p>
+                  {
+                    detailMovie.release_date <= todate &&
+                    <div style={{ textDecoration: "none" }}>
+                      <div
+                        style={{
+                          fontSize: "18px",
+                          width: "150px",
+                          height: "50px",
+                          color: "#fff",
+                          backgroundColor: "#e71a0f",
+                          marginTop: "50px",
+                          marginLeft: "50px",
+                          border: 0,
+                          borderRadius: "5px",
+                          display: "flex",
+                          justifyContent: "center",
+                          cursor: "pointer",
+                        }}
+                        onClick={(e) => {
+                          handleGetTicketInfo(detailMovie.id);
+                          openModal();
+                        }}
+                      >
+                        <p style={{ lineHeight: "50px" }}>
+                          <FontAwesomeIcon icon={faTicket} />
+                        </p>
+                        <p style={{ lineHeight: "50px", marginLeft: "15px" }}>
+                          MUA VÉ
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  }
                 </div>
               </div>
             </div>
