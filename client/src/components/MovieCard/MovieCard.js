@@ -7,7 +7,7 @@ import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
 const MovieCard = (props) => {
   const todate = new Date().toISOString()
-  console.log(props.movie.title, " ", props.movie.release_date, " ", todate, " ", props.movie.release_date <= todate)
+  // console.log(props.movie.title, " ", props.movie.release_date, " ", todate, " ", props.movie.release_date <= todate)
   const { getDate, handleGetTicketInfo, openModal } = useContext(Context);
   return (
     <div className="movie-card">

@@ -490,18 +490,20 @@ const AppContext = ({ children }) => {
 
       if (user) {
         const rs = await axios.delete(
-          `http://localhost:5000/user/delete_history?id=${id_book}`,
+          `http://localhost:5000/user/delete_history?id_book=${id_book}`,
+          // `http://localhost:5000/user/delete_history?id=${id_book}`,
           {
             headers: {
               token: `Bearer ${user.accessToken}`,
             },
           }
         );
-        if (rs.status === 200) return true;
+        if (rs.status === 200) return rs.status;
       }
     } catch (error) {
       console.log("Delete booking history failed:", error.message);
-      return false;
+      return error.response.status
+
     }
   };
 

@@ -7,6 +7,7 @@ import "./ProfileBookingHistory.css";
 import { Context } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+var ticketInfo = {};
 
 const ProfileBookingHistory = () => {
   const {
@@ -15,7 +16,7 @@ const ProfileBookingHistory = () => {
     getDate,
     handleDeleteBookingHistory,
   } = useContext(Context);
-
+  console.log(bookingHistoryList)
   const [active, setActive] = useState(1);
   const [show, setShow] = useState(false);
   const [bookingHistoryPerPageList, setBookingHistoryListPerPageList] =
@@ -23,7 +24,10 @@ const ProfileBookingHistory = () => {
   let items = [];
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (ticket) => {
+    ticketInfo = ticket
+    setShow(true);
+  }
 
   if (bookingHistoryList.length !== 0) {
     for (
@@ -67,15 +71,46 @@ const ProfileBookingHistory = () => {
   }, [bookingHistoryList]);
 
   const handleConfirmDeleteBookingHistory = (ticket) => {
-    const checkDelete = handleDeleteBookingHistory(ticket?.id_book);
-    if (checkDelete) {
-      toast.success("Xóa lịch sử thành công");
-      handleClose();
-    } else toast.error("Xóa lịch sử thất bại");
+    // const checkDelete = handleDeleteBookingHistory(ticket?.id_book);
+    // if (checkDelete) {
+    //   toast.success("Xóa lịch sử thành công");
+    //   handleClose();
+    // } else toast.error("Xóa lịch sử thất bại");
+    handleDeleteBookingHistory(ticket?.id_book).then((checkDelete) => {
+      // console.log(checkDelete)
+      if (checkDelete === 200) {
+        toast.success("Xóa lịch sử thành công");
+        getBookingHistory();
+      } else if (checkDelete === 409) {
+        toast.error("Xóa lịch sử thất bại: bạn không thể xóa lịch sử của xuất phim chưa chiếu!");
+      } else if (checkDelete === 500) {
+        toast.error("Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!");
+      }
+    })
   };
 
   return (
     <div className="profile-booking-history-container">
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Thông báo</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Bạn có muốn xóa lịch sử đặt vé ?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Đóng
+          </Button>
+          <Button
+            variant="primary"
+            onClick={(e) => {
+              handleConfirmDeleteBookingHistory(ticketInfo);
+              handleClose()
+            }}
+          >
+            Đồng ý
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <h4 className="profile-booking-history-title">LỊCH SỬ ĐẶT VÉ</h4>
       <p className="profile-booking-history-subtitle">
         Tra cứu & quản lý lịch sử đặt vé
@@ -93,7 +128,7 @@ const ProfileBookingHistory = () => {
                   padding: "20px 20px",
                 }}
               >
-                <Modal show={show} onHide={handleClose}>
+                {/* <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
                     <Modal.Title>Thông báo</Modal.Title>
                   </Modal.Header>
@@ -106,12 +141,13 @@ const ProfileBookingHistory = () => {
                       variant="primary"
                       onClick={(e) => {
                         handleConfirmDeleteBookingHistory(ticket);
+                        handleClose()
                       }}
                     >
                       Đồng ý
                     </Button>
                   </Modal.Footer>
-                </Modal>
+                </Modal> */}
                 <div style={{ display: "flex" }}>
                   <p style={{ fontWeight: "bold" }}>Ngày đặt:</p>
                   <p style={{ marginLeft: "10px" }}>
@@ -185,7 +221,7 @@ const ProfileBookingHistory = () => {
                     }}
                     onClick={(e) => {
                       // handleConfirmDeleteBookingHistory(ticket);
-                      handleShow();
+                      handleShow(ticket);
                     }}
                   >
                     <FontAwesomeIcon icon={faTrash} />
