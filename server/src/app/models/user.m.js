@@ -83,4 +83,11 @@ module.exports = {
       throw err;
     }
   },
+  deleteAccount: async (id_user) => {
+    try {
+      await db.none("DELETE FROM users WHERE id = $1;", [id_user]);
+    } catch (err) {
+      throw err;
+    }
+  },
 };

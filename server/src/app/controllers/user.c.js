@@ -88,6 +88,28 @@ const userController = {
       res.status(500).json(error);
     }
   },
+
+  // [DELETE] /delete_account?id_user={id_user}&password={password}
+  deleteAccount: async (req, res) => {
+    try {
+      // get user by id
+      console.log(req.query.id_user, typeof req.query.id_user, req.query.password, typeof req.query.password);
+      const user = await userModel.getUserByID(req.query.id_user);
+
+      // check password
+      const validPassword = await bcrypt.compare(req.query.password, user.password);
+
+      // send response
+      if (!validPassword) {
+        return res.status(401).json("Wrong Password!");
+      } else {
+        await userModel.deleteAccount(req.query.id_user, req.query.password);
+        return res.status(200).json("Delete Successfully!");
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
 };
 
 module.exports = userController;

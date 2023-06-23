@@ -163,4 +163,33 @@ router.get("/booking_history", middlewareController.verifyToken, userController.
  */
 router.delete("/delete_history", middlewareController.verifyToken, userController.deleteHistory);
 
+/**
+ * @swagger
+ * /user/delete_account?id_user={id_user}&password={password}:
+ *  delete:
+ *   summary: delete user's booking history
+ *   tags: [/user]
+ *   security:
+ *     - tokenAuth: []
+ *   parameters:
+ *     - name: id_user
+ *       in: path
+ *       description: User's ID
+ *       required: true
+ *       type: integer
+ *     - name: password
+ *       in: path
+ *       description: User's password
+ *       required: true
+ *       type: string
+ *   responses:
+ *     '200':
+ *       description: Delete Successfully!
+ *     '401':
+ *       description: Wrong password!
+ *     '500':
+ *       description: Internal server error
+ */
+router.delete("/delete_account", middlewareController.verifyToken, userController.deleteAccount);
+
 module.exports = router;
