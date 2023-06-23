@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react'
-import axios from 'axios';
+import React from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
 
 import "./ProfileAddMovies.css"

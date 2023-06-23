@@ -1,0 +1,48 @@
+.delete-account-form {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-account-form .caution {
+    text-align: center;
+    padding: 0 20px;
+}
+
+.delete-account-form .caution h2 {
+    color: red;
+    font-weight: bold;
+}
+
+
+.delete-account-form .input-text-field {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #bdbdbd;
+    /* margin: auto;
+    display: block; */
+}
+
+.delete-account-form label {
+    display: block;
+    /* width: fit-content;
+    margin: auto; */
+}
+
+.delete-account-form .err-msg {
+    color: red;
+}
+
+.delete-account-form .input-submit {
+    min-width: 100px;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    font-size: 18px;
+    border-radius: 7px;
+    border: none;
+    display: block;
+    margin: 10px auto;
+}

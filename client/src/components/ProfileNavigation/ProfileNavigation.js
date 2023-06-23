@@ -9,6 +9,7 @@ import {
   faTicket,
   faBriefcase,
   faFilm,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import "./ProfileNavigation.css";
 
@@ -69,10 +70,10 @@ const ProfileNavigation = (props) => {
     }
     let MSG = JSON.parse(localStorage.getItem("UnfulfilledMsg"))
     if (MSG) {
-      if(MSG.type === "success") {
+      if (MSG.type === "success") {
         toast.success(MSG.msg);
       }
-      else if(MSG.type === "err") {
+      else if (MSG.type === "err") {
         toast.error(MSG.msg)
       }
       localStorage.removeItem("UnfulfilledMsg")
@@ -95,9 +96,8 @@ const ProfileNavigation = (props) => {
       </div>
       <div className="profile-nav-main">
         <div
-          className={`profile-main-category ${
-            activeNav === "detail" && "active"
-          }`}
+          className={`profile-main-category ${activeNav === "detail" && "active"
+            }`}
           onClick={(e) => {
             handleChangeProfileNav("detail");
             setActiveNav("detail");
@@ -109,9 +109,8 @@ const ProfileNavigation = (props) => {
           <p>Tài khoản của tôi</p>
         </div>
         <div
-          className={`profile-main-category ${
-            activeNav === "edit" && "active"
-          }`}
+          className={`profile-main-category ${activeNav === "edit" && "active"
+            }`}
           onClick={(e) => {
             handleChangeProfileNav("edit");
             setActiveNav("edit");
@@ -123,9 +122,8 @@ const ProfileNavigation = (props) => {
           <p>Chỉnh sửa tài khoản</p>
         </div>
         <div
-          className={`profile-main-category ${
-            activeNav === "changepassword" && "active"
-          }`}
+          className={`profile-main-category ${activeNav === "changepassword" && "active"
+            }`}
           onClick={(e) => {
             handleChangeProfileNav("changepassword");
             setActiveNav("changepassword");
@@ -137,9 +135,8 @@ const ProfileNavigation = (props) => {
           <p>Đổi mật khẩu</p>
         </div>
         <div
-          className={`profile-main-category ${
-            activeNav === "bookinghistory" && "active"
-          }`}
+          className={`profile-main-category ${activeNav === "bookinghistory" && "active"
+            }`}
           onClick={(e) => {
             handleChangeProfileNav("bookinghistory");
             setActiveNav("bookinghistory");
@@ -152,36 +149,47 @@ const ProfileNavigation = (props) => {
         </div>
         {checkIsStaff() && (
           <>
-          <div
-            className={`profile-main-category ${
-              activeNav === "shift" && "active"
-            }`}
-            onClick={(e) => {
-              handleChangeProfileNav("shift");
-              setActiveNav("shift");
-            }}
-          >
-            <p>
-              <FontAwesomeIcon icon={faBriefcase} />
-            </p>
-            <p>Quản lý lịch làm việc</p>
-          </div>
-          <div
-            className={`profile-main-category ${
-              activeNav === "addmovies" && "active"
-            }`}
-            onClick={(e) => {
-              handleChangeProfileNav("addmovies");
-              setActiveNav("addmovies");
-            }}
-          >
-            <p>
-              <FontAwesomeIcon icon={faFilm} />
-            </p>
-            <p>Thêm lịch chiếu</p>
-          </div>
+            <div
+              className={`profile-main-category ${activeNav === "shift" && "active"
+                }`}
+              onClick={(e) => {
+                handleChangeProfileNav("shift");
+                setActiveNav("shift");
+              }}
+            >
+              <p>
+                <FontAwesomeIcon icon={faBriefcase} />
+              </p>
+              <p>Quản lý lịch làm việc</p>
+            </div>
+            <div
+              className={`profile-main-category ${activeNav === "addmovies" && "active"
+                }`}
+              onClick={(e) => {
+                handleChangeProfileNav("addmovies");
+                setActiveNav("addmovies");
+              }}
+            >
+              <p>
+                <FontAwesomeIcon icon={faFilm} />
+              </p>
+              <p>Thêm lịch chiếu</p>
+            </div>
           </>
         )}
+        <div
+          className={`profile-main-category ${activeNav === "deleteaccount" && "active"
+            }`}
+          onClick={(e) => {
+            handleChangeProfileNav("deleteaccount");
+            setActiveNav("deleteaccount");
+          }}
+        >
+          <p>
+            <FontAwesomeIcon icon={faTrash} />
+          </p>
+          <p>Xóa tài khoản</p>
+        </div>
       </div>
     </div>
   );

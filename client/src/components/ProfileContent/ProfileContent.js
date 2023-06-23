@@ -10,6 +10,7 @@ import ProfileChangePassword from "../ProfileChangePassword/ProfileChangePasswor
 import ProfileBookingHistory from "../ProfileBookingHistory/ProfileBookingHistory";
 import ProfileShift from "../ProfileShift/ProfileShift";
 import ProfileAddMovies from "../ProfileAddMovies/ProfileAddMovies";
+import ProfileDeleteAccount from "../ProfileDeleteAccount/ProfileDeleteAccount";
 
 const ProfileContent = () => {
   const { getUserProfile, navigateUrl, handleChangeProfileNav } =
@@ -53,7 +54,8 @@ const ProfileContent = () => {
         {navigateUrl === "changepassword" && <ProfileChangePassword />}
         {navigateUrl === "bookinghistory" && <ProfileBookingHistory />}
         {navigateUrl === "shift" && <ProfileShift />}
-        {navigateUrl === "addmovies" && <ProfileAddMovies/>}
+        {navigateUrl === "addmovies" && <ProfileAddMovies />}
+        {navigateUrl === "deleteaccount" && <ProfileDeleteAccount />}
       </div>
     </div>
   );
