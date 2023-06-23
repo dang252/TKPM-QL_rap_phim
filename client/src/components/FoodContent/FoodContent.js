@@ -16,12 +16,14 @@ const FoodContent = (props) => {
   const paramsTime = searchParams.get("time");
   const paramsIdMovie = searchParams.get("id_movie");
   const paramsIdRoom = searchParams.get("id_room");
+  const paramsRoomName = searchParams.get("room");
 
   return (
     <div className="food-content-container">
       <p className="food-content-title">BOOKING ONLINE</p>
       <p className="food-content-subtitle">
-        {paramsCinemaName} | Cinemas {paramsIdRoom}
+        {/* {paramsCinemaName} | Cinemas {paramsIdRoom} */}
+        {paramsCinemaName} | {paramsRoomName}
       </p>
       <p className="food-content-subtitle-2">Bắp Nước</p>
       <div
@@ -64,10 +66,12 @@ const FoodContent = (props) => {
         seatsPickList={seatsPickList}
         paramsTime={paramsTime}
         paramsCinemaName={paramsCinemaName}
+        paramsRoomName={paramsRoomName}
+        paramsIdRoom={paramsIdRoom}
         paramsIdSchedule={paramsIdSchedule}
         detailMovie={detailMovie}
-        prevUrl={`/book/seats?id_movie=${paramsIdMovie}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`}
-        nextUrl={`/book/payment?id_movie=${detailMovie.id}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`}
+        prevUrl={`/book/seats?id_movie=${paramsIdMovie}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&room=${paramsRoomName}&time=${paramsTime}`}
+        nextUrl={`/book/payment?id_movie=${detailMovie.id}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&room=${paramsRoomName}&time=${paramsTime}`}
       />
     </div>
   );

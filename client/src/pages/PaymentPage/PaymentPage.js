@@ -15,6 +15,7 @@ const PaymentPage = () => {
   const paramsIdMovie = searchParams.get("id_movie");
   const paramsIdRoom = searchParams.get("id_room");
   const paramsCinemaName = searchParams.get("name");
+  const paramsRoomName = searchParams.get("room");
   const paramsTime = searchParams.get("time");
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const PaymentPage = () => {
   useEffect(() => {
     if (seatsPickList.length === 0) {
       navigate(
-        `/book/seats?id_movie=${paramsIdMovie}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`
+        `/book/seats?id_movie=${paramsIdMovie}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}$room=${paramsRoomName}&time=${paramsTime}`
       );
     }
   }, [
@@ -34,6 +35,7 @@ const PaymentPage = () => {
     paramsIdRoom,
     paramsIdSchedule,
     paramsCinemaName,
+    paramsRoomName,
     paramsTime,
   ]);
 
@@ -48,6 +50,7 @@ const PaymentPage = () => {
         ticketPrice={ticketPrice}
         paramsTime={paramsTime}
         paramsCinemaName={paramsCinemaName}
+        paramsRoomName={paramsRoomName}
         paramsIdSchedule={paramsIdSchedule}
         paramsIdRoom={paramsIdRoom}
       />

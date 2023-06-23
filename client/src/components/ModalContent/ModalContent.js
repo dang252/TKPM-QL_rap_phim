@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom";
 import "./ModalContent.css";
 
 const ModalContent = () => {
-  
+
   const [dateOption, setDateOption] = useState(0);
   const [provinceOption, setProvinceOption] = useState(0);
   const [cinemas, setCinemas] = useState([]);
-  const { ticketInfo, dates, provinces, DayOfWeeks  } = useContext(Context);
+  const { ticketInfo, dates, provinces, DayOfWeeks } = useContext(Context);
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -19,11 +19,11 @@ const ModalContent = () => {
   //   GetProvince();
   // }, [dateOption, GetProvince]);
 
-  const handleGetSchedule = (ticketInfo, id_room, id, cinema_name, tm) => {
+  const handleGetSchedule = (ticketInfo, id_room, id, cinema_name, room_name, tm) => {
     const user = localStorage.getItem("user");
     if (user)
       navigate(
-        `/book/seats?id_movie=${ticketInfo}&id_room=${id_room}&id_schedule=${id}&name=${cinema_name}&time=${tm}`
+        `/book/seats?id_movie=${ticketInfo}&id_room=${id_room}&id_schedule=${id}&name=${cinema_name}&room=${room_name}&time=${tm}`
       );
     else navigate("/login");
   };
@@ -32,9 +32,9 @@ const ModalContent = () => {
     const GetCinemasSchedule = async () => {
       try {
         let today = new Date();
-        let dayStr = dates[dateOption] != null 
-        ? (dates[dateOption].getYear() + 1900) + "-" +  (("0" + (dates[dateOption].getMonth() + 1)).slice(-2)) +  "-" + ("0" + dates[dateOption].getDate()).slice(-2)
-        : (today.getYear() + 1900) +  "-" +  (("0" + (today.getMonth()+1)).slice(-2)) +  "-" + today.getDate() 
+        let dayStr = dates[dateOption] != null
+          ? (dates[dateOption].getYear() + 1900) + "-" + (("0" + (dates[dateOption].getMonth() + 1)).slice(-2)) + "-" + ("0" + dates[dateOption].getDate()).slice(-2)
+          : (today.getYear() + 1900) + "-" + (("0" + (today.getMonth() + 1)).slice(-2)) + "-" + today.getDate()
         const response = await axios.post(
           `http://localhost:5000/book/schedule`,
           {
@@ -93,7 +93,7 @@ const ModalContent = () => {
         //     pre_id_cinema = info.id_cinema;
         //     pre_id_room = info.id_room;
         //   });
-          // setCinemas(data2)
+        // setCinemas(data2)
         // }
         setCinemas(data);
       } catch (err) {
@@ -179,6 +179,7 @@ const ModalContent = () => {
                             cinema.id_room,
                             cinema.id,
                             cinema.cinema_name,
+                            cinema.room_name,
                             tm
                           );
                         }}

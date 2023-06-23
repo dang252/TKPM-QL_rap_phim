@@ -15,6 +15,7 @@ const FoodPage = () => {
   const paramsIdSchedule = searchParams.get("id_schedule");
   const paramsIdMovie = searchParams.get("id_movie");
   const paramsCinemaName = searchParams.get("name");
+  const paramsRoomName = searchParams.get("room");
   const paramsTime = searchParams.get("time");
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const FoodPage = () => {
   useEffect(() => {
     if (seatsPickList.length === 0) {
       navigate(
-        `/book/seats?id_movie=${paramsIdMovie}&id_movie=${paramsIdMovie}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`
+        `/book/seats?id_movie=${paramsIdMovie}&id_movie=${paramsIdMovie}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}$room=${paramsRoomName}&time=${paramsTime}`
       );
     }
   }, [
@@ -35,6 +36,7 @@ const FoodPage = () => {
     paramsIdMovie,
     paramsIdSchedule,
     paramsCinemaName,
+    paramsRoomName,
     paramsTime,
   ]);
 

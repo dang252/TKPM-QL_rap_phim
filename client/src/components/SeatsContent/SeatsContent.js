@@ -27,6 +27,7 @@ const SeatsContent = (props) => {
     paramsIdSchedule,
     paramsIdRoom,
     paramsCinemaName,
+    paramsRoomName,
     detailMovie,
     paramsTime,
   } = props;
@@ -78,7 +79,8 @@ const SeatsContent = (props) => {
     <div className="seats-container">
       <p className="seats-title">BOOKING ONLINE</p>
       <p className="seats-subtitle">
-        {paramsCinemaName} | Cinemas {paramsIdRoom}
+        {/* {paramsCinemaName} | Cinemas {paramsIdRoom} */}
+        {paramsCinemaName} | {paramsRoomName}
       </p>
       <p className="seats-subtitle-2">Người / Ghế</p>
       <Modal show={show} onHide={handleClose}>
@@ -124,11 +126,10 @@ const SeatsContent = (props) => {
               return (
                 <div
                   key={seat}
-                  className={`${
-                    targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
-                      ? "choose seat"
-                      : "seat"
-                  }
+                  className={`${targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
+                    ? "choose seat"
+                    : "seat"
+                    }
                   ${targetSeat.status === 1 ? "picked" : ""}
                   ${targetSeat.status === -1 ? "ban" : ""}`}
                   onClick={(e) => {
@@ -150,11 +151,10 @@ const SeatsContent = (props) => {
               return (
                 <div
                   key={seat}
-                  className={`${
-                    targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
-                      ? "choose seat"
-                      : "seat"
-                  }
+                  className={`${targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
+                    ? "choose seat"
+                    : "seat"
+                    }
                   ${targetSeat.status === 1 ? "picked" : ""}
                   ${targetSeat.status === -1 ? "ban" : ""}`}
                   onClick={(e) => {
@@ -173,11 +173,10 @@ const SeatsContent = (props) => {
               return (
                 <div
                   key={seat}
-                  className={`${
-                    targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
-                      ? "choose seat"
-                      : "seat"
-                  }
+                  className={`${targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
+                    ? "choose seat"
+                    : "seat"
+                    }
                   ${targetSeat.status === 1 ? "picked" : ""}
                   ${targetSeat.status === -1 ? "ban" : ""}`}
                   onClick={(e) => {
@@ -199,11 +198,10 @@ const SeatsContent = (props) => {
               return (
                 <div
                   key={seat}
-                  className={`${
-                    targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
-                      ? "choose seat"
-                      : "seat"
-                  }
+                  className={`${targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
+                    ? "choose seat"
+                    : "seat"
+                    }
                   ${targetSeat.status === 1 ? "picked" : ""}
                   ${targetSeat.status === -1 ? "ban" : ""}`}
                   onClick={(e) => {
@@ -222,11 +220,10 @@ const SeatsContent = (props) => {
               return (
                 <div
                   key={seat}
-                  className={`${
-                    targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
-                      ? "choose seat"
-                      : "seat"
-                  }
+                  className={`${targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
+                    ? "choose seat"
+                    : "seat"
+                    }
                   ${targetSeat.status === 1 ? "picked" : ""}
                   ${targetSeat.status === -1 ? "ban" : ""}`}
                   onClick={(e) => {
@@ -246,11 +243,10 @@ const SeatsContent = (props) => {
               return (
                 <div
                   key={seat}
-                  className={`${
-                    targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
-                      ? "choose seat"
-                      : "seat"
-                  }
+                  className={`${targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
+                    ? "choose seat"
+                    : "seat"
+                    }
                   ${targetSeat.status === 1 ? "picked" : ""}
                   ${targetSeat.status === -1 ? "ban" : ""}`}
                   onClick={(e) => {
@@ -269,11 +265,10 @@ const SeatsContent = (props) => {
               return (
                 <div
                   key={seat}
-                  className={`${
-                    targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
-                      ? "choose seat"
-                      : "seat"
-                  }
+                  className={`${targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
+                    ? "choose seat"
+                    : "seat"
+                    }
                   ${targetSeat.status === 1 ? "picked" : ""}
                   ${targetSeat.status === -1 ? "ban" : ""}`}
                   onClick={(e) => {
@@ -292,11 +287,10 @@ const SeatsContent = (props) => {
               return (
                 <div
                   key={seat}
-                  className={`${
-                    targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
-                      ? "choose seat"
-                      : "seat"
-                  }
+                  className={`${targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
+                    ? "choose seat"
+                    : "seat"
+                    }
                   ${targetSeat.status === 1 ? "picked" : ""}
                   ${targetSeat.status === -1 ? "ban" : ""}`}
                   onClick={(e) => {
@@ -315,11 +309,10 @@ const SeatsContent = (props) => {
               return (
                 <div
                   key={seat}
-                  className={`${
-                    targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
-                      ? "choose seat"
-                      : "seat"
-                  }
+                  className={`${targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
+                    ? "choose seat"
+                    : "seat"
+                    }
                   ${targetSeat.status === 1 ? "picked" : ""}
                   ${targetSeat.status === -1 ? "ban" : ""}`}
                   onClick={(e) => {
@@ -338,11 +331,10 @@ const SeatsContent = (props) => {
               return (
                 <div
                   key={seat}
-                  className={`${
-                    targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
-                      ? "choose seat"
-                      : "seat"
-                  }
+                  className={`${targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
+                    ? "choose seat"
+                    : "seat"
+                    }
                   ${targetSeat.status === 1 ? "picked" : ""}
                   ${targetSeat.status === -1 ? "ban" : ""}`}
                   onClick={(e) => {
@@ -361,11 +353,10 @@ const SeatsContent = (props) => {
               return (
                 <div
                   key={seat}
-                  className={`${
-                    targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
-                      ? "choose seat"
-                      : "seat"
-                  }
+                  className={`${targetSeat.status === 0 && isExistPick(targetSeat?.id_seat)
+                    ? "choose seat"
+                    : "seat"
+                    }
                   ${targetSeat.status === 1 ? "picked" : ""}
                   ${targetSeat.status === -1 ? "ban" : ""}`}
                   onClick={(e) => {
@@ -437,11 +428,12 @@ const SeatsContent = (props) => {
         seatsPickList={seatsPickList}
         paramsTime={paramsTime}
         paramsCinemaName={paramsCinemaName}
+        paramsRoomName={paramsRoomName}
         paramsIdSchedule={paramsIdSchedule}
         paramsIdRoom={paramsIdRoom}
         detailMovie={detailMovie}
         prevUrl="/"
-        nextUrl={`/book/foods?id_movie=${detailMovie.id}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`}
+        nextUrl={`/book/foods?id_movie=${detailMovie.id}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&room=${paramsRoomName}&time=${paramsTime}`}
       />
     </div>
   );

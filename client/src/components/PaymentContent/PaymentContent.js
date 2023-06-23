@@ -10,6 +10,7 @@ const PaymentContent = (props) => {
     ticketPrice,
     paramsTime,
     paramsCinemaName,
+    paramsRoomName,
     paramsIdSchedule,
     paramsIdRoom,
   } = props;
@@ -378,10 +379,11 @@ const PaymentContent = (props) => {
         seatsPickList={seatsPickList}
         paramsTime={paramsTime}
         paramsCinemaName={paramsCinemaName}
+        paramsRoomName={paramsRoomName}
         paramsIdSchedule={paramsIdSchedule}
         paramsIdRoom={paramsIdRoom}
         detailMovie={detailMovie}
-        prevUrl={`/book/foods?id_movie=${detailMovie.id}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&time=${paramsTime}`}
+        prevUrl={`/book/foods?id_movie=${detailMovie.id}&id_room=${paramsIdRoom}&id_schedule=${paramsIdSchedule}&name=${paramsCinemaName}&room=${paramsRoomName}&time=${paramsTime}`}
         nextUrl={`/book/result`}
         isAgreeRule={isAgreeRule}
         paymentType={paymentType}

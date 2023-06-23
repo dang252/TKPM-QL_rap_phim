@@ -21,6 +21,7 @@ const SeatsPage = () => {
   const paramsIdMovie = searchParams.get("id_movie");
   const paramsIdRoom = searchParams.get("id_room");
   const paramsCinemaName = searchParams.get("name");
+  const paramsRoomName = searchParams.get("room");
   const paramsTime = searchParams.get("time");
 
   useEffect(() => {
@@ -81,6 +82,7 @@ const SeatsPage = () => {
         paramsIdSchedule={paramsIdSchedule}
         paramsIdRoom={paramsIdRoom}
         paramsCinemaName={paramsCinemaName}
+        paramsRoomName={paramsRoomName}
         detailMovie={detailMovie}
         paramsTime={paramsTime}
       />
