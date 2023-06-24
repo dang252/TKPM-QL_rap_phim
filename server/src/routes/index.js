@@ -69,15 +69,21 @@ function router(app) {
    *      BookDetail:
    *        type: object
    *        properties:
+   *          id_book:
+   *            type: integer
+   *            description: booking's id
+   *          booking_code:
+   *            type: string
+   *            description: booking's code
    *          cinema_name:
    *            type: string
    *            description: cinema's name
    *          location:
    *            type: string
    *            description: cinema's location
-   *          purchase_date:
+   *          opening_day:
    *            type: string
-   *            description: ticket's purchase_date
+   *            description: movie's opening day
    *          title:
    *            type: string
    *            description: movie's title
@@ -100,6 +106,9 @@ function router(app) {
    *            items:
    *              type: string
    *            description: food_drink's name
+   *          purchase_date:
+   *            type: string
+   *            description: ticket's purchase_date
    *          total_price:
    *            type: number
    *            description: ticket's total_price
