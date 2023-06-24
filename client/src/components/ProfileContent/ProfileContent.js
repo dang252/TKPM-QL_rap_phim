@@ -11,6 +11,7 @@ import ProfileBookingHistory from "../ProfileBookingHistory/ProfileBookingHistor
 import ProfileShift from "../ProfileShift/ProfileShift";
 import ProfileAddMovies from "../ProfileAddMovies/ProfileAddMovies";
 import ProfileDeleteAccount from "../ProfileDeleteAccount/ProfileDeleteAccount";
+import ProfileSearchTicket from "../ProfileSearchTicket/ProfileSearchTicket";
 
 const ProfileContent = () => {
   const { getUserProfile, navigateUrl, handleChangeProfileNav } =
@@ -56,6 +57,7 @@ const ProfileContent = () => {
         {navigateUrl === "shift" && <ProfileShift />}
         {navigateUrl === "addmovies" && <ProfileAddMovies />}
         {navigateUrl === "deleteaccount" && <ProfileDeleteAccount />}
+        {navigateUrl === "searchticket" && <ProfileSearchTicket />}
       </div>
     </div>
   );

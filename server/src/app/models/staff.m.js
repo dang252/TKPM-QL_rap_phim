@@ -220,10 +220,10 @@ module.exports = {
 
       return rs2;
     } catch (error) {
-      if (err.code === "0") {
+      if (error.code === 0) {
         return null;
       } else {
-        throw err;
+        throw error;
       }
     }
   },

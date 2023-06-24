@@ -205,6 +205,7 @@ const AppContext = ({ children }) => {
         ans = '-' + ans;
       }
     }
+    // ans = code.slice(0, 4) + "-" + code.slice(4, 8) + "-" + code.slice(8, 14) 
     return ans;
   };
 

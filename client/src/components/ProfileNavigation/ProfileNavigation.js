@@ -10,6 +10,7 @@ import {
   faBriefcase,
   faFilm,
   faTrash,
+  faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import "./ProfileNavigation.css";
 
@@ -174,6 +175,19 @@ const ProfileNavigation = (props) => {
                 <FontAwesomeIcon icon={faFilm} />
               </p>
               <p>Thêm lịch chiếu</p>
+            </div>
+            <div
+              className={`profile-main-category ${activeNav === "searchticket" && "active"
+                }`}
+              onClick={(e) => {
+                handleChangeProfileNav("searchticket");
+                setActiveNav("searchticket");
+              }}
+            >
+              <p>
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+              </p>
+              <p>Kiểm tra vé</p>
             </div>
           </>
         )}

@@ -21,12 +21,16 @@ const ProfileMobileMenu = () => {
         className="profile-mobile-nav"
         show={show}
         onHide={handleClose}
+        scroll={true}
       >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>HỆ THỐNG CGV</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <ProfileNavigation handleChangeProfileNav={handleChangeProfileNav} />
+          <div style={{ overflow: "auto" }}>
+            <ProfileNavigation handleChangeProfileNav={handleChangeProfileNav} />
+          </div>
+          {/* <ProfileNavigation handleChangeProfileNav={handleChangeProfileNav} /> */}
         </Offcanvas.Body>
       </Offcanvas>
       <div

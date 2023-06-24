@@ -129,26 +129,6 @@ const ProfileBookingHistory = () => {
                   padding: "20px 20px",
                 }}
               >
-                {/* <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Thông báo</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>Bạn có muốn xóa lịch sử đặt vé ?</Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Đóng
-                    </Button>
-                    <Button
-                      variant="primary"
-                      onClick={(e) => {
-                        handleConfirmDeleteBookingHistory(ticket);
-                        handleClose()
-                      }}
-                    >
-                      Đồng ý
-                    </Button>
-                  </Modal.Footer>
-                </Modal> */}
                 <div style={{ display: "flex" }}>
                   <p style={{ fontWeight: "bold" }}>Ngày đặt:</p>
                   <p style={{ marginLeft: "10px" }}>

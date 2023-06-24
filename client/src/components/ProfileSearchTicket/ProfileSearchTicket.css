@@ -1,0 +1,79 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.search-container {
+    /* height: 100%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.search-container .search-form {
+    display: flex;
+    margin: 10px auto 0;
+    justify-content: center;
+    gap: 0
+}
+
+.search-container .search-form>* {
+    display: block;
+    align-self: center;
+}
+
+.search-container .search-form label {
+    text-align: center;
+    margin: 0 5px;
+}
+
+.search-container .search-form .booking-code-field {
+    border: 1px solid #bdbdbd;
+    width: fit-content;
+    padding: 2px;
+    border-radius: 5px;
+    align-self: center;
+    /* margin: auto; */
+    margin: 0 5px;
+}
+
+.search-container .search-form .booking-code-field input {
+    border: none;
+    width: 40px;
+    text-align: center;
+}
+
+.search-container .search-form .booking-code-field input:first-child {
+    width: 20px;
+}
+
+.search-container .search-form .input-submit {
+    padding: 10px;
+    background-color: red;
+    color: white;
+    font-size: 18px;
+    border-radius: 7px;
+    border: none;
+    display: block;
+    margin: 0 5px;
+}
+
+@media (width <=600px) {
+    .search-container .search-form {
+        display: block;
+    }
+
+    .search-container .search-form .booking-code-field {
+        margin: 0 auto 5px;
+    }
+
+    .search-container .search-form .input-submit {
+        margin: auto;
+    }
+}
