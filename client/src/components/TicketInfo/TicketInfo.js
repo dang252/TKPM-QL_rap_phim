@@ -14,6 +14,14 @@ const TicketInfo = (props) => {
             }}
         >
             <div style={{ display: "flex" }}>
+                <p style={{ fontWeight: "bold" }}>Người đặt:</p>
+                <p style={{ marginLeft: "10px" }}>{ticket.name}</p>
+            </div>
+            <div style={{ display: "flex" }}>
+                <p style={{ fontWeight: "bold" }}>Số điện thoại:</p>
+                <p style={{ marginLeft: "10px" }}>{ticket.phone}</p>
+            </div>
+            <div style={{ display: "flex" }}>
                 <p style={{ fontWeight: "bold" }}>Ngày đặt:</p>
                 <p style={{ marginLeft: "10px" }}>
                     {getDate(ticket.purchase_date)}
@@ -47,10 +55,6 @@ const TicketInfo = (props) => {
                 <p style={{ marginLeft: "10px" }}>{ticket.start_time}</p>
             </div>
             <div style={{ display: "flex" }}>
-                <p style={{ fontWeight: "bold" }}>Giờ kết thúc:</p>
-                <p style={{ marginLeft: "10px" }}>{ticket.end_time}</p>
-            </div>
-            <div style={{ display: "flex" }}>
                 <p style={{ fontWeight: "bold" }}>Ghế đặt:</p>
                 <div style={{ marginLeft: "10px", display: "flex" }}>
                     {ticket.seats?.map((seat, index) => {
@@ -74,12 +78,6 @@ const TicketInfo = (props) => {
                     })}
                 </div>
             </div>
-            {/* <div style={{ display: "flex" }}>
-                        <p style={{ fontWeight: "bold" }}>Mã số vé:</p>
-                        <p style={{ marginLeft: "10px", color: "red" }}>
-                            {getBookingCode(ticket.booking_code)}
-                        </p>
-                    </div> */}
             <div style={{ display: "flex" }}>
                 <p style={{ fontWeight: "bold" }}>Giá vé:</p>
                 <p style={{ marginLeft: "10px", color: "red" }}>
