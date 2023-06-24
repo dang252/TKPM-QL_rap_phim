@@ -218,7 +218,12 @@ module.exports = {
 
       const rs2 = await db.one("SELECT * FROM get_booking_history($1) WHERE booking_code = $2;", [rs1.id_user, booking_code]);
 
-      return rs2;
+      const rs3 = await db.one("SELECT name, phone, email FROM users WHERE id = $1;", [rs1.id_user]);
+
+      return {
+        ...rs2,
+        ...rs3,
+      };
     } catch (error) {
       if (error.code === 0) {
         return null;
