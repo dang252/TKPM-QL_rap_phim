@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS public.book;
 CREATE TABLE IF NOT EXISTS public.book
 (
 	id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+	code text NOT NULL,
     id_user integer NOT NULL,
     id_schedule integer NOT NULL,
     id_seats integer[] NOT NULL,
@@ -159,19 +160,56 @@ $do$;
 
 
 ------ About book ------
--- insert data sample
---INSERT INTO book (id_user, id_seats, id_schedule, id_food_drink, start_time, purchase_date)
---VALUES (1, ARRAY[26, 21, 6], 1, ARRAY[1, 18], '09:00:00', CURRENT_DATE);
+CREATE OR REPLACE PROCEDURE book_tickets (
+	p_id_user		INTEGER,
+	p_id_seats		INTEGER[],
+	p_id_schedule	INTEGER,
+	p_id_food_drink	INTEGER[],
+	p_start_time	TIME
+)
+AS $$
+DECLARE
+	p_id_book	INTEGER;
+	p_code		TEXT;
+BEGIN
+	INSERT INTO book (code, id_user, id_seats, id_schedule, id_food_drink, start_time, purchase_date)
+	VALUES ('...', p_id_user, p_id_seats, p_id_schedule, p_id_food_drink, p_start_time, CURRENT_DATE)
+	RETURNING id INTO p_id_book;
+	
+	SELECT TO_CHAR(_s.date, 'YYMMDD') || LPAD(_s.id_cinema::text, 3, '0') || LPAD(_b.id::text, 5, '0') INTO p_code
+	FROM book _b JOIN schedule _s ON _b.id_schedule = _s.id
+	WHERE _b.id = p_id_book;
+
+	UPDATE book SET code = p_code WHERE id = p_id_book;
+	
+	UPDATE seats SET status = 1 WHERE id_seat = ANY(p_id_seats) AND id_schedule = p_id_schedule AND time = p_start_time;
+END;
+$$ LANGUAGE plpgsql;
+-- CALL book_tickets(1, ARRAY[26, 21, 6], 1, ARRAY[1, 18], '09:00:00');
 
 -- get booking history
 CREATE OR REPLACE FUNCTION get_booking_history(user_id integer)
-RETURNS TABLE(id_book integer, cinema_name character varying, location character varying, purchase_date timestamp with time zone, title character varying, start_time time without time zone, end_time time without time zone, room_name character varying, seats text[], food_drink text[], total_price double precision) AS $$
+RETURNS TABLE(id_book integer,
+			  booking_code text,
+			  cinema_name character varying,
+			  location character varying,
+			  opening_day timestamp with time zone,
+			  title character varying,
+			  start_time time without time zone,
+			  end_time time without time zone,
+			  room_name character varying,
+			  seats text[],
+			  food_drink text[],
+			  purchase_date timestamp with time zone,
+			  total_price double precision)
+AS $$
 BEGIN
 	RETURN QUERY
 	SELECT	_b.id AS id_book,
+			_b.code AS booking_code,
 			_c.name AS cinema_name,
 			_c.location,
-			_b.purchase_date AT TIME ZONE 'UTC' AT TIME ZONE 'GMT+7' AS purchase_date,
+			_s.date AT TIME ZONE 'UTC' AT TIME ZONE 'GMT+7' AS opening_day,
 			_m.title,
 			_b.start_time,
 			(_b.start_time + _m.duration::interval)::time AS end_time,
@@ -181,6 +219,7 @@ BEGIN
 			ARRAY (	SELECT name || ' (' || description || ')'
 					FROM food_drink
 					WHERE id = ANY(id_food_drink)) AS food_drink,
+			_b.purchase_date AT TIME ZONE 'UTC' AT TIME ZONE 'GMT+7' AS purchase_date,
 			(real_price(_s.date, _b.start_time, _u.dob, _r.id) * ARRAY_LENGTH(_b.id_seats, 1)	-- ticket's price
 			 + (SELECT	COALESCE(SUM(element), 0)
 				FROM	unnest(ARRAY (SELECT price
