@@ -183,6 +183,21 @@ const moviesController = {
       res.status(500).json(error);
     }
   },
+
+  // [GET] /getTicketInfo?booking_code={booking_code}
+  getTicketInfo: async (req, res) => {
+    try {
+      const rs = await staffModel.getTicketInfo(req.query.booking_code);
+
+      if (rs == null) {
+        res.status(404).json("No ticket found!");
+      } else {
+        res.status(200).json(rs);
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
 };
 
 module.exports = moviesController;

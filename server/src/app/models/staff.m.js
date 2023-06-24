@@ -3,7 +3,6 @@ const db = require("../../config/connect_db");
 const MAX_STAFF_PER_SHIFT = 5;
 
 module.exports = {
-
   // get list room
   getListRoom: async (id_cinema) => {
     try {
@@ -46,9 +45,12 @@ module.exports = {
   // get list shift of a staff
   getStaffShift: async (id_staff) => {
     try {
-      return await db.any(`SELECT province, name, location, day, time_start, time_end  FROM 
+      return await db.any(
+        `SELECT province, name, location, day, time_start, time_end  FROM 
       (select * from shifts, cinemas where shifts.id_cinema = cinemas.id) as shift_cine
-    WHERE EXISTS (SELECT 1 FROM unnest(id_staffs) AS elements WHERE elements = $1)`, [id_staff]);
+    WHERE EXISTS (SELECT 1 FROM unnest(id_staffs) AS elements WHERE elements = $1)`,
+        [id_staff]
+      );
     } catch (err) {
       if (err.code === 0) {
         return null;
@@ -130,17 +132,17 @@ module.exports = {
   // block user
   blockUser: async (id_user) => {
     try {
-      const check = await db.oneOrNone('SELECT * FROM blacklist WHERE id_user = $1', [id_user]);
+      const check = await db.oneOrNone("SELECT * FROM blacklist WHERE id_user = $1", [id_user]);
 
       if (check !== null) {
-        return 'FAIL'; // User is already blacklisted
+        return "FAIL"; // User is already blacklisted
       }
 
-      await db.none('INSERT INTO blacklist (id_user) VALUES ($1)', [id_user]);
+      await db.none("INSERT INTO blacklist (id_user) VALUES ($1)", [id_user]);
 
-      return 'OK'; // User has been successfully blacklisted
+      return "OK"; // User has been successfully blacklisted
     } catch (err) {
-      if (err.code === '0') {
+      if (err.code === "0") {
         return null;
       } else {
         throw err;
@@ -148,12 +150,11 @@ module.exports = {
     }
   },
 
-
   // --------------------- ----------- -----------
   registerShifts: async (id_staff, id_shifts) => {
     try {
       // get all shifts full in shifts staff registered for
-      const id_fail_shifts = await db.one("SELECT ARRAY_AGG(id) FROM shifts WHERE id = ANY($1) AND ARRAY_LENGTH(id_staffs, 1) >= $2;", [id_shifts,MAX_STAFF_PER_SHIFT]);
+      const id_fail_shifts = await db.one("SELECT ARRAY_AGG(id) FROM shifts WHERE id = ANY($1) AND ARRAY_LENGTH(id_staffs, 1) >= $2;", [id_shifts, MAX_STAFF_PER_SHIFT]);
 
       // get all shifts not full and get information of fail shifts
       let id_success_shifts = id_shifts.slice();
@@ -208,6 +209,22 @@ module.exports = {
       return rs.status;
     } catch (error) {
       console.log(error);
+    }
+  },
+
+  getTicketInfo: async (booking_code) => {
+    try {
+      const rs1 = await db.one("SELECT id_user FROM book WHERE code = $1;", [booking_code]);
+
+      const rs2 = await db.one("SELECT * FROM get_booking_history($1) WHERE booking_code = $2;", [rs1.id_user, booking_code]);
+
+      return rs2;
+    } catch (error) {
+      if (err.code === "0") {
+        return null;
+      } else {
+        throw err;
+      }
     }
   },
 };

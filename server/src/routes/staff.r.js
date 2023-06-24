@@ -1,5 +1,6 @@
 const staffController = require("../app/controllers/staff.c");
 const middlewareController = require("../middleware/middleware.js");
+const { route } = require("./user.r");
 
 const router = require("express").Router();
 
@@ -477,5 +478,37 @@ router.put("/registerShifts", middlewareController.verifyToken, staffController.
  *       description: Internal server error
  */
 router.put("/updateSchedule", middlewareController.verifyToken, staffController.updateSchedule);
+
+/**
+ * @swagger
+ * /staff/getTicketInfo?booking_code={booking_code}:
+ *  get:
+ *   summary: staff get ticket's information
+ *   tags: [/staff]
+ *   parameters:
+ *     - name: booking_code
+ *       in: path
+ *       description: booking's code
+ *       required: true
+ *       type: string
+ *   security:
+ *     - tokenAuth: []
+ *   responses:
+ *     '200':
+ *       description: Get ticket's information successfully!
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/BookDetail'
+ *     '404':
+ *       description: No tikcet found!
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: string
+ *     '500':
+ *       description: Internal server error
+ */
+router.get("/getTicketInfo", middlewareController.verifyToken, staffController.getTicketInfo);
 
 module.exports = router;
