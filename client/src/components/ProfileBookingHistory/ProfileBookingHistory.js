@@ -15,6 +15,7 @@ const ProfileBookingHistory = () => {
     bookingHistoryList,
     getDate,
     handleDeleteBookingHistory,
+    getBookingCode,
   } = useContext(Context);
   console.log(bookingHistoryList)
   const [active, setActive] = useState(1);
@@ -174,6 +175,10 @@ const ProfileBookingHistory = () => {
                   <p style={{ marginLeft: "10px" }}>{ticket.title}</p>
                 </div>
                 <div style={{ display: "flex" }}>
+                  <p style={{ fontWeight: "bold" }}>Ngày chiếu:</p>
+                  <p style={{ marginLeft: "10px" }}>{getDate(ticket.opening_day)}</p>
+                </div>
+                <div style={{ display: "flex" }}>
                   <p style={{ fontWeight: "bold" }}>Giờ bắt đầu:</p>
                   <p style={{ marginLeft: "10px" }}>{ticket.start_time}</p>
                 </div>
@@ -204,6 +209,12 @@ const ProfileBookingHistory = () => {
                       );
                     })}
                   </div>
+                </div>
+                <div style={{ display: "flex" }}>
+                  <p style={{ fontWeight: "bold" }}>Mã số vé:</p>
+                  <p style={{ marginLeft: "10px", color: "red" }}>
+                    {getBookingCode(ticket.booking_code)}
+                  </p>
                 </div>
                 <div style={{ display: "flex" }}>
                   <p style={{ fontWeight: "bold" }}>Giá vé:</p>

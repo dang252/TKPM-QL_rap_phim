@@ -6,7 +6,7 @@ import PaymentConfirm from "../../components/PaymentConfirm/PaymentConfirm";
 import { Context } from "../../context/UserContext";
 
 const PaymentConfirmPage = () => {
-  const { seatsPickList, ticketInfoResult, getDate } = useContext(Context);
+  const { seatsPickList, ticketInfoResult, getDate, getBookingCode } = useContext(Context);
 
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const PaymentConfirmPage = () => {
 
   return (
     <div>
-      <PaymentConfirm ticketInfoResult={ticketInfoResult} getDate={getDate} />
+      <PaymentConfirm ticketInfoResult={ticketInfoResult} getDate={getDate} getBookingCode={getBookingCode} />
     </div>
   );
 };

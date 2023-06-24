@@ -197,6 +197,17 @@ const AppContext = ({ children }) => {
     return day + "-" + month + "-" + year;
   };
 
+  const getBookingCode = (code) => {
+    var ans = "";
+    for (let i = 13; i >= 0; i--) {
+      ans = code[i] + ans;
+      if (i === 2 || i === 6 || i === 10) {
+        ans = '-' + ans;
+      }
+    }
+    return ans;
+  };
+
   const getMoviesByCategory = async (category) => {
     try {
       const rs = await axios.get(`http://localhost:5000/movies/${category}`);
@@ -449,7 +460,7 @@ const AppContext = ({ children }) => {
             },
           }
         );
-        console.log(rs.data);
+        // console.log(rs.data);
         setTicketInfoResult(rs.data);
         return true;
       }
@@ -876,6 +887,7 @@ const AppContext = ({ children }) => {
         activeNav,
         setActiveNav,
         getDate,
+        getBookingCode,
         getMoviesByCategory,
         hpMovieList,
         randomArray,

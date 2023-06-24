@@ -3,7 +3,7 @@ import "./PaymentConfirm.css";
 import { Link } from "react-router-dom";
 
 const PaymentConfirm = (props) => {
-  const { ticketInfoResult, getDate } = props;
+  const { ticketInfoResult, getDate, getBookingCode } = props;
 
   return (
     <div className="payment-confirm-container">
@@ -85,6 +85,18 @@ const PaymentConfirm = (props) => {
                   marginRight: "10px",
                 }}
               >
+                Ngày chiếu:
+              </p>
+              <p>{getDate(ticketInfoResult.opening_day)}</p>
+            </div>
+            <div style={{ display: "flex" }}>
+              <p
+                style={{
+                  fontWeight: "bold",
+                  minWidth: "60px",
+                  marginRight: "10px",
+                }}
+              >
                 Giờ bắt đầu:
               </p>
               <p>{ticketInfoResult.start_time}</p>
@@ -155,7 +167,21 @@ const PaymentConfirm = (props) => {
               )}
             </div>
             <div
-              style={{ display: "flex", marginTop: "80px", fontSize: "20px" }}
+              style={{ display: "flex", marginTop: "20px", fontSize: "20px" }}
+            >
+              <p
+                style={{
+                  fontWeight: "bold",
+                  minWidth: "60px",
+                  marginRight: "10px",
+                }}
+              >
+                Mã số vé:
+              </p>
+              <p style={{ color: "red" }}>{getBookingCode(ticketInfoResult.booking_code)}</p>
+            </div>
+            <div
+              style={{ display: "flex", marginTop: "20px", fontSize: "20px" }}
             >
               <p
                 style={{
