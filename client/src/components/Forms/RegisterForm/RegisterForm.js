@@ -16,9 +16,10 @@ const errMsg = {
   1: "Tên không hợp lệ!",
   2: "Email không hợp lệ!",
   3: "Số điện thoại không hợp lệ!",
-  4: "Password không hợp lệ! Password phải bao gồm ít nhất 1 ký tự thường, 1 ký tự in hoa và 1 chữ số!",
+  4: "Password không hợp lệ! Password phải ít nhất 8 ký tự gồm ít nhất 1 ký tự thường, 1 ký tự in hoa và 1 chữ số!",
   5: "Capcha Không hợp lệ.",
   6: "Server đang gặp sự cố, bạn vui lòng thử lại sau ít phút nữa nhé!",
+  7: "Email hoặc số điện thoại đã bị trùng, bạn vui lòng thử số/email khác nhé!"
 };
 
 const RegisterForm = () => {
@@ -81,7 +82,9 @@ const RegisterForm = () => {
         if (error.response) {
           // err 404
           // err 500
-          setErr(6);
+          if (error.response.status === 404)
+            setErr(7);
+          else setErr(6)
         } else if (error.request) {
           setErr(6);
         } else {
