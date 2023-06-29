@@ -8,9 +8,12 @@ import MovieSlidebar from "../../components/MovieSlidebar/MovieSlidebar";
 import EventSlidebar from "../../components/EventSlidebar/EventSlidebar";
 
 import { Context } from "../../context/UserContext";
+import RecommendBar from "../../components/RecommendBar/RecommendBar";
+
+import './HomePage.css'
 
 const HomePage = () => {
-  const { getMoviesByCategory, hpMovieList, randomArray } = useContext(Context);
+  const { getMoviesByCategory, hpMovieList, randomArray, getRecommendMovies } = useContext(Context);
   const [movieSelection, setMovieSelection] = useState("");
 
   useEffect(() => {
@@ -34,6 +37,7 @@ const HomePage = () => {
   // Get current movies list
   useEffect(() => {
     getMoviesByCategory("currentMovies");
+    getRecommendMovies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -46,10 +50,15 @@ const HomePage = () => {
     <div>
       <CategorySlide />
       <Slidebar />
-      <HomeTitle imgUrl="../../assets/img/h3_movie_selection.gif" />
-      <MovieSlidebar movieSelection={movieSelection} />
-      <HomeTitle2 imgUrl="../../assets/img/h3_event.gif" />
-      <EventSlidebar />
+      <div className="wrapper">
+        <HomeTitle imgUrl="../../assets/img/h3_movie_selection.gif" />
+        <MovieSlidebar movieSelection={movieSelection} />
+        <HomeTitle2 imgUrl="../../assets/img/h3_event.gif" />
+        <EventSlidebar />
+        <div className="recommend-wrapper">
+          <RecommendBar />
+        </div>
+      </div>
     </div>
   );
 };

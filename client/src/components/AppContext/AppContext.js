@@ -157,7 +157,7 @@ const AppContext = ({ children }) => {
     const getUser = async () => {
       try {
         const rs = await getUserProfile();
-        console.log(rs);
+        // console.log(rs);
         if (rs?.status === 200) {
           const data = JSON.parse(localStorage.getItem("user"));
           if (data !== null) {
@@ -234,7 +234,6 @@ const AppContext = ({ children }) => {
     }
     return arr;
   };
-
   const getDetailMovie = async (id) => {
     try {
       const rs = await axios.get(
@@ -874,6 +873,33 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const getRecommendMovies = async () => {
+    try {
+      const rs = await getUserProfile();
+      if (rs?.status === 200) {
+        const data = JSON.parse(localStorage.getItem("user"));
+        if (data !== null) {
+          const recommendMovie = await axios.get(
+            `http://localhost:5000/movies/recommendMovies?id_user=${data.id}`,
+            {
+              headers: {
+                token: `Bearer ${data.accessToken}`,
+              },
+            },
+            { withCredentials: true }
+          )
+          // console.log(recommendMovie)
+          return recommendMovie.data.movies
+        }
+      } else {
+        localStorage.removeItem("user");
+      }
+    } catch (err) {
+      console.log(err)
+      console.log(err.message);
+    }
+  }
+
   return (
     <Context.Provider
       value={{
@@ -954,6 +980,7 @@ const AppContext = ({ children }) => {
         getRoomForSelect,
         getMovieByID,
         timeOption,
+        getRecommendMovies
       }}
     >
       {children}

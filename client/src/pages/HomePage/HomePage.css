@@ -1,0 +1,22 @@
+/* .wrapper {
+    display: flex;
+}
+
+.wrapper .main-content {
+    width: 80%;
+} */
+.wrapper {
+    position: relative;
+    /* contain: content; */
+}
+
+.wrapper .recommend-wrapper {
+    /* contain: content;
+    /* position: absolute; */
+    /* top: 0;
+    right: 0;
+    width: 210px; */
+    /* height: 200px; */
+    /* border: 2px solid black;
+    border-radius: 5px; */
+}
