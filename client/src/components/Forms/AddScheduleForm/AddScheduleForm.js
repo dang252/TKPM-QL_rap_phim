@@ -46,7 +46,7 @@ const AddScheduleForm = () => {
             console.log(schedule)
             const user = JSON.parse(localStorage.getItem("user"));
             const rs = await axios.put(
-                `${process.env.REACT_APP_BACKEND_API_URL}staff/updateSchedule`,
+                `${process.env.REACT_APP_BACKEND_API_URL}/staff/updateSchedule`,
                 schedule,
                 {
                     headers: {

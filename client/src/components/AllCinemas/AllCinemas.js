@@ -20,7 +20,7 @@ const AllCinemas = () => {
     const GetCinemas = async () => {
       try {
         const response = await axios.post(
-          `${process.env.REACT_APP_BACKEND_API_URL}book/provinces`,
+          `${process.env.REACT_APP_BACKEND_API_URL}//book/provinces`,
           { ...provinces[provinceOption] },
           {
             withCredentials: true,
@@ -71,7 +71,7 @@ const AllCinemas = () => {
     const GetCinemaInfoWithDate = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_API_URL}book/cinema?id_cinema=${cinemas[cinemaOption].id}&date=${(dates[dateOption].getYear() + 1900) + "-" + (("0" + (dates[dateOption].getMonth() + 1)).slice(-2)) + "-" + ("0" + dates[dateOption].getDate()).slice(-2)}`,
+          `${process.env.REACT_APP_BACKEND_API_URL}//book/cinema?id_cinema=${cinemas[cinemaOption].id}&date=${(dates[dateOption].getYear() + 1900) + "-" + (("0" + (dates[dateOption].getMonth() + 1)).slice(-2)) + "-" + ("0" + dates[dateOption].getDate()).slice(-2)}`,
           {},
           {
             withCredentials: true,
