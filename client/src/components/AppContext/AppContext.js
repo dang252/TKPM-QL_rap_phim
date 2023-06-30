@@ -51,7 +51,7 @@ const AppContext = ({ children }) => {
   const GetProvince = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_API_URL}//book/provinces`,
+        `${process.env.REACT_APP_BACKEND_API_URL}/book/provinces`,
         {},
         {
           withCredentials: true,
