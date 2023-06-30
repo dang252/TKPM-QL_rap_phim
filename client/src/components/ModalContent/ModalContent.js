@@ -36,7 +36,7 @@ const ModalContent = () => {
           ? (dates[dateOption].getYear() + 1900) + "-" + (("0" + (dates[dateOption].getMonth() + 1)).slice(-2)) + "-" + ("0" + dates[dateOption].getDate()).slice(-2)
           : (today.getYear() + 1900) + "-" + (("0" + (today.getMonth() + 1)).slice(-2)) + "-" + today.getDate()
         const response = await axios.post(
-          `http://localhost:5000/book/schedule`,
+          `${process.env.REACT_APP_BACKEND_API_URL}book/schedule`,
           {
             id_movie: ticketInfo,
             date: dayStr,

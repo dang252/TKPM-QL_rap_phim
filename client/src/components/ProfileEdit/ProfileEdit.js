@@ -99,7 +99,7 @@ const ProfileEdit = () => {
 
       if (user && checkError && err === 0) {
         const rs = await axios.post(
-          "http://localhost:5000/user/profile",
+          `${process.env.REACT_APP_BACKEND_API_URL}user/profile`,
           {
             id: user.id,
             name: name,

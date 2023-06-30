@@ -37,7 +37,7 @@ const ProfileDeleteAccount = () => {
 
             if (user) {
                 const rs = await axios.delete(
-                    `http://localhost:5000/user/delete_account?id_user=${user.id}&password=${password}`,
+                    `${process.env.REACT_APP_BACKEND_API_URL}user/delete_account?id_user=${user.id}&password=${password}`,
                     {
                         headers: {
                             token: `Bearer ${user.accessToken}`,

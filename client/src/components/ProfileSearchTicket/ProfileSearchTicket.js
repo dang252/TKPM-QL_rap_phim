@@ -21,7 +21,7 @@ const ProfileSearchTicket = () => {
             const user = JSON.parse(localStorage.getItem("user"));
             const code = bookingCode.field1 + bookingCode.field2 + bookingCode.field3 + bookingCode.field4
             const rs = await axios.get(
-                `http://localhost:5000/staff/getTicketInfo?booking_code=${code}`,
+                `${process.env.REACT_APP_BACKEND_API_URL}staff/getTicketInfo?booking_code=${code}`,
                 {
                     headers: {
                         token: `Bearer ${user.accessToken}`,

@@ -34,7 +34,7 @@ const AddMovieForm = () => {
         try {
             const user = JSON.parse(localStorage.getItem("user"));
             const rs = await axios.post(
-                "http://localhost:5000/staff/createMovie",
+                `${process.env.REACT_APP_BACKEND_API_URL}staff/createMovie`,
                 addedMovieInfo,
                 {
                     headers: {

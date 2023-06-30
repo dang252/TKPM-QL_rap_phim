@@ -32,7 +32,7 @@ const MoviesList = (props) => {
     const GetMovies = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/movies/${status[props.path].API}`,
+          `${process.env.REACT_APP_BACKEND_API_URL}movies/${status[props.path].API}`,
           {},
           {
             withCredentials: true,

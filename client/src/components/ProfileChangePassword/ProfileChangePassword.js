@@ -68,7 +68,7 @@ const ProfileChangePassword = () => {
 
       if (user && checkError && err === 0) {
         const rs = await axios.post(
-          "http://localhost:5000/user/changePassword",
+          `${process.env.REACT_APP_BACKEND_API_URL}user/changePassword`,
           {
             id: user.id,
             oldPassword: oldPassword,

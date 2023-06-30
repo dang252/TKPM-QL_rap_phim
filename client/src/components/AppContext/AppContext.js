@@ -51,7 +51,7 @@ const AppContext = ({ children }) => {
   const GetProvince = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/book/provinces`,
+        `${process.env.REACT_APP_BACKEND_API_URL}book/provinces`,
         {},
         {
           withCredentials: true,
@@ -74,7 +74,7 @@ const AppContext = ({ children }) => {
 
       if (user) {
         await axios.post(
-          "http://localhost:5000/auth/logout",
+          `${process.env.REACT_APP_BACKEND_API_URL}auth/logout`,
           {},
           {
             headers: {
@@ -128,7 +128,7 @@ const AppContext = ({ children }) => {
       const user = JSON.parse(localStorage.getItem("user"));
       if (user) {
         const rs = await axios.get(
-          `http://localhost:5000/user/profile?id=${user.id}`,
+          `${process.env.REACT_APP_BACKEND_API_URL}user/profile?id=${user.id}`,
           {
             headers: {
               token: `Bearer ${user.accessToken}`,
@@ -211,7 +211,7 @@ const AppContext = ({ children }) => {
 
   const getMoviesByCategory = async (category) => {
     try {
-      const rs = await axios.get(`http://localhost:5000/movies/${category}`);
+      const rs = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}movies/${category}`);
       const data = await rs?.data;
       if (data) {
         setHpMovieList(rs.data);
@@ -237,7 +237,7 @@ const AppContext = ({ children }) => {
   const getDetailMovie = async (id) => {
     try {
       const rs = await axios.get(
-        `http://localhost:5000/movies/detail?id=${id}`
+        `${process.env.REACT_APP_BACKEND_API_URL}movies/detail?id=${id}`
       );
       const data = await rs?.data;
       setDetailMovie(data);
@@ -288,7 +288,7 @@ const AppContext = ({ children }) => {
       const user = JSON.parse(localStorage.getItem("user"));
       if (user) {
         const rs = await axios.get(
-          `http://localhost:5000/book/seats?id_schedule=${idSchedule}&time=${time}`,
+          `${process.env.REACT_APP_BACKEND_API_URL}book/seats?id_schedule=${idSchedule}&time=${time}`,
           {
             headers: {
               token: `Bearer ${user.accessToken}`,
@@ -334,7 +334,7 @@ const AppContext = ({ children }) => {
         };
 
         const rs = await axios.post(
-          "http://localhost:5000/staff/blockSeat",
+          `${process.env.REACT_APP_BACKEND_API_URL}staff/blockSeat`,
           data,
           {
             headers: {
@@ -364,7 +364,7 @@ const AppContext = ({ children }) => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       if (user) {
-        const rs = await axios.get("http://localhost:5000/book/food_drink", {
+        const rs = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}book/food_drink`, {
           headers: {
             token: `Bearer ${user.accessToken}`,
           },
@@ -421,7 +421,7 @@ const AppContext = ({ children }) => {
         };
 
         const rs = await axios.post(
-          "http://localhost:5000/book/ticket_price",
+          `${process.env.REACT_APP_BACKEND_API_URL}book/ticket_price`,
           data,
           {
             headers: {
@@ -452,7 +452,7 @@ const AppContext = ({ children }) => {
         };
 
         const rs = await axios.post(
-          "http://localhost:5000/book/bookTickets",
+          `${process.env.REACT_APP_BACKEND_API_URL}book/bookTickets`,
           data,
           {
             headers: {
@@ -480,7 +480,7 @@ const AppContext = ({ children }) => {
 
       if (user) {
         const rs = await axios.get(
-          `http://localhost:5000/user/booking_history?id=${user.id}`,
+          `${process.env.REACT_APP_BACKEND_API_URL}user/booking_history?id=${user.id}`,
           {
             headers: {
               token: `Bearer ${user.accessToken}`,
@@ -501,7 +501,7 @@ const AppContext = ({ children }) => {
 
       if (user) {
         const rs = await axios.delete(
-          `http://localhost:5000/user/delete_history?id_book=${id_book}`,
+          `${process.env.REACT_APP_BACKEND_API_URL}user/delete_history?id_book=${id_book}`,
           // `http://localhost:5000/user/delete_history?id=${id_book}`,
           {
             headers: {
@@ -537,7 +537,7 @@ const AppContext = ({ children }) => {
 
       if (user && user?.is_staff === true) {
         const rs = await axios.get(
-          `http://localhost:5000/staff/listShift?id_cinema=${cinemaId}`,
+          `${process.env.REACT_APP_BACKEND_API_URL}staff/listShift?id_cinema=${cinemaId}`,
           {
             headers: {
               token: `Bearer ${user.accessToken}`,
@@ -623,7 +623,7 @@ const AppContext = ({ children }) => {
         };
 
         const rs = await axios.put(
-          "http://localhost:5000/staff/registerShifts",
+          `${process.env.REACT_APP_BACKEND_API_URL}staff/registerShifts`,
           data,
           {
             headers: {
@@ -655,7 +655,7 @@ const AppContext = ({ children }) => {
 
   const getCinemaProvinces = async () => {
     try {
-      const rs = await axios.get("http://localhost:5000/book/provinces");
+      const rs = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}book/provinces`);
 
       const cloneList = rs.data?.map((cinema) => {
         const data = {
@@ -675,7 +675,7 @@ const AppContext = ({ children }) => {
 
   const handleChooseCinemaProvinces = async (value) => {
     try {
-      const rs = await axios.post("http://localhost:5000/book/provinces", {
+      const rs = await axios.post(`${process.env.REACT_APP_BACKEND_API_URL}book/provinces`, {
         province: value.value,
       });
 
@@ -703,7 +703,7 @@ const AppContext = ({ children }) => {
 
       if (user && user?.is_staff === true) {
         const rs = await axios.get(
-          `http://localhost:5000/staff/staffShift?id_staff=${user.id}`,
+          `${process.env.REACT_APP_BACKEND_API_URL}staff/staffShift?id_staff=${user.id}`,
           {
             headers: {
               token: `Bearer ${user.accessToken}`,
@@ -718,7 +718,7 @@ const AppContext = ({ children }) => {
   };
   const getMoviesForSelect = async () => {
     try {
-      const rs = await axios.get(`http://localhost:5000/movies/listMovies`, {
+      const rs = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}movies/listMovies`, {
         withCredentials: true,
       });
 
@@ -736,7 +736,7 @@ const AppContext = ({ children }) => {
   };
   const getProvincesForSelect = async () => {
     try {
-      const rs = await axios.get("http://localhost:5000/book/provinces", {
+      const rs = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}book/provinces`, {
         withCredentials: true,
       });
 
@@ -757,7 +757,7 @@ const AppContext = ({ children }) => {
   const getCinemaProvincesForSelect = async (value) => {
     try {
       const rs = await axios.post(
-        "http://localhost:5000/book/provinces",
+        `${process.env.REACT_APP_BACKEND_API_URL}book/provinces`,
         {
           province: value.value,
         },
@@ -783,7 +783,7 @@ const AppContext = ({ children }) => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       const rs = await axios.get(
-        `http://localhost:5000/staff/listRoom?id_cinema=${value.value}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}staff/listRoom?id_cinema=${value.value}`,
         {
           headers: {
             token: `Bearer ${user.accessToken}`,
@@ -808,7 +808,7 @@ const AppContext = ({ children }) => {
   const getMovieByID = async (id) => {
     try {
       const rs = await axios.get(
-        `http://localhost:5000/movies/detail?id=${id}`
+        `${process.env.REACT_APP_BACKEND_API_URL}movies/detail?id=${id}`
       );
       const data = await rs?.data;
       return data;
@@ -875,12 +875,13 @@ const AppContext = ({ children }) => {
 
   const getRecommendMovies = async () => {
     try {
+      console.log(process.env.REACT_APP_BACKEND_API_URL)
       const rs = await getUserProfile();
       if (rs?.status === 200) {
         const data = JSON.parse(localStorage.getItem("user"));
         if (data !== null) {
           const recommendMovie = await axios.get(
-            `http://localhost:5000/movies/recommendMovies?id_user=${data.id}`,
+            `${process.env.REACT_APP_BACKEND_API_URL}movies/recommendMovies?id_user=${data.id}`,
             {
               headers: {
                 token: `Bearer ${data.accessToken}`,
