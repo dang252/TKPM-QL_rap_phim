@@ -862,7 +862,7 @@ const AppContext = ({ children }) => {
 
   window.onload = () => {
     let MSG = JSON.parse(localStorage.getItem("UnfulfilledMsg"));
-    console.log(MSG);
+    // console.log(MSG);
     if (MSG) {
       if (MSG.type === "success") {
         toast.success(MSG.msg);
@@ -875,7 +875,7 @@ const AppContext = ({ children }) => {
 
   const getRecommendMovies = async () => {
     try {
-      console.log(process.env.REACT_APP_BACKEND_API_URL)
+      // console.log(process.env.REACT_APP_BACKEND_API_URL)
       const rs = await getUserProfile();
       if (rs?.status === 200) {
         const data = JSON.parse(localStorage.getItem("user"));

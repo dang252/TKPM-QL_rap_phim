@@ -17,9 +17,9 @@ const RecommendBar = () => {
     }, [])
     const [showRecommend, setShowRecommend] = useState(true)
 
-    useEffect(() => {
-        console.log(recommendMovies)
-    }, [recommendMovies])
+    // useEffect(() => {
+    //     console.log(recommendMovies)
+    // }, [recommendMovies])
 
     return (
         <>
