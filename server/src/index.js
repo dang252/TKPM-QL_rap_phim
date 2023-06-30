@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://tkpm-ql-rap-phim-dang252.vercel.app/",
+    origin: "https://tkpm-ql-rap-phim.vercel.app/",
     credentials: true,
   })
 );
@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", `https://tkpm-ql-rap-phim-dang252.vercel.app/`);
+  res.setHeader("Access-Control-Allow-Origin", `https://tkpm-ql-rap-phim.vercel.app/`);
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type");
   res.setHeader("Access-Control-Allow-Credentials", true);
